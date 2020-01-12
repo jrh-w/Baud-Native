@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Examples } from '@shoutem/ui';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
+import Menu from "./components/MenuComponent";
+import Login from "./components/LoginComponent";
 /*export default function App() {
   return (
     <View style={styles.container}>
