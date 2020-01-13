@@ -1,41 +1,41 @@
+import { AppLoading } from 'expo';
+import { Container, Text, Header } from 'native-base';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Examples } from '@shoutem/ui';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import Menu from "./components/MenuComponent";
-import Login from "./components/LoginComponent";
-/*export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-    </View>
-  );
-}*/
-
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/
-
-const RootStack = createStackNavigator(
-  {
-    Menu: Menu,
-    Login: Login
-  },
-  {
-    initialRouteName: 'Login'
-  }
-);
-
-const AppContainer = createAppContainer(RootStack);
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
   render() {
-    return <AppContainer />;
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
+
+    return (
+      <Container>
+      <Header />
+      <Grid>
+        <Col style={{ backgroundColor: '#635DB7', height: 200 }}></Col>
+        <Col style={{ backgroundColor: '#00CE9F', height: 200 }}></Col>
+      </Grid>
+        <Text>Open up App.js to start working on your app!</Text>
+      </Container>
+    );
   }
 }
