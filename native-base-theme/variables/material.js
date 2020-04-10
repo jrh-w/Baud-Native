@@ -146,13 +146,13 @@ export default {
   fontFamily: 'SemiBold',
   fontSizeBase: 15,
   get fontSizeH1() {
-    return this.fontSizeBase * 1.8;
+    return this.fontSizeBase * 1.6;
   },
   get fontSizeH2() {
     return this.fontSizeBase * 1.6;
   },
   get fontSizeH3() {
-    return this.fontSizeBase * 1.4;
+    return this.fontSizeBase * 0.9;
   },
 
   // Footer

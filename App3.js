@@ -2,45 +2,36 @@ import { AppLoading } from 'expo';
 import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
+import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+
 import { StatusBar, Image } from 'react-native';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
-import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import Main from "./components/MainComponent";
-import Login from "./components/LoginComponent";
-/*export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-    </View>
-  );
-}*/
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
 
   async componentDidMount() {
     await Font.loadAsync({
-      Montserrat_Regular: require('./assets/fonts/Montserrat/Montserrat_Regular.ttf'),
-      Montserrat_Bold: require('./assets/fonts/Montserrat/Montserrat_Bold.ttf'),
-      SemiBold: require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
+      Montserrat_Regular: require('native-base/Fonts/Montserrat_Regular.ttf'),
+      Montserrat_Bold: require('native-base/Fonts/Montserrat_Bold.ttf'),
+      SemiBold: require('native-base/Fonts/Montserrat-SemiBold.ttf'),
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
   }
 
-const RootStack = createStackNavigator(
-  {
-    Menu: Main,
-    Login: Login
-  },
-  {
-    initialRouteName: 'Login'
-  }
-);
+  render() {
 
-const AppContainer = createAppContainer(RootStack);
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
 
     return (
     <StyleProvider style={getTheme(material)}>
@@ -76,7 +67,7 @@ const AppContainer = createAppContainer(RootStack);
                     <Input style={{ paddingLeft: 15 }} placeholder='Username or email'/>
                   </Item>
                   <Item rounded>
-                    <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password'/>
+                    <Input style={{ paddingLeft: 15 }} placeholder='Password'/>
                   </Item>
                   <Button transparent>
                     <Text>Forgot your password?</Text>
