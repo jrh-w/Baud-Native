@@ -25,7 +25,8 @@ const RootStack = createStackNavigator(
     defaultNavigationOptions: {
       headerLeft: null,
       headerStyle: {
-        height: 0
+        height: 0,
+        borderBottomColor: 'transparent'
       }
     }
   }
