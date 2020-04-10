@@ -9,9 +9,6 @@ import { StatusBar, Image, ScrollView } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
 class Main extends Component {
   constructor(props) {
     super(props);

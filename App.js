@@ -12,37 +12,29 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Main from "./components/MainComponent";
 import Login from "./components/LoginComponent";
-/*export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-    </View>
-  );
-}*/
-
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/
+import Sign_Up from "./components/Sign_UpComponent";
 
 const RootStack = createStackNavigator(
   {
     Menu: Main,
-    Login: Login
+    Login: Login,
+    Sign_Up: Sign_Up
   },
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Login',
+    defaultNavigationOptions: {
+      headerLeft: null,
+      headerStyle: {
+        height: 0
+      }
+    }
   }
 );
 
 const AppContainer = createAppContainer(RootStack);
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
-    return <AppContainer />;
+    return <AppContainer/>;
   }
 }
