@@ -34,7 +34,29 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Montserrat_Regular: require('./assets/fonts/Montserrat/Montserrat_Regular.ttf'),
+      Montserrat_Bold: require('./assets/fonts/Montserrat/Montserrat_Bold.ttf'),
+      SemiBold: require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
   render() {
+
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
+
     return <AppContainer/>;
   }
 }
