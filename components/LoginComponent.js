@@ -22,9 +22,9 @@ class Login extends Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      Montserrat_Regular: require('native-base/Fonts/Montserrat_Regular.ttf'),
-      Montserrat_Bold: require('native-base/Fonts/Montserrat_Bold.ttf'),
-      SemiBold: require('native-base/Fonts/Montserrat-SemiBold.ttf'),
+      Montserrat_Regular: require('../assets/fonts/Montserrat/Montserrat_Regular.ttf'),
+      Montserrat_Bold: require('../assets/fonts/Montserrat/Montserrat_Bold.ttf'),
+      SemiBold: require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
