@@ -19,9 +19,9 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      Montserrat_Regular: require('native-base/Fonts/Montserrat_Regular.ttf'),
-      Montserrat_Bold: require('native-base/Fonts/Montserrat_Bold.ttf'),
-      SemiBold: require('native-base/Fonts/Montserrat-SemiBold.ttf'),
+      Montserrat_Regular: require('./assets/fonts/Montserrat/Montserrat_Regular.ttf'),
+      Montserrat_Bold: require('./assets/fonts/Montserrat/Montserrat_Bold.ttf'),
+      SemiBold: require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
@@ -67,7 +67,7 @@ export default class App extends React.Component {
                     <Input style={{ paddingLeft: 15 }} placeholder='Username or email'/>
                   </Item>
                   <Item rounded>
-                    <Input style={{ paddingLeft: 15 }} placeholder='Password'/>
+                    <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password'/>
                   </Item>
                   <Button transparent>
                     <Text>Forgot your password?</Text>
