@@ -10,9 +10,9 @@ import material from './native-base-theme/variables/material';
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Main from "./components/MainComponent";
-import Login from "./components/LoginComponent";
-import Sign_Up from "./components/Sign_UpComponent";
+import Main from "./components/Main";
+import Login from "./components/Login";
+import Sign_Up from "./components/Sign_Up";
 
 const RootStack = createStackNavigator(
   {

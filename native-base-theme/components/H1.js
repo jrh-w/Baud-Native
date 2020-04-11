@@ -7,8 +7,8 @@ export default (variables /* : * */ = variable) => {
     color: variables.textColor,
     fontSize: variables.fontSizeH1,
     lineHeight: variables.lineHeightH1,
-    fontWeight: 'bold',
-    fontFamily: 'Montserrat_Bold'
+    //fontWeight: 'bold',
+    fontFamily: 'Montserrat_Regular'
   };
 
   return h1Theme;

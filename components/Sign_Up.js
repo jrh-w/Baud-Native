@@ -9,7 +9,9 @@ class Sign_Up extends Component {
 
   render() {
     return (
-      <View></View>
+      <View>
+        <Text>My awesome font</Text>;
+      </View>
     );
   }
 }

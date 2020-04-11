@@ -19,7 +19,7 @@ class Login extends Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      Montserrat_Regular: require('../assets/fonts/Montserrat/Montserrat_Regular.ttf'),
+      Montserrat_Regular: require('../node_modules/native-base/Fonts/Foundation.ttf'),
       Montserrat_Bold: require('../assets/fonts/Montserrat/Montserrat_Bold.ttf'),
       SemiBold: require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
       ...Ionicons.font,
@@ -43,7 +43,7 @@ class Login extends Component {
               <Image style={{ width: 200, height: 200 }} source={require('../assets/logo.png')} />
             </Row>
             <Row style={{ height: 50 }}>
-              <H1>
+              <H1 style={{ fontFamily: "Montserrat_Bold" }}>
                 Baud
               </H1>
             </Row>
