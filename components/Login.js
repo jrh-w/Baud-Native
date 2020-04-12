@@ -70,7 +70,7 @@ class Login extends Component {
                       <Text>Forgot your password?</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-                      <Button onPress={() => this.props.navigation.navigate('Menu')}style={{ width: 50 }} bordered large rounded>
+                      <Button onPress={() => this.props.navigation.navigate('Profile')}style={{ width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>

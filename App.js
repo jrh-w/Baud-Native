@@ -10,13 +10,20 @@ import material from './native-base-theme/variables/material';
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Main from "./components/Main";
+
+//import { Provider } from 'react-redux';
+//import { ConfigureStore } from './configureStore';
+
+import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Sign_Up from "./components/Sign_Up";
 
+//const store = ConfigureStore();
+
 const RootStack = createStackNavigator(
   {
-    Menu: Main,
+
+    Profile: Profile,
     Login: Login,
     Sign_Up: Sign_Up
   },
@@ -58,6 +65,10 @@ export default class App extends Component {
       return <AppLoading />;
     }
 
-    return <AppContainer/>;
+    return (
+      //<Provider store={store}>
+        <AppContainer/>
+      //</Provider>
+    );
   }
 }

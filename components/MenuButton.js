@@ -12,7 +12,9 @@ class MenuButton extends Component {
       <Button onPress={() => this.props.navigation.navigate({this.props.navigation})} style={{ width: 50 }} bordered large rounded>
         <Icon type='Ionicons' name={this.props.icon} />
       </Button>
-      <H1>{this.props.name}</H1>
+      <H1>
+      { this.props.name }
+      </H1>
     );
   }
 }

@@ -9,7 +9,7 @@ import { StatusBar, Image, ScrollView } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
-class Main extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -172,4 +172,4 @@ class Main extends Component {
     );
   }
 }
-export default Main;
+export default Profile;
