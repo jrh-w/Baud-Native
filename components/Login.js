@@ -43,7 +43,7 @@ class Login extends Component {
               <Image style={{ width: 200, height: 200 }} source={require('../assets/logo.png')} />
             </Row>
             <Row style={{ height: 50 }}>
-              <H1 style={{ fontFamily: "Montserrat_Bold" }}>
+              <H1>
                 Baud
               </H1>
             </Row>

@@ -8,7 +8,7 @@ export default (variables /* : * */ = variable) => {
     fontSize: variables.fontSizeH1,
     lineHeight: variables.lineHeightH1,
     //fontWeight: 'bold',
-    fontFamily: 'Montserrat_Regular'
+    fontFamily: 'Montserrat_Bold'
   };
 
   return h1Theme;
