@@ -15,12 +15,12 @@ class MenuButton extends Component {
         {this.props.navigation.state.routeName == this.props.route ?
           <Button onPress={() => this.props.navigation.navigate(this.props.route)} transparent large vertical active>
             <Icon active type='Ionicons' name={this.props.icon} />
-            <Text style={{ fontSize: 12 }}>{this.props.name}</Text>
+            <Text style={{ fontSize: 12 }}>{this.props.route}</Text>
           </Button>
           :
           <Button onPress={() => this.props.navigation.navigate(this.props.route)} light transparent large vertical>
             <Icon type='Ionicons' name={this.props.icon} />
-            <Text style={{ fontSize: 12 }}>{this.props.name}</Text>
+            <Text style={{ fontSize: 12 }}>{this.props.route}</Text>
           </Button>
         }
       </View>

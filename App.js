@@ -18,6 +18,7 @@ import Community from './components/Community';
 import Create from './components/Create';
 import Learn from './components/Learn';
 import Login from './components/Login';
+import Menu from './components/Menu';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
@@ -30,6 +31,7 @@ const RootStack = createStackNavigator(
     Create: Create,
     Learn: Learn,
     Login: Login,
+    Menu: Menu,
     Profile: Profile,
     Settings: Settings,
     Sign_Up: Sign_Up,
@@ -56,11 +58,15 @@ export default class App extends Component {
     };
   }
 
+// Propozycja: wprowadzenie tego propsa do store'a [Może zadziałać]
+
   async componentDidMount() {
     await Font.loadAsync({
       Montserrat_Regular: require('./assets/fonts/Montserrat/Montserrat_Regular.ttf'),
       Montserrat_Bold: require('./assets/fonts/Montserrat/Montserrat_Bold.ttf'),
       SemiBold: require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       ...Ionicons.font,
     });
     this.setState({ isReady: true });

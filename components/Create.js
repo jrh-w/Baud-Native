@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
+import Menu from './Menu';
+
 class Create extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,9 @@ class Create extends Component {
 
   render() {
     return(
-      <View></View>
+      <View>
+        <Menu navigation={this.props.navigation}/>
+      </View>
     );
   }
 }
