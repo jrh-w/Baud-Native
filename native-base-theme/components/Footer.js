@@ -113,7 +113,19 @@ export default (variables /* : * */ = variable) => {
     paddingBottom: variables.footerPaddingBottom,
     elevation: 3,
     left: 0,
-    right: 0
+    right: 0,
+
+    //custom shadow to make it look fancy
+
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 3,
+
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 10
   };
   return footerTheme;
 };
