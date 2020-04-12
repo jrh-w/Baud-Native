@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import MenuButton from './MenuButton';
+
+import { Button, Icon } from 'native-base';
 
 class Menu extends Component {
   constructor(props) {
@@ -9,33 +11,33 @@ class Menu extends Component {
       icons: [
         {
           icon: 'md-create',
-          navigation: 'Create',
+          route: 'Create',
           name: 'Create',
-          active : true,
+          active : 1,
         },
         {
           icon: 'ios-school',
-          navigation: 'Learn',
+          route: 'Learn',
           name: 'Learn',
-          active : false,
+          active : 0,
         },
         {
           icon: 'ios-people',
-          navigation: 'Community',
+          route: 'Community',
           name: 'Community',
-          active : false,
+          active : 0,
         },
         {
           icon: 'ios-person',
-          navigation: 'Profile',
+          route: 'Profile',
           name: 'Profile',
-          active : false,
+          active : 0,
         },
         {
           icon: 'md-settings',
-          navigation: 'Settings',
+          route: 'Settings',
           name: 'Settings',
-          active : false,
+          active : 0,
         },
       ]
     };
@@ -44,7 +46,7 @@ class Menu extends Component {
   render() {
 
     this.buttons = this.state.icons.map((item, key) =>
-      <MenuButton icon={item.icon} navigation={item.navigation} name={item.name} active={item.active}/>
+      <MenuButton icon={item.icon} route={item.route} name={item.name} active={item.active} navigation={this.props.navigation}/>
     );
 
     return(

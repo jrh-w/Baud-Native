@@ -22,7 +22,6 @@ import Sign_Up from "./components/Sign_Up";
 
 const RootStack = createStackNavigator(
   {
-
     Profile: Profile,
     Login: Login,
     Sign_Up: Sign_Up

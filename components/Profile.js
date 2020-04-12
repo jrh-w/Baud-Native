@@ -9,6 +9,8 @@ import { StatusBar, Image, ScrollView } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
+import Menu from './Menu';
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -189,6 +191,7 @@ class Profile extends Component {
                       </Grid>
                     </CardItem>
                   </Card>
+                  <Menu navigation={this.props.navigation}/>
                 </Col>
               </Body>
             </Grid>
