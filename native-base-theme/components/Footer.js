@@ -124,8 +124,7 @@ export default (variables /* : * */ = variable) => {
     elevation: 3,
 
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingTop: 10
+    borderTopRightRadius: 20
   };
   return footerTheme;
 };

@@ -3,36 +3,30 @@ import { View, Text } from 'react-native';
 import MenuButton from './MenuButton';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Body, Footer, FooterTab } from 'native-base';
+import { connect } from 'react-redux';
 
-import { Button, Icon } from 'native-base';
+const mapStateToProps = state => {
+  return {
+    icons: state.icons
+  };
+};
 
 class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      icons: [
-        {
-          icon: 'md-create',
-          route: 'Login',
-        },
-        {
-          icon: 'ios-school',
-          route: 'Learn',
-        },
-        {
-          icon: 'ios-people',
-          route: 'Community',
-        },
-        {
-          icon: 'ios-person',
-          route: 'Profile',
-        },
-        {
-          icon: 'md-settings',
-          route: 'Settings',
-        },
-      ]
+      icons: []
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props.icons !== state.icons) {
+      return {
+        icons: props.icons
+      };
+    }
+
+    return null;
   }
 
   render() {
@@ -51,4 +45,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);

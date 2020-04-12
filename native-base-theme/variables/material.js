@@ -156,7 +156,7 @@ export default {
   },
 
   // Footer
-  footerHeight: 55,
+  footerHeight: 75,
   footerDefaultBg: '#ffffff',
   footerPaddingBottom: 0,
 
