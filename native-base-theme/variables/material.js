@@ -132,7 +132,7 @@ export default {
   brandLight: '#C3C3C3',
 
   // Container
-  containerBgColor: '#fff',
+  containerBgColor: '#F7F7F7',
 
   // Date Picker
   datePickerTextColor: '#000',
@@ -170,14 +170,14 @@ export default {
 
   // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#3F51B5',
+  toolbarDefaultBg: '#fff',
   toolbarHeight: 56,
   toolbarSearchIconSize: 23,
   toolbarInputColor: '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 40 : 50,
   toolbarBtnTextColor: '#fff',
-  toolbarDefaultBorder: '#3F51B5',
+  toolbarDefaultBorder: '#fff', //#3F51B5
   iosStatusbar: 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg)

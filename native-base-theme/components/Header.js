@@ -412,7 +412,10 @@ export default (variables /* : * */ = variable) => {
     shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     top: 0,
     left: 0,
-    right: 0
+    right: 0,
+
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   };
 
   return headerTheme;

@@ -9,7 +9,11 @@ import { StatusBar, Image, ScrollView } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
-import Menu from './Menu';
+import Menu from './sub_components/Menu';
+import ProfileHeader from './sub_components/ProfileHeader';
+import Certificates from './sub_components/Certificates';
+import Goals from './sub_components/Goals';
+import Stats from './sub_components/Stats';
 
 class Profile extends Component {
   constructor(props) {
@@ -37,24 +41,8 @@ class Profile extends Component {
 
     return (
       <StyleProvider style={getTheme(material)}>
-        <Container style={{ backgroundColor: '#F7F7F7' }}>
-          <Card style={{ marginTop: -80, paddingTop: 80 }}>
-            <CardItem>
-            <Body>
-                <Row style={{ height: 115, marginVertical: 40, marginHorizontal: 10}}>
-                <Left>
-                  <H1 style={{ fontFamily: "Montserrat_Bold" }}>
-                    Name Surname
-                  </H1>
-                  <Text note>
-                    1204 points
-                  </Text>
-                </Left>
-                  <Image style={{ width: 115, height: 115, borderRadius: 100 }} source={require('../assets/logo.png')} />
-                </Row>
-              </Body>
-            </CardItem>
-          </Card>
+        <Container>
+          <ProfileHeader />
           <Content>
             <Grid>
               <Body>
@@ -65,132 +53,10 @@ class Profile extends Component {
                     </H1>
                   </Row>
                 </Col>
-              <ScrollView alwaysBounceVertical='false' style={{ paddingLeft: 20 }}>
-                  <Row>
-                    <Card style={{ width: 150, marginRight: 20 }}>
-                      <CardItem style={{ backgroundColor: '#FEDE40' }}>
-                        <Body style={{ alignItems: 'center' }}>
-                          <Col>
-                            <Body>
-                              <Row>
-                                <Icon type='AntDesign' name='home' />
-                                <H1 style={{ fontSize: 12, marginLeft: 10 }}>
-                                  JS Basics
-                                </H1>
-                              </Row>
-                              <Row style={{ marginTop: 5 }}>
-                                <H1 style={{ fontSize: 15 }}>
-                                  COMPLETED
-                                </H1>
-                              </Row>
-                            </Body>
-                          </Col>
-                        </Body>
-                      </CardItem>
-                    </Card>
-                    <Card style={{ width: 150, marginRight: 20 }}>
-                      <CardItem style={{ backgroundColor: '#FEDE40' }}>
-                        <Body style={{ alignItems: 'center' }}>
-                          <Col>
-                            <Body>
-                              <Row>
-                                <Icon type='AntDesign' name='home' />
-                                <H1 style={{ fontSize: 12, marginLeft: 10 }}>
-                                  JS Basics
-                                </H1>
-                              </Row>
-                              <Row style={{ marginTop: 5 }}>
-                                <H1 style={{ fontSize: 15 }}>
-                                  COMPLETED
-                                </H1>
-                              </Row>
-                            </Body>
-                          </Col>
-                        </Body>
-                      </CardItem>
-                    </Card>
-                    <Card style={{ width: 150 }}>
-                      <CardItem style={{ backgroundColor: '#FEDE40' }}>
-                        <Body style={{ alignItems: 'center' }}>
-                          <Col>
-                            <Body>
-                              <Row>
-                                <Icon type='AntDesign' name='home' />
-                                <H1 style={{ fontSize: 12, marginLeft: 10 }}>
-                                  JS Basics
-                                </H1>
-                              </Row>
-                              <Row style={{ marginTop: 5 }}>
-                                <H1 style={{ fontSize: 15 }}>
-                                  COMPLETED
-                                </H1>
-                              </Row>
-                            </Body>
-                          </Col>
-                        </Body>
-                      </CardItem>
-                    </Card>
-                  </Row>
-                </ScrollView>
+                <Certificates navigation={this.props.navigation}/>
                 <Col style={{ width: 300 }}>
-                  <Card>
-                    <CardItem>
-                      <Col>
-                        <Row style={{ marginVertical: 5 }}>
-                          <H1>
-                            Your goal
-                          </H1>
-                        </Row>
-                        <Row style={{ marginVertical: 5 }}>
-                          <Text>
-                            tutaj bedzie wykres jak go zrobimy
-                          </Text>
-                        </Row>
-                      </Col>
-                    </CardItem>
-                  </Card>
-                  <Card>
-                    <CardItem>
-                      <Grid>
-                        <Col>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <H1>
-                              3
-                            </H1>
-                          </Row>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <Text>
-                              Created
-                            </Text>
-                          </Row>
-                        </Col>
-                        <Col>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <H1>
-                              27
-                            </H1>
-                          </Row>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <Text>
-                              Rank
-                            </Text>
-                          </Row>
-                        </Col>
-                        <Col>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <H1>
-                              102
-                            </H1>
-                          </Row>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                            <Text>
-                              Wins
-                            </Text>
-                          </Row>
-                        </Col>
-                      </Grid>
-                    </CardItem>
-                  </Card>
+                  <Goals />
+                  <Stats />
                 </Col>
               </Body>
             </Grid>

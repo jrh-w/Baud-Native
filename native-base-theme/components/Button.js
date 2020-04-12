@@ -305,7 +305,8 @@ export default (variables /* : * */ = variable) => {
 
     '.vertical': {
       flexDirection: 'column',
-      height: null
+      height: null,
+      flex : 1
     },
 
     'NativeBase.Text': {
@@ -314,7 +315,7 @@ export default (variables /* : * */ = variable) => {
       marginRight: 0,
       color: variables.inverseTextColor,
       fontSize: variables.buttonTextSize,
-      paddingHorizontal: 16,
+      //paddingHorizontal: 16,
       backgroundColor: 'transparent'
     },
 

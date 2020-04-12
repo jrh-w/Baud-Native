@@ -9,6 +9,8 @@ import { StatusBar, Image } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
+import AppHeader from './sub_components/AppHeader';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -35,21 +37,8 @@ class Login extends Component {
 
     return (
     <StyleProvider style={getTheme(material)}>
-      <Container style={{ backgroundColor: '#F7F7F7' }}>
-      <Card style={{ marginTop: -80, paddingTop: 80 }}>
-        <CardItem>
-          <Body style={{ alignItems: 'center' }}>
-            <Row style={{ height: 225 }}>
-              <Image style={{ width: 200, height: 200 }} source={require('../assets/logo.png')} />
-            </Row>
-            <Row style={{ height: 50 }}>
-              <H1>
-                Baud
-              </H1>
-            </Row>
-          </Body>
-        </CardItem>
-      </Card>
+      <Container>
+      <AppHeader />
         <Content>
             <Grid>
               <Body>

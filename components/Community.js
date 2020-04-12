@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text, StyleProvider, Container, Content, Header } from 'native-base';
+
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
+
+import Menu from './sub_components/Menu';
 
 class Community extends Component {
   constructor(props) {
@@ -8,7 +13,13 @@ class Community extends Component {
 
   render() {
     return(
-      <View></View>
+      <StyleProvider style={getTheme(material)}>
+        <Container>
+          <Content>
+          </Content>
+          <Menu navigation={this.props.navigation}/>
+        </Container>
+      </StyleProvider>
     );
   }
 }

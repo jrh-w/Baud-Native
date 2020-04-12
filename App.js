@@ -56,11 +56,15 @@ export default class App extends Component {
     };
   }
 
+// Propozycja: wprowadzenie tego propsa do store'a [Może zadziałać]
+
   async componentDidMount() {
     await Font.loadAsync({
       Montserrat_Regular: require('./assets/fonts/Montserrat/Montserrat_Regular.ttf'),
       Montserrat_Bold: require('./assets/fonts/Montserrat/Montserrat_Bold.ttf'),
       SemiBold: require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       ...Ionicons.font,
     });
     this.setState({ isReady: true });

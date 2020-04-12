@@ -1,17 +1,81 @@
+import { AppLoading } from 'expo';
+import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
+import * as Font from 'expo-font';
+import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
+import { StatusBar, Image } from 'react-native';
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
+
+import AppHeader from './sub_components/AppHeader';
 
 class Sign_Up extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      //isReady: false
+    };
   }
 
+  /*async componentDidMount() {
+    await Font.loadAsync({
+      Montserrat_Regular: require('../node_modules/native-base/Fonts/Foundation.ttf'),
+      Montserrat_Bold: require('../assets/fonts/Montserrat/Montserrat_Bold.ttf'),
+      SemiBold: require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }*/
+
   render() {
+
+  /*  if (!this.state.isReady) {
+      return <AppLoading />;
+    }*/
+
     return (
-      <View>
-        <Text>My awesome font</Text>;
-      </View>
+    <StyleProvider style={getTheme(material)}>
+      <Container>
+      <AppHeader />
+        <Content>
+            <Grid>
+              <Body>
+                <Col style={{ width: 300 }}>
+                  <Body>
+                    <Row style={{ marginVertical: 20 }}>
+                      <H1>
+                      Sign in
+                      </H1>
+                    </Row>
+                    <Item rounded>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Username'/>
+                    </Item>
+                    <Item rounded>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Email'/>
+                    </Item>
+                    <Item rounded>
+                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password'/>
+                    </Item>
+                    <Item rounded>
+                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Confirm password'/>
+                    </Item>
+                    <Button onPress={() => this.props.navigation.navigate('Login')} transparent>
+                      <Text>I already have an account</Text>
+                    </Button>
+                    <Row style={{ marginVertical: 20 }}>
+                      <Button onPress={() => this.props.navigation.navigate('Profile')} style={{ width: 50 }} bordered large rounded>
+                        <Icon type='Entypo' name='chevron-right' />
+                      </Button>
+                    </Row>
+                  </Body>
+                </Col>
+              </Body>
+            </Grid>
+          </Content>
+      </Container>
+    </StyleProvider>
     );
   }
 }
