@@ -1,5 +1,5 @@
 import { AppLoading } from 'expo';
-import { H2, H3, Left, Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
+import { Right, H2, H3, Left, Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
@@ -41,7 +41,7 @@ class Main extends Component {
             <Body>
                 <Row style={{ height: 115, marginVertical: 40, marginHorizontal: 10}}>
                 <Left>
-                  <H1>
+                  <H1 style={{ fontFamily: "Montserrat_Bold" }}>
                     Name Surname
                   </H1>
                   <Text note>
@@ -149,18 +149,44 @@ class Main extends Component {
                   </Card>
                   <Card>
                     <CardItem>
-                      <Col>
-                        <Row>
-                          <H1>
-                            0
-                          </H1>
-                        </Row>
-                        <Row>
-                          <Text>
-                            Created
-                          </Text>
-                        </Row>
-                      </Col>
+                      <Grid>
+                        <Col>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <H1>
+                              3
+                            </H1>
+                          </Row>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <Text>
+                              Created
+                            </Text>
+                          </Row>
+                        </Col>
+                        <Col>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <H1>
+                              27
+                            </H1>
+                          </Row>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <Text>
+                              Rank
+                            </Text>
+                          </Row>
+                        </Col>
+                        <Col>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <H1>
+                              102
+                            </H1>
+                          </Row>
+                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+                            <Text>
+                              Wins
+                            </Text>
+                          </Row>
+                        </Col>
+                      </Grid>
                     </CardItem>
                   </Card>
                 </Col>
