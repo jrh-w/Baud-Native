@@ -11,14 +11,14 @@ import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-//import { Provider } from 'react-redux';
-//import { ConfigureStore } from './configureStore';
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './redux/configureStore';
 
 import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Sign_Up from "./components/Sign_Up";
 
-//const store = ConfigureStore();
+const store = ConfigureStore();
 
 const RootStack = createStackNavigator(
   {
@@ -65,9 +65,9 @@ export default class App extends Component {
     }
 
     return (
-      //<Provider store={store}>
+      <Provider store={store}>
         <AppContainer/>
-      //</Provider>
+      </Provider>
     );
   }
 }

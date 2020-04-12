@@ -1,46 +1,30 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import MenuButton from './MenuButton';
+import { connect } from 'react-redux';
 
-import { Button, Icon } from 'native-base';
+const mapStateToProps = state => {
+  return {
+    icons: state.icons
+  };
+};
 
 class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      icons: [
-        {
-          icon: 'md-create',
-          route: 'Create',
-          name: 'Create',
-          active : true,
-        },
-        {
-          icon: 'ios-school',
-          route: 'Learn',
-          name: 'Learn',
-          active : false,
-        },
-        {
-          icon: 'ios-people',
-          route: 'Community',
-          name: 'Community',
-          active : false,
-        },
-        {
-          icon: 'ios-person',
-          route: 'Profile',
-          name: 'Profile',
-          active : false,
-        },
-        {
-          icon: 'md-settings',
-          route: 'Settings',
-          name: 'Settings',
-          active : false,
-        },
-      ]
+      icons: []
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props.icons !== state.icons) {
+      return {
+        icons: props.icons
+      };
+    }
+
+    return null;
   }
 
   render() {
@@ -57,4 +41,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);
