@@ -18,7 +18,7 @@ const RootStack = createStackNavigator(
   {
     Menu: Main,
     Login: Login,
-    Sign_Up: Sign_Up
+    Sign_Up: Sign_Up,
   },
   {
     initialRouteName: 'Login',

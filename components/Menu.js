@@ -9,31 +9,31 @@ class Menu extends Component {
       icons: [
         {
           icon: 'md-create',
-          navigation: 'Create',
+          route: 'Create',
           name: 'Create',
           active : true,
         },
         {
           icon: 'ios-school',
-          navigation: 'Learn',
+          route: 'Learn',
           name: 'Learn',
           active : false,
         },
         {
           icon: 'ios-people',
-          navigation: 'Community',
+          route: 'Community',
           name: 'Community',
           active : false,
         },
         {
           icon: 'ios-person',
-          navigation: 'Profile',
+          route: 'Profile',
           name: 'Profile',
           active : false,
         },
         {
           icon: 'md-settings',
-          navigation: 'Settings',
+          route: 'Settings',
           name: 'Settings',
           active : false,
         },
@@ -44,7 +44,7 @@ class Menu extends Component {
   render() {
 
     this.buttons = this.state.icons.map((item, key) =>
-      <MenuButton icon={item.icon} navigation={item.navigation} name={item.name} active={item.active}/>
+      <MenuButton icon={item.icon} route={item.route} name={item.name} active={item.active}/>
     );
 
     return(
