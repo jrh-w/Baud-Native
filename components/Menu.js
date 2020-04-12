@@ -32,7 +32,7 @@ class Menu extends Component {
   render() {
 
     this.buttons = this.state.icons.map((item, key) =>
-      <MenuButton id={key.id} icon={item.icon} route={item.route} name={item.route} navigation={this.props.navigation}/>
+      <MenuButton id={key.id} icon={item.icon} route={item.route} navigation={this.props.navigation}/>
     );
 
     return(

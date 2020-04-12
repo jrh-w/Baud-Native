@@ -70,7 +70,7 @@ export default (variables /* : * */ = variable) => {
     backgroundColor:
       Platform.OS === PLATFORM.ANDROID ? variables.footerDefaultBg : undefined,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     flex: 1,
     alignSelf: 'stretch'
   };
