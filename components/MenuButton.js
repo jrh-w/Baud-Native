@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Container, Button, Text, Icon } from 'native-base';
-import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 class MenuButton extends Component {
   constructor(props) {
@@ -10,15 +10,17 @@ class MenuButton extends Component {
 
   render() {
     return (
-      <View>
-        <Button onPress={() => this.props.navigation.navigate('Login')}style={{ width: 50 }} bordered large rounded>
-          <Icon style={{ textColor: '#38A7F1' }} type='Ionicons' name={this.props.icon} />
+      {this.props.active ?
+        <Button onPress={() => this.props.navigation.navigate(this.props.route)} transparent large vertical active>
+          <Icon active type='Ionicons' name={this.props.icon} />
+          <Text style={{ fontSize: 12 }}>{this.props.name}</Text>
         </Button>
-      </View>
-        /*<Button onPress={() => this.props.navigation.navigate({this.props.route})} style={{ width: 50 }} bordered large rounded>
-          <Icon style={{ textColor: '#38A7F1' }} type='Ionicons' name={this.props.icon} />
-        </Button>*/
-        //<Text style={{ textColor: '#38A7F1' }} note>{this.props.name}</Text>
+        :
+        <Button onPress={() => this.props.navigation.navigate(this.props.route)} transparent large vertical>
+          <Icon type='Ionicons' name={this.props.icon} />
+          <Text style={{ fontSize: 12 }}>{this.props.name}</Text>
+        </Button>
+        }
     );
   }
 }

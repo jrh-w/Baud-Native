@@ -11,7 +11,7 @@ import material from '../native-base-theme/variables/material';
 
 import Menu from './Menu';
 
-class Main extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -191,14 +191,14 @@ class Main extends Component {
                       </Grid>
                     </CardItem>
                   </Card>
-                  <Menu/>
                 </Col>
               </Body>
             </Grid>
           </Content>
+          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );
   }
 }
-export default Main;
+export default Profile;

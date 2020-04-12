@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import MenuButton from './MenuButton';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Body, Footer, FooterTab } from 'native-base';
 
 class Menu extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class Menu extends Component {
       icons: [
         {
           icon: 'md-create',
-          route: 'Create',
+          route: 'Login',
           name: 'Create',
           active : true,
         },
@@ -44,13 +46,17 @@ class Menu extends Component {
   render() {
 
     this.buttons = this.state.icons.map((item, key) =>
-      <MenuButton icon={item.icon} route={item.route} name={item.name} active={item.active}/>
+      <Col>
+          <MenuButton navigation={this.props.navigation} icon={item.icon} route={item.route} name={item.name} active={item.active}/>
+      </Col>
     );
 
     return(
-      <View>
-        {this.buttons}
-      </View>
+        <Footer>
+          <FooterTab>
+            {this.buttons}
+          </FooterTab>
+        </Footer>
     );
   }
 }
