@@ -129,7 +129,7 @@ export default {
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
   brandDark: '#000',
-  brandLight: '#f4f4f4',
+  brandLight: '#C3C3C3',
 
   // Container
   containerBgColor: '#fff',
@@ -156,8 +156,8 @@ export default {
   },
 
   // Footer
-  footerHeight: 55,
-  footerDefaultBg: '#3F51B5',
+  footerHeight: 75,
+  footerDefaultBg: '#ffffff',
   footerPaddingBottom: 0,
 
   // FooterTab
@@ -165,8 +165,8 @@ export default {
   tabBarTextSize: 11,
   activeTab: '#fff',
   sTabBarActiveTextColor: '#007aff',
-  tabBarActiveTextColor: '#fff',
-  tabActiveBgColor: '#3F51B5',
+  tabBarActiveTextColor: '#38A7F1',
+  tabActiveBgColor: '#fff',
 
   // Header
   toolbarBtnColor: '#fff',

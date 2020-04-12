@@ -5,32 +5,22 @@ const initialState = {
     {
       icon: 'md-create',
       route: 'Create',
-      name: 'Create',
-      active : true,
     },
     {
       icon: 'ios-school',
       route: 'Learn',
-      name: 'Learn',
-      active : false,
     },
     {
       icon: 'ios-people',
       route: 'Community',
-      name: 'Community',
-      active : false,
     },
     {
       icon: 'ios-person',
       route: 'Profile',
-      name: 'Profile',
-      active : false,
     },
     {
       icon: 'md-settings',
       route: 'Settings',
-      name: 'Settings',
-      active : false,
     },
   ]
 };

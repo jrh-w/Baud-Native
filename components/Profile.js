@@ -191,11 +191,11 @@ class Profile extends Component {
                       </Grid>
                     </CardItem>
                   </Card>
-                  <Menu navigation={this.props.navigation}/>
                 </Col>
               </Body>
             </Grid>
           </Content>
+          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );

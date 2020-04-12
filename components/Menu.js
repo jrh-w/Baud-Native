@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import MenuButton from './MenuButton';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Body, Footer, FooterTab } from 'native-base';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -34,9 +36,11 @@ class Menu extends Component {
     );
 
     return(
-      <View>
-        {this.buttons}
-      </View>
+        <Footer>
+          <FooterTab>
+            {this.buttons}
+          </FooterTab>
+        </Footer>
     );
   }
 }
