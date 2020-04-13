@@ -42,7 +42,12 @@ const RootStack = createStackNavigator(
         height: 0,
         borderBottomColor: 'transparent'
       }
-    }
+    },
+    transitionConfig : () => ({
+  	transitionSpec: {
+  		duration: 0
+  	}
+  })
   }
 );
 

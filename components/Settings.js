@@ -18,9 +18,9 @@ class Settings extends Component {
     return(
       <StyleProvider style={getTheme(material)}>
         <Container>
-          <Content style={{ backgroundColor: '#f4d322' }}>
-            <Certificates navigation={this.props.navigation}/>
+          <Content>
           </Content>
+          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );
