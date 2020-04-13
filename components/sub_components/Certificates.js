@@ -28,7 +28,6 @@ class Certificates extends Component {
          certificates: props.certificates
       };
     }
-    alert('nie');
     return null;
   }
 
@@ -47,11 +46,11 @@ class Certificates extends Component {
     );
 
     return(
-      <ScrollView alwaysBounceVertical='false' style={{ flexDirection: 'row', paddingLeft: 20 }}>
-          <Row>
-            {this.certButtons}
-          </Row>
-        </ScrollView>
+      <ScrollView alwaysBounceVertical='false' style={{ backgroundColor: '#000', flexDirection: 'row'}}>
+        <Row>
+          {this.certButtons}
+        </Row>
+      </ScrollView>
     );
   }
 }
