@@ -47,7 +47,7 @@ class Certificates extends Component {
     );
 
     return(
-      <ScrollView alwaysBounceVertical='false' style={{ paddingLeft: 20 }}>
+      <ScrollView alwaysBounceVertical='false' style={{ flexDirection: 'row', paddingLeft: 20 }}>
           <Row>
             {this.certButtons}
           </Row>

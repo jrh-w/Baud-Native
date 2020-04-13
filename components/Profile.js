@@ -43,7 +43,7 @@ class Profile extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
           <ProfileHeader />
-          <Content>
+          <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>
                 <Col style={{ width: 300 }}>
