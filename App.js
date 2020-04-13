@@ -18,6 +18,7 @@ import Community from './components/Community';
 import Create from './components/Create';
 import Learn from './components/Learn';
 import Login from './components/Login';
+import Menu from './components/sub_components/Menu';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
@@ -30,6 +31,7 @@ const RootStack = createStackNavigator(
     Create: Create,
     Learn: Learn,
     Login: Login,
+    Menu: Menu,
     Profile: Profile,
     Settings: Settings,
     Sign_Up: Sign_Up,
