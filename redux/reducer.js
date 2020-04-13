@@ -3,6 +3,9 @@
 const initialState = {
   name: 'John Doe',
   points: 123,
+  createdLessons: 64,
+  userRank: 43,
+  userWins: 841,
   icons: [
     {
       icon: 'md-create',
