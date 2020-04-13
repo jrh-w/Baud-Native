@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 import { Card, CardItem, Body, H1, Text, Left } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Image } from 'react-native';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    points: state.points
+  };
+};
 
 class ProfileHeader extends Component {
   constructor(props) {
@@ -31,10 +39,10 @@ class ProfileHeader extends Component {
             <Row style={{ height: 115, marginVertical: 40, marginHorizontal: 10}}>
               <Left>
                 <H1 style={{ fontFamily: "Montserrat_Bold" }}>
-                  Name Surname
+                  { this.state.name }
                 </H1>
                 <Text note>
-                  1204 points
+                  { this.state.points } points
                 </Text>
               </Left>
               <Image style={{ width: 115, height: 115, borderRadius: 100 }} source={require('../../assets/logo.png')} />
@@ -46,4 +54,4 @@ class ProfileHeader extends Component {
   }
 }
 
-export default ProfileHeader;
+export default connect(mapStateToProps)(ProfileHeader);
