@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { Card, CardItem, Body, H1, Icon, ProgressBar } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
@@ -10,6 +10,7 @@ class CertificatesButton extends Component {
   }
 
   render() {
+
     return(
       /*<Card style={{ width: 150, marginRight: 20 }}>
         <CardItem style={{ backgroundColor: this.props.bgColor, textColor: this.props.color }}>

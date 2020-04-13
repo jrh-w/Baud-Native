@@ -1,6 +1,8 @@
 // Reducer rozpoznaje i rozdziela zadania oraz dane dla Store'a (sklepu)
 
 const initialState = {
+  name: 'John Doe',
+  points: 123,
   icons: [
     {
       icon: 'md-create',

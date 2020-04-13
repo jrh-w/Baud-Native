@@ -7,6 +7,20 @@ import { Image } from 'react-native';
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: '',
+      points: 0
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props !== state) {
+      return {
+         name: props.name,
+         points: props.points
+      };
+    }
+    return null;
   }
 
   render() {

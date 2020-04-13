@@ -7,49 +7,26 @@ import { Image } from 'react-native';
 class Stats extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      objects: []
+    }
   }
 
   render() {
+
+    this.objects = this.state.stats.map((item, key) =>
+      <CertificatesButton
+        key={key}
+        value={item.value}
+        name={item.name}
+      />
+    );
+
     return(
       <Card>
         <CardItem>
           <Grid>
-            <Col>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <H1>
-                  3
-                </H1>
-              </Row>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <Text>
-                  Created
-                </Text>
-              </Row>
-            </Col>
-            <Col>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <H1>
-                  27
-                </H1>
-              </Row>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <Text>
-                  Rank
-                </Text>
-              </Row>
-            </Col>
-            <Col>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <H1>
-                  102
-                </H1>
-              </Row>
-              <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-                <Text>
-                  Wins
-                </Text>
-              </Row>
-            </Col>
+            {this.objects}
           </Grid>
         </CardItem>
       </Card>

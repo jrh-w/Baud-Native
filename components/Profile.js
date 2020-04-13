@@ -5,7 +5,7 @@ import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
-import { StatusBar, Image, ScrollView } from 'react-native';
+import { StatusBar, Image, ScrollView, View } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
@@ -43,7 +43,7 @@ class Profile extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
           <ProfileHeader />
-          <Content>
+          <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>
                 <Col style={{ width: 300 }}>

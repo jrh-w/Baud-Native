@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Card, CardItem, Body, H1, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -46,7 +46,7 @@ class Certificates extends Component {
     );
 
     return(
-      <ScrollView horizontal='true' style={{ paddingRight: 20, paddingLeft: 20 }}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row'}}>
         <Row>
           {this.certButtons}
         </Row>
