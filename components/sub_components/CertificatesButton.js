@@ -38,7 +38,7 @@ class CertificatesButton extends Component {
         </CardItem>
       </Card>*/
       <View>
-      <Card style={{ width: 150, marginRight: 20 }}>
+      <Card style={{ width: 150, marginHorizontal: 10 }}>
         <CardItem style={{ backgroundColor: this.props.bgColor, borderColor: this.props.bgColor }}>
           <Body style={{ alignItems: 'center' }}>
             <Col>

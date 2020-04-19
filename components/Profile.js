@@ -53,7 +53,7 @@ class Profile extends Component {
     return (
       <StyleProvider style={getTheme(material)}>
         <Container>
-          <ProfileHeader />
+          <ProfileHeader/>
           <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>

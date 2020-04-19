@@ -33,7 +33,7 @@ class ProfileHeader extends Component {
 
   render() {
     return(
-      <Card style={{ marginTop: -80, paddingTop: 80 }}>
+      <Card style={{ marginTop: -80, paddingTop: 80, marginBottom: 0 }}>
         <CardItem>
           <Body>
             <Row style={{ height: 115, marginVertical: 40, marginHorizontal: 10}}>

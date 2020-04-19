@@ -28,12 +28,13 @@ class Goals extends Component {
                 Your goal
               </H1>
             </Row>
-            <Row style={{ marginVertical: 5 }}>
+            <Row style={{ marginVertical: 5, flex: 1, justifyContent: 'center' }}>
             <LineChart
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                labels: ['Mon', 'Tue', 'Wen', 'Thur', 'Fri', 'Sat', 'Sun'],
                 datasets: [{
                   data: [
+                    Math.random() * 100,
                     Math.random() * 100,
                     Math.random() * 100,
                     Math.random() * 100,
@@ -45,12 +46,11 @@ class Goals extends Component {
               }}
               width={Dimensions.get('window').width * .8} // from react-native
               height={220}
-              yAxisLabel={'$'}
               chartConfig={{
-                backgroundColor: '#e26a00',
-                backgroundGradientFrom: '#fb8c00',
-                backgroundGradientTo: '#ffa726',
-                decimalPlaces: 2, // optional, defaults to 2dp
+                backgroundColor: '#1DA8F0',
+                backgroundGradientFrom: '#1DA8F0',
+                backgroundGradientTo: '#7DE0FF',
+                decimalPlaces: 0, // optional, defaults to 2dp
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {
                   borderRadius: 16
@@ -58,7 +58,8 @@ class Goals extends Component {
               }}
               style={{
                 marginVertical: 8,
-                borderRadius: 16
+                borderRadius: 16,
+                marginHorizontal: 'auto'
               }}
             />
             </Row>
