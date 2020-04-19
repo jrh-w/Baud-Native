@@ -47,7 +47,7 @@ const RootStack = createStackNavigator(
     },
     transitionConfig : () => ({
   	transitionSpec: {
-  		duration: 0
+  		duration: 0,
   	}
   })
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Text, StyleProvider, Container, Content, Header } from 'native-base';
 
 import getTheme from '../native-base-theme/components';

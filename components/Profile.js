@@ -15,6 +15,17 @@ import Certificates from './sub_components/Certificates';
 import Goals from './sub_components/Goals';
 import Stats from './sub_components/Stats';
 
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from 'react-native-chart-kit';
+
+import { Dimensions } from 'react-native';
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +57,7 @@ class Profile extends Component {
           <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>
-                <Col style={{ width: 300 }}>
+                <Col style={{ width: Dimensions.get('window').width * .9 }}>
                   <Row style={{ marginVertical: 10 }}>
                     <H1>
                     Your certificates
@@ -54,7 +65,7 @@ class Profile extends Component {
                   </Row>
                 </Col>
                 <Certificates navigation={this.props.navigation}/>
-                <Col style={{ width: 300 }}>
+                <Col style={{ width: Dimensions.get('window').width * .9 }}>
                   <Goals />
                   <Stats />
                 </Col>
