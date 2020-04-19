@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Card, CardItem, Body, H1, Text, Left } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Image, StyleSheet, View, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
 import {
   LineChart,
@@ -13,12 +14,37 @@ import {
   StackedBarChart
 } from 'react-native-chart-kit';
 
+const mapStateToProps = state => {
+  return {
+    userStats: state.userStats,
+  };
+};
+
 class Goals extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userStats: {},
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props !== state) {
+      return {
+        userStats: props.userStats,
+      };
+    }
+
+    return null;
   }
 
   render() {
+
+    const data = {
+      labels: this.state.userStats.labels,
+      datasets: this.state.userStats.datasets
+    };
+
     return(
       <Card>
         <CardItem>
@@ -30,20 +56,7 @@ class Goals extends Component {
             </Row>
             <Row style={{ marginVertical: 5, flex: 1, justifyContent: 'center' }}>
             <LineChart
-              data={{
-                labels: ['Mon', 'Tue', 'Wen', 'Thur', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                  data: [
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100
-                  ]
-                }]
-              }}
+              data={data}
               width={Dimensions.get('window').width * .8} // from react-native
               height={220}
               chartConfig={{
@@ -70,4 +83,4 @@ class Goals extends Component {
   }
 }
 
-export default Goals;
+export default connect(mapStateToProps)(Goals);

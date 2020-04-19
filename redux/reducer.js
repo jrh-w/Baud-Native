@@ -6,6 +6,22 @@ const initialState = {
   createdLessons: 64,
   userRank: 43,
   userWins: 841,
+  userStats: {
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+    ],
+    datasets: [
+      {
+        data: [20, 45, 98, 80, 99, 43],
+        strokeWidth: 2,
+      }
+    ]
+  },
   icons: [
     {
       icon: 'md-create',
