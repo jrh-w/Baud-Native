@@ -46,7 +46,7 @@ class Certificates extends Component {
     );
 
     return(
-      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row'}}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row' }}>
         <Row>
           {this.certButtons}
         </Row>

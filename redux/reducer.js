@@ -69,7 +69,8 @@ const initialState = {
       progress: 20,
       route: '',
     },
-  ]
+  ],
+  myData: [20, 45, 28, 80, 99, 43]
 };
 
 export const Reducer = (state = initialState, action) => {
