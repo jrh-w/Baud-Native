@@ -4,6 +4,7 @@ import { Card, CardItem, Body, H1, Text, Left } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Image, StyleSheet, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import {
   LineChart,
@@ -44,6 +45,15 @@ class Goals extends Component {
       labels: this.state.userStats.labels,
       datasets: this.state.userStats.datasets
     };
+
+    const test = {
+      date: Date.now()
+    }
+
+    axios.get('http://baud.epizy.com/getStats.php')
+      .then(function(response) {
+        console.log(response);
+      })
 
     return(
       <Card>

@@ -16,7 +16,13 @@ class Sign_Up extends Component {
     super(props);
     this.state = {
       //isReady: false
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
     };
+
+    this.register = this.register.bind(this);
   }
 
   /*async componentDidMount() {
@@ -28,6 +34,26 @@ class Sign_Up extends Component {
     });
     this.setState({ isReady: true });
   }*/
+
+  register() {
+
+    let usernameRegEx = new RegExp('^(?=[a-zA-Z0-9._-]{8,40}$)(?!.*[_.-]{2})[^_.-].*[^_.-]$');
+    let passwordRegEx = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
+    let emailRegEx = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+
+    let usernameTest = usernameRegEx.test(this.state.username);
+    let passwordTest = passwordRegEx.test(this.state.password);
+    let emailTest = emailRegEx.test(this.state.email);
+    let passwordsMatch = (this.state.password === this.state.confirmPassword);
+
+    console.log(usernameRegEx.test(this.state.username));
+    console.log(passwordRegEx.test(this.state.password));
+    console.log(emailRegEx.test(this.state.email));
+    console.log(passwordsMatch);
+
+
+    //this.props.navigation.navigate('Profile');
+  }
 
   render() {
 
@@ -50,22 +76,26 @@ class Sign_Up extends Component {
                       </H1>
                     </Row>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} placeholder='Username'/>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Username' value={this.state.username}
+                      onChangeText={user => this.setState({ username: user })}/>
                     </Item>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} placeholder='Email'/>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Email' value={this.state.email}
+                      onChangeText={email => this.setState({ email: email })}/>
                     </Item>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password'/>
+                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password' value={this.state.password}
+                      onChangeText={password => this.setState({ password: password })}/>
                     </Item>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Confirm password'/>
+                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Confirm password' value={this.state.confirmPassword}
+                      onChangeText={confirm => this.setState({ confirmPassword: confirm })}/>
                     </Item>
                     <Button onPress={() => this.props.navigation.navigate('Login')} transparent>
                       <Text>I already have an account</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-                      <Button onPress={() => this.props.navigation.navigate('Profile')} style={{ width: 50 }} bordered large rounded>
+                      <Button onPress={this.register} style={{ width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>
