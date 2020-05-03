@@ -73,7 +73,7 @@ class Sign_Up extends Component {
     let emailTest = emailRegEx.test(this.state.email);
     let passwordsMatch = (this.state.password === this.state.confirmPassword);
 
-    let test = checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
+    let test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
 
     console.log(usernameRegEx.test(this.state.username));
     console.log(passwordRegEx.test(this.state.password));

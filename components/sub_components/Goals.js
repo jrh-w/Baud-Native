@@ -50,10 +50,10 @@ class Goals extends Component {
       date: Date.now()
     }
 
-    axios.get('http://baud.epizy.com/getStats.php')
+    /*axios.get('http://baud.epizy.com/getStats.php')
       .then(function(response) {
         console.log(response);
-      })
+      })*/
 
     return(
       <Card>
