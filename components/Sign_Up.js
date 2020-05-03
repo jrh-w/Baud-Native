@@ -46,7 +46,7 @@ class Sign_Up extends Component {
     if(!usernameTest) {
 
     }
-    
+
     if(!passwordTest) {
 
     }
@@ -58,6 +58,8 @@ class Sign_Up extends Component {
     if(!passwordsMatch) {
 
     }
+
+    return checkSuccessful;
   }
 
   register() {
@@ -70,6 +72,8 @@ class Sign_Up extends Component {
     let passwordTest = passwordRegEx.test(this.state.password);
     let emailTest = emailRegEx.test(this.state.email);
     let passwordsMatch = (this.state.password === this.state.confirmPassword);
+
+    let test = checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
 
     console.log(usernameRegEx.test(this.state.username));
     console.log(passwordRegEx.test(this.state.password));
