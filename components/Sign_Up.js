@@ -11,6 +11,8 @@ import material from '../native-base-theme/variables/material';
 
 import AppHeader from './sub_components/AppHeader';
 
+import axios from 'axios';
+
 class Sign_Up extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +75,14 @@ class Sign_Up extends Component {
     let emailTest = emailRegEx.test(this.state.email);
     let passwordsMatch = (this.state.password === this.state.confirmPassword);
 
-    let test = checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
+    let test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
+
+    axios.get('https://evening-oasis-01489.herokuapp.com/')
+      .then((response) => {
+        console.log(response.data);
+      }).catch((error) => {
+        console.log(error);
+      })
 
     console.log(usernameRegEx.test(this.state.username));
     console.log(passwordRegEx.test(this.state.password));
