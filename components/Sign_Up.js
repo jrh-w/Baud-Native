@@ -11,6 +11,9 @@ import material from '../native-base-theme/variables/material';
 
 import AppHeader from './sub_components/AppHeader';
 
+import axios from 'axios';
+import bcrypt from 'react-native-bcrypt';
+
 class Sign_Up extends Component {
   constructor(props) {
     super(props);
@@ -74,6 +77,28 @@ class Sign_Up extends Component {
     let passwordsMatch = (this.state.password === this.state.confirmPassword);
 
     let test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
+
+    axios.get('https://evening-oasis-01489.herokuapp.com/')
+      .then((response) => {
+        console.log(response.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+
+      let salt = bcrypt.genSaltSync(10);
+      let hash = bcrypt.hashSync(this.state.password, salt);
+
+    axios.post('https://evening-oasis-01489.herokuapp.com/', {
+      email: this.state.email,
+      username: this.state.username,
+      password: hash
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
     console.log(usernameRegEx.test(this.state.username));
     console.log(passwordRegEx.test(this.state.password));
