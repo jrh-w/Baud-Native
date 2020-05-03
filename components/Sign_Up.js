@@ -19,10 +19,15 @@ class Sign_Up extends Component {
       username: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      usernameError: '',
+      emailError: '',
+      passwordError: '',
+      confirmPasswordError: ''
     };
 
     this.register = this.register.bind(this);
+    this.checkData = this.checkData.bind(this);
   }
 
   /*async componentDidMount() {
@@ -34,6 +39,26 @@ class Sign_Up extends Component {
     });
     this.setState({ isReady: true });
   }*/
+
+  checkData(usernameTest, passwordTest, emailTest, passwordsMatch) {
+    let checkSuccessful = true;
+
+    if(!usernameTest) {
+
+    }
+    
+    if(!passwordTest) {
+
+    }
+
+    if(!emailTest) {
+
+    }
+
+    if(!passwordsMatch) {
+
+    }
+  }
 
   register() {
 
