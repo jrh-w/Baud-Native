@@ -78,33 +78,45 @@ class Sign_Up extends Component {
 
     let test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
 
-    axios.get('https://evening-oasis-01489.herokuapp.com/')
+    /*axios.get('https://evening-oasis-01489.herokuapp.com/')
       .then((response) => {
         console.log(response.data);
       }).catch((error) => {
         console.log(error);
       })
+    */
 
-      let salt = bcrypt.genSaltSync(10);
-      let hash = bcrypt.hashSync(this.state.password, salt);
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(this.state.password, salt);
 
-    axios.post('https://evening-oasis-01489.herokuapp.com/', {
-      email: this.state.email,
-      username: this.state.username,
-      password: hash
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    console.log(test);
 
-    console.log(usernameRegEx.test(this.state.username));
-    console.log(passwordRegEx.test(this.state.password));
-    console.log(emailRegEx.test(this.state.email));
-    console.log(passwordsMatch);
+    if(test) {
+      axios.post('https://evening-oasis-01489.herokuapp.com/register', {
+        email: this.state.email,
+        username: this.state.username,
+        password: hash
+      })
+      .then(function (response) {
+        console.log(response.data);
+        let verifyID = response.data;
+      })
+      .catch(function (error) {
+        let errorCode = error.response.status;
+        if(errorCode == 452) {
+          // Email taken
+        } else if (errorCode == 453) {
+          // Username taken
+        } else {
+          // Connection error
+        }
+      });
+    }
 
+    //console.log(usernameRegEx.test(this.state.username));
+    //console.log(passwordRegEx.test(this.state.password));
+    //console.log(emailRegEx.test(this.state.email));
+    //console.log(passwordsMatch);
 
     //this.props.navigation.navigate('Profile');
   }
