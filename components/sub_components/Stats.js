@@ -36,6 +36,7 @@ class Stats extends Component {
   }
 
   render() {
+
     return(
       <Card>
         <CardItem>

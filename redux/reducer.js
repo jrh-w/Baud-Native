@@ -6,6 +6,23 @@ const initialState = {
   createdLessons: 64,
   userRank: 43,
   userWins: 841,
+  userStats: {
+    labels: [
+      'Mon',
+      'Tue',
+      'Wen',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun'
+    ],
+    datasets: [
+      {
+        data: [20, 45, 98, 80, 99, 43, 33],
+        strokeWidth: 2,
+      }
+    ]
+  },
   icons: [
     {
       icon: 'md-create',
@@ -53,7 +70,8 @@ const initialState = {
       progress: 20,
       route: '',
     },
-  ]
+  ],
+  myData: [20, 45, 28, 80, 99, 43]
 };
 
 export const Reducer = (state = initialState, action) => {
