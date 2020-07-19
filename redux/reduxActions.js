@@ -6,5 +6,5 @@ export function addStatsData(data) {
   return {
     type: ADD_STATS,
     data
-  }
+  };
 }

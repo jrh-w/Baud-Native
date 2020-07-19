@@ -4,10 +4,11 @@ import { ADD_STATS } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',
+  userID: 1,
   points: 123,
-  createdLessons: 64,
-  userRank: 43,
-  userWins: 841,
+  //createdLessons: 64,
+  //userRank: 43,
+  //userWins: 841,
   userStats: {
     labels: [
       'January',
@@ -22,7 +23,10 @@ const initialState = {
         data: [20, 45, 98, 80, 99, 43],
         strokeWidth: 2,
       }
-    ]
+    ],
+    createdLessons: 64,
+    userRank: 43,
+    userWins: 841
   },
   icons: [
     {
@@ -78,12 +82,9 @@ const initialState = {
 export const Reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_STATS:
-      return [
-        ...state,
-        {
-          userStats: action.data
-        }
-      ]
+    return Object.assign({}, state, {
+      userStats: action.data
+    })
     default:
       return state;
   }
