@@ -5,11 +5,12 @@ import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
-import { StatusBar, Image } from 'react-native';
+import { StatusBar, Image, Dimensions } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
 import AppHeader from './sub_components/AppHeader';
+import SignUpAlert from './sub_components/SignUpAlert';
 
 import axios from 'axios';
 import bcrypt from 'react-native-bcrypt';
@@ -22,22 +23,17 @@ class Sign_Up extends Component {
       username: '',
       email: '',
       password: '',
-<<<<<<< HEAD
-      confirmPassword: ''
-    };
-
-    this.register = this.register.bind(this);
-=======
       confirmPassword: '',
-      usernameError: '',
-      emailError: '',
-      passwordError: '',
-      confirmPasswordError: ''
+      usernameError: 'usernameError',
+      emailError: 'emailError',
+      passwordError: 'passwordError',
+      confirmPasswordError: 'confirmPasswordError',
+      errorText: '',
+      invalidData: false
     };
 
     this.register = this.register.bind(this);
     this.checkData = this.checkData.bind(this);
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
   }
 
   /*async componentDidMount() {
@@ -50,31 +46,56 @@ class Sign_Up extends Component {
     this.setState({ isReady: true });
   }*/
 
-<<<<<<< HEAD
-=======
   checkData(usernameTest, passwordTest, emailTest, passwordsMatch) {
     let checkSuccessful = true;
+    this.state.errorText = '';
 
-    if(!usernameTest) {
-
+    switch(false){
+      case usernameTest:
+        this.state.errorText = this.state.usernameError;
+        checkSuccessful = false;
+        break;
+      case emailTest:
+        this.state.errorText = this.state.emailError;
+        checkSuccessful = false;
+        break;
+      case passwordTest:
+        this.state.errorText = this.state.passwordError;
+        checkSuccessful = false;
+        break;
+      case passwordsMatch:
+        this.state.errorText = this.state.confirmPasswordError;
+        checkSuccessful = false;
+        break;
+      default:
+        break;
     }
 
+    /*if(!usernameTest) {
+        this.state.errorText = this.state.usernameError;
+        checkSuccessful = false;
+    }
+    else
     if(!passwordTest) {
-
+        this.state.errorText = this.state.passwordError;
+        checkSuccessful = false;
     }
-
+    else
     if(!emailTest) {
-
+        this.state.errorText = this.state.emailError;
+        checkSuccessful = false;
     }
-
+    else
     if(!passwordsMatch) {
+        this.state.errorText = this.state.confirmPasswordError;
+        checkSuccessful = false;
+    }*/
 
-    }
-
+    this.setState({invalidData : !checkSuccessful})
+    console.log('invalidData ' + this.state.invalidData + ' errorText ' + this.state.errorText);
     return checkSuccessful;
   }
 
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
   register() {
 
     let usernameRegEx = new RegExp('^(?=[a-zA-Z0-9._-]{8,40}$)(?!.*[_.-]{2})[^_.-].*[^_.-]$');
@@ -86,14 +107,7 @@ class Sign_Up extends Component {
     let emailTest = emailRegEx.test(this.state.email);
     let passwordsMatch = (this.state.password === this.state.confirmPassword);
 
-<<<<<<< HEAD
-    console.log(usernameRegEx.test(this.state.username));
-    console.log(passwordRegEx.test(this.state.password));
-    console.log(emailRegEx.test(this.state.email));
-    console.log(passwordsMatch);
-
-=======
-    let test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
+    var test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
 
     /*axios.get('https://evening-oasis-01489.herokuapp.com/')
       .then((response) => {
@@ -106,9 +120,9 @@ class Sign_Up extends Component {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(this.state.password, salt);
 
-    console.log(test);
+    console.log(test + ' test');
 
-    if(test) {
+    /*if(test) {
       axios.post('https://evening-oasis-01489.herokuapp.com/register', {
         email: this.state.email,
         username: this.state.username,
@@ -129,12 +143,11 @@ class Sign_Up extends Component {
         }
       });
     }
-
+*/
     //console.log(usernameRegEx.test(this.state.username));
     //console.log(passwordRegEx.test(this.state.password));
     //console.log(emailRegEx.test(this.state.email));
     //console.log(passwordsMatch);
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
 
     //this.props.navigation.navigate('Profile');
   }
@@ -148,15 +161,16 @@ class Sign_Up extends Component {
     return (
     <StyleProvider style={getTheme(material)}>
       <Container>
-      <AppHeader />
         <Content>
+        <AppHeader />
             <Grid>
               <Body>
-                <Col style={{ width: 300 }}>
+                <Col style={{ width: Dimensions.get('window').width*0.8 }}>
+                  <SignUpAlert errorText={this.state.errorText} invalidData={this.state.invalidData} />
                   <Body>
-                    <Row style={{ marginVertical: 20 }}>
+                    <Row style={{ marginVertical: 10 }}>
                       <H1>
-                      Sign in
+                      Sign up
                       </H1>
                     </Row>
                     <Item rounded>
@@ -179,11 +193,7 @@ class Sign_Up extends Component {
                       <Text>I already have an account</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-<<<<<<< HEAD
-                      <Button onPress={this.register} style={{ width: 50 }} bordered large rounded>
-=======
                       <Button onPress={this.register} style={{ justifyContent: "center", width: 50 }} bordered large rounded>
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>

@@ -49,15 +49,15 @@ class CertificatesButton extends Component {
                     {this.props.name}
                   </H1>
                 </Row>
-                  <Row style={{ marginTop: 5 }}>
-                    {this.props.progress >= 100 ?
-                    <H1 style={{ fontSize: 15, color: this.props.color }}>
-                      COMPLETED
-                    </H1>
-                    :
-                    <H1 style={{ fontSize: 13, color: this.props.color }}>
-                      UNCOMPLETED
-                    </H1>
+                <Row style={{ marginTop: 5 }}>
+                  {this.props.progress >= 100 ?
+                  <H1 style={{ fontSize: 13, color: this.props.color }}>
+                    COMPLETED
+                  </H1>
+                  :
+                  <H1 style={{ fontSize: 13, color: this.props.color }}>
+                    UNCOMPLETED
+                  </H1>
                   }
                 </Row>
               </Body>

@@ -8,7 +8,6 @@ const initialState = {
   userWins: 841,
   userStats: {
     labels: [
-<<<<<<< HEAD
       'Mon',
       'Tue',
       'Wen',
@@ -20,18 +19,6 @@ const initialState = {
     datasets: [
       {
         data: [20, 45, 98, 80, 99, 43, 33],
-=======
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-    ],
-    datasets: [
-      {
-        data: [20, 45, 98, 80, 99, 43],
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
         strokeWidth: 2,
       }
     ]

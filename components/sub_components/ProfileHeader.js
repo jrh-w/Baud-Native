@@ -33,11 +33,7 @@ class ProfileHeader extends Component {
 
   render() {
     return(
-<<<<<<< HEAD
-      <Card style={{ marginTop: -80, paddingTop: 80, marginBottom: 0, paddingBottom: 15 }}>
-=======
       <Card style={{ marginTop: -80, paddingTop: 80, marginBottom: 0 }}>
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
         <CardItem>
           <Body>
             <Row style={{ height: 115, marginVertical: 40, marginHorizontal: 10}}>

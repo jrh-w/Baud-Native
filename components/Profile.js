@@ -54,20 +54,12 @@ class Profile extends Component {
     return (
       <StyleProvider style={getTheme(material)}>
         <Container>
-<<<<<<< HEAD
-          <LearnHeader/>
-=======
           <ProfileHeader/>
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
           <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>
                 <Col style={{ width: Dimensions.get('window').width * .9 }}>
-<<<<<<< HEAD
-                  <Row style={{ marginBottom: 10, marginTop: 25 }}>
-=======
                   <Row style={{ marginVertical: 10 }}>
->>>>>>> 068e7c53a6ce0f65c626a6a71d7e19307d101640
                     <H1>
                     Your certificates
                     </H1>
