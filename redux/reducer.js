@@ -1,5 +1,7 @@
 // Reducer rozpoznaje i rozdziela zadania oraz dane dla Store'a (sklepu)
 
+import { ADD_STATS } from './reduxActions';
+
 const initialState = {
   name: 'John Doe',
   points: 123,
@@ -76,6 +78,13 @@ const initialState = {
 
 export const Reducer = (state = initialState, action) => {
   switch(action.type) {
+    case ADD_STATS:
+      return [
+        ...state,
+        {
+          userStats: action.data
+        }
+      ]
     default:
       return state;
   }
