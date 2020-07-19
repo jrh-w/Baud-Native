@@ -11,16 +11,17 @@ const initialState = {
   //userWins: 841,
   userStats: {
     labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
+      'Mon',
+      'Tue',
+      'Wen',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun'
     ],
     datasets: [
       {
-        data: [20, 45, 98, 80, 99, 43],
+        data: [20, 45, 98, 80, 99, 43, 33],
         strokeWidth: 2,
       }
     ],

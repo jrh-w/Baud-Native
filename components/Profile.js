@@ -14,6 +14,7 @@ import material from '../native-base-theme/variables/material';
 
 import Menu from './sub_components/Menu';
 import ProfileHeader from './sub_components/ProfileHeader';
+import LearnHeader from './sub_components/LearnHeader';
 import Certificates from './sub_components/Certificates';
 import Goals from './sub_components/Goals';
 import Stats from './sub_components/Stats';
