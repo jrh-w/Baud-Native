@@ -4,6 +4,8 @@ import * as Font from 'expo-font';
 import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import { connect } from 'react-redux';
+import { addStatsData } from '../redux/reduxActions';
 
 import { StatusBar, Image, ScrollView, View } from 'react-native';
 import getTheme from '../native-base-theme/components';
@@ -26,12 +28,24 @@ import {
 
 import { Dimensions } from 'react-native';
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onStatsData: data => dispatch(addStatsData(data))
+  }
+}
+
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       //isReady: false
     };
+  }
+
+  componentDidMount() {
+
+
+
   }
 
 /*  async componentDidMount() {
@@ -78,4 +92,5 @@ class Profile extends Component {
     );
   }
 }
-export default Profile;
+
+export default connect(null, mapDispatchToProps)(Profile);
