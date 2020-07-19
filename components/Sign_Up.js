@@ -161,7 +161,7 @@ class Sign_Up extends Component {
                       <Text>I already have an account</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-                      <Button onPress={this.register} style={{ width: 50 }} bordered large rounded>
+                      <Button onPress={this.register} style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>
