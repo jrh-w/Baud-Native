@@ -59,12 +59,12 @@ class Login extends Component {
                       <Text>Forgot your password?</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-                      <Button onPress={() => this.props.navigation.navigate('Profile')}style={{ width: 50 }} bordered large rounded>
+                      <Button onPress={() => this.props.navigation.navigate('Profile')}style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>
                     <Row style={{ marginTop: 20 }}>
-                      <Button onPress={() => this.props.navigation.navigate('Sign_Up')} style={{ width: 150 }} bordered large rounded>
+                      <Button onPress={() => this.props.navigation.navigate('Sign_Up')} style={{ justifyContent: "center", width: 200 }} bordered large rounded>
                         <Text style={{ marginLeft: 'auto', marginRight: 'auto' }}>Sign Up</Text>
                       </Button>
                     </Row>

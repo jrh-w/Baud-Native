@@ -55,7 +55,7 @@ class CertificatesButton extends Component {
                       COMPLETED
                     </H1>
                     :
-                    <H1 style={{ fontSize: 15, color: this.props.color }}>
+                    <H1 style={{ fontSize: 13, color: this.props.color }}>
                       UNCOMPLETED
                     </H1>
                   }
