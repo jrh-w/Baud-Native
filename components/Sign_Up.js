@@ -24,7 +24,7 @@ class Sign_Up extends Component {
       email: '',
       password: '',
       confirmPassword: '',
-      usernameError: 'usernameError',
+      usernameError: 'Username should contain at least 8 characters',
       emailError: 'emailError',
       passwordError: 'passwordError',
       confirmPasswordError: 'confirmPasswordError',
@@ -192,7 +192,7 @@ class Sign_Up extends Component {
                     <Button onPress={() => this.props.navigation.navigate('Login')} transparent>
                       <Text>I already have an account</Text>
                     </Button>
-                    <Row style={{ marginVertical: 20 }}>
+                    <Row style={{ marginVertical: 10 }}>
                       <Button onPress={this.register} style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>

@@ -38,8 +38,8 @@ class Login extends Component {
     return (
     <StyleProvider style={getTheme(material)}>
       <Container>
-      <AppHeader />
         <Content>
+          <AppHeader />
             <Grid>
               <Body>
                 <Col style={{ width: 300 }}>
