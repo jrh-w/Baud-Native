@@ -1,4 +1,4 @@
-import { AppLoading } from 'expo';
+//import { AppLoading } from 'expo';
 import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
@@ -14,6 +14,7 @@ import SignUpAlert from './sub_components/SignUpAlert';
 
 import axios from 'axios';
 import bcrypt from 'react-native-bcrypt';
+import isaac from 'isaac';
 
 class Sign_Up extends Component {
   constructor(props) {
@@ -116,6 +117,14 @@ class Sign_Up extends Component {
         console.log(error);
       })
     */
+
+    bcrypt.setRandomFallback((len) => {
+      if (!Uint8Array.prototype.map) {
+        Uint8Array.prototype.map = Array.prototype.map;
+      }
+      const buffer = new UInt8Array(len);
+      return buffer.map(() => Math.floor(isaac.random() * 256));
+    });
 
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(this.state.password, salt);

@@ -1,4 +1,4 @@
-import { AppLoading } from 'expo';
+//import { AppLoading } from 'expo';
 import { Right, H2, H3, Left, Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
@@ -52,7 +52,7 @@ class Profile extends Component {
       userStats: {}
     };
 
-    this.prepareChartData = this.prepareChartData.bind(this);
+    this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
     this.getDateLabels = this.getDateLabels.bind(this);
   }
 
@@ -72,7 +72,7 @@ class Profile extends Component {
 
   }
 
-  prepareChartData(data) { // Preparing data from the last week // NEEDS TESTING
+  prepareUserStatsData(data) { // Preparing data from the last week // NEEDS TESTING
     let lastWeekPoints = [];
 
     let points = data.points.split(";").slice(-7);
@@ -100,14 +100,17 @@ class Profile extends Component {
 
     let datasets = [
       {
-        data: points,
+        data: lastWeekPoints,
         strokeWidth: 2,
       }
     ];
 
     return {
       labels: labels,
-      datasets: datasets
+      datasets: datasets,
+      createdLessons: data.createdLessons,
+      userRank: data.userRank,
+      userWins: data.userWins
     }
 
   }
@@ -130,7 +133,7 @@ class Profile extends Component {
         //let stats = response.data;
         this.props.onStatsData(response.data);
         //console.log(this.state.userStats.points);
-        console.log(this.prepareChartData(response.data));
+        console.log(this.prepareUserStatsData(response.data));
       }).catch((error) => {
         console.log(error);
       })*/

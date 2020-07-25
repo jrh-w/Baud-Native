@@ -1,4 +1,4 @@
-import { AppLoading } from 'expo';
+//import { AppLoading } from 'expo';
 import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';

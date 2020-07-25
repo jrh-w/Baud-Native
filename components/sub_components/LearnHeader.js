@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 
 import { Card, CardItem, Body, H1, Text, Left, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-
-import { Dimensions } from 'react-native';
 
 const mapStateToProps = state => {
   return {
