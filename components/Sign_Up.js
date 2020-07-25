@@ -25,10 +25,11 @@ class Sign_Up extends Component {
       email: '',
       password: '',
       confirmPassword: '',
-      usernameError: 'usernameError',
-      emailError: 'emailError',
-      passwordError: 'passwordError',
-      confirmPasswordError: 'confirmPasswordError',
+      usernameError: 'Username should contain at least 8 characters',
+      takenUsernameError: 'That username is already taken',
+      emailError: 'The email you entered is incorrect',
+      passwordError : 'Password should contain at least 8 chacters, 1 number and 1 symbol',
+      confirmPasswordError: 'Passwords has to be the same',
       errorText: '',
       invalidData: false
     };
@@ -201,7 +202,7 @@ class Sign_Up extends Component {
                     <Button onPress={() => this.props.navigation.navigate('Login')} transparent>
                       <Text>I already have an account</Text>
                     </Button>
-                    <Row style={{ marginVertical: 20 }}>
+                    <Row style={{ marginVertical: 10 }}>
                       <Button onPress={this.register} style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>

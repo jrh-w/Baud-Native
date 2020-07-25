@@ -18,7 +18,7 @@ class AppHeader extends Component {
                 <Image style={{ width: Dimensions.get('window').height*0.2, height: Dimensions.get('window').height*0.2 }} source={require('../../assets/logo.png')} />
               </Row>
               <Row>
-                <H1 style={{ marginVertical: 20}}>
+                <H1 style={{ marginTop: 20, marginBottom: 10}}>
                   Baud
                 </H1>
               </Row>
