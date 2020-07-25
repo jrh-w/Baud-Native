@@ -25,9 +25,10 @@ class Sign_Up extends Component {
       password: '',
       confirmPassword: '',
       usernameError: 'Username should contain at least 8 characters',
-      emailError: 'emailError',
-      passwordError: 'passwordError',
-      confirmPasswordError: 'confirmPasswordError',
+      takenUsernameError: 'That username is already taken',
+      emailError: 'The email you entered is incorrect',
+      passwordError : 'Password should contain at least 8 chacters, 1 number and 1 symbol',
+      confirmPasswordError: 'Passwords has to be the same',
       errorText: '',
       invalidData: false
     };

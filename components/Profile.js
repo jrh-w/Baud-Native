@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import { Ionicons, EvilIcons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { addStatsData } from '../redux/reduxActions';
 
@@ -29,6 +30,7 @@ import {
 
 import { Dimensions } from 'react-native';
 
+const mapStateToProps = state => {
   return {
     userID: state.userID,
     userStats: state.userStats
