@@ -7,9 +7,10 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    createdLessons: state.createdLessons,
-    userRank: state.userRank,
-    userWins: state.userWins
+    userStats: state.userStats, // Nie biorąc całego zestawu, nie otrzymujemy danych
+    //createdLessons: state.userStats.createdLessons,
+    //userRank: state.userStats.userRank,
+    //userWins: state.userStats.userWins
   };
 };
 
@@ -26,9 +27,9 @@ class Stats extends Component {
   static getDerivedStateFromProps(props, state) {
     if(props !== state) {
       return {
-        createdLessons: props.createdLessons,
-        userRank: props.userRank,
-        userWins: props.userWins
+        createdLessons: props.userStats.createdLessons,
+        userRank: props.userStats.userRank,
+        userWins: props.userStats.userWins
       };
     }
 
