@@ -25,28 +25,11 @@ class Goals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userStats: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-        ],
-        datasets: [
-          {
-            data: [20, 45, 98, 80, 99, 43],
-            strokeWidth: 2,
-          }
-        ]
-      }
+      userStats: {}
     };
   }
 
-  // Kiedy dane będą gotowe dla chart'u, to będzie można pobierać dane rzeczywiste
-
-  /*static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props, state) {
     if(props !== state) {
       return {
         userStats: props.userStats,
@@ -54,7 +37,7 @@ class Goals extends Component {
     }
 
     return null;
-  }*/
+  }
 
   render() {
 

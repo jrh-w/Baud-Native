@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Card, CardItem, Body, H1, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -45,13 +45,22 @@ class Certificates extends Component {
       />
     );
 
-    return(
-      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row' }}>
-        <Row>
-          {this.certButtons}
-        </Row>
-      </ScrollView>
-    );
+    if(this.state.certificates.length) {
+      return(
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row' }}>
+          <Row>
+            {this.certButtons}
+          </Row>
+        </ScrollView>
+      );
+    } else {
+      return(
+        <View>
+          <Text style={{ fontSize: 20, padding: 10 }}>No certificates here yet...</Text>
+        </View>
+      );
+    }
+
   }
 }
 

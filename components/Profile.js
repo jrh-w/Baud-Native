@@ -47,7 +47,6 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //isReady: false
       userID: 0,
       userStats: {}
     };
@@ -59,7 +58,7 @@ class Profile extends Component {
   getDateLabels() {
     let labels = [];
 
-    let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let currentDay = new Date().getDay();
 
     for(let days = 6; days >= 0; days--) {
@@ -72,11 +71,13 @@ class Profile extends Component {
 
   }
 
-  prepareUserStatsData(data) { // Preparing data from the last week // NEEDS TESTING
-    let lastWeekPoints = [];
+  // lastDays -> change stats data length extracted from DB // TO BE IMPLEMENTED
 
-    let points = data.points.split(";").slice(-7);
-    let date = data.date.split(";").slice(-7);
+  prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
+    let lastWeekPoints = new Array(lastDays).fill(0);
+
+    let points = data.points.split(";").slice(Math.abs(lastDays) * -1);
+    let date = data.date.split(";").slice(Math.abs(lastDays) * -1);
 
     let currentDate = Date.now() / 1000; // Current time in seconds
     let offset = new Date().getTimezoneOffset();
@@ -128,15 +129,12 @@ class Profile extends Component {
 
   componentDidMount() {
 
-    /*axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
+    axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then((response) => {
-        //let stats = response.data;
-        this.props.onStatsData(response.data);
-        //console.log(this.state.userStats.points);
-        console.log(this.prepareUserStatsData(response.data));
+        this.props.onStatsData(this.prepareUserStatsData(response.data));
       }).catch((error) => {
         console.log(error);
-      })*/
+      })
 
   }
 
@@ -151,10 +149,6 @@ class Profile extends Component {
   }*/
 
   render() {
-
-  /*  if (!this.state.isReady) {
-      return <AppLoading />;
-    }*/
 
     return (
       <StyleProvider style={getTheme(material)}>

@@ -1,4 +1,4 @@
-import { AppLoading } from 'expo';
+//import { AppLoading } from 'expo';
 import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
@@ -81,14 +81,17 @@ export default class App extends Component {
 
   render() {
 
-    if (!this.state.isReady) {
-      return <AppLoading />;
+    if(this.state.isReady) {
+      return (
+        <Provider store={store}>
+          <AppContainer/>
+        </Provider>
+      );
+    } else {
+      return (
+        <View></View>
+      );
     }
 
-    return (
-      <Provider store={store}>
-        <AppContainer/>
-      </Provider>
-    );
   }
 }

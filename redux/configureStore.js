@@ -10,3 +10,7 @@ export const ConfigureStore = () => {
 
     return store;
 }
+
+export default function configureStore(initialState = initialState) {
+  return createStore(Reducer, initialState);
+}
