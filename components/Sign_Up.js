@@ -79,14 +79,6 @@ class Sign_Up extends Component {
 
     var test = this.checkData(usernameTest, passwordTest, emailTest, passwordsMatch);
 
-    // axios.get('https://evening-oasis-01489.herokuapp.com/')
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   })
-
-
     // bcrypt.setRandomFallback((len) => {
     //   if (!Uint8Array.prototype.map) {
     //     Uint8Array.prototype.map = Array.prototype.map;
@@ -98,9 +90,7 @@ class Sign_Up extends Component {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(this.state.password, salt);
 
-    console.log(test + ' test');
-
-    /*if(test) {
+    if(test) {
       axios.post('https://evening-oasis-01489.herokuapp.com/register', {
         email: this.state.email,
         username: this.state.username,
@@ -108,24 +98,21 @@ class Sign_Up extends Component {
       })
       .then(function (response) {
         console.log(response.data);
-        let verifyID = response.data;
+        return this.props.navigation.navigate('Login');
       })
       .catch(function (error) {
         let errorCode = error.response.status;
         if(errorCode == 452) {
-          // Email taken
+          console.log('Email already in use'); // Email taken
         } else if (errorCode == 453) {
-          // Username taken
+          console.log('Username already in use'); // Username taken
         } else {
-          // Connection error
+          console.log('Connection error'); // Connection error
         }
+        return false;
       });
-    }
-*/
+    } else return false;
 
-    return test;
-
-    //this.props.navigation.navigate('Profile');
   }
 
   render() {
