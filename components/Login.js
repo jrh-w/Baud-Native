@@ -13,13 +13,21 @@ import AppHeader from './sub_components/AppHeader';
 
 import axios from 'axios';
 import bcrypt from 'react-native-bcrypt';
+import { connect } from 'react-redux';
+import { addUserData } from '../redux/reduxActions';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUserData: data => dispatch(addUserData(data))
+  };
+}
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      username: 'jaqub.f.wjlodaz@gmmm.coz',
+      password: 'gendarme21254+'
     };
 
     this.logIn = this.logIn.bind(this);
@@ -27,10 +35,8 @@ class Login extends Component {
 
   logIn() {
 
-    // if(this.state.username = '') return false; // DO NOT USE !!!
-
-    console.log(this.state);
-
+    let that = this; // Needed in BCrypt
+    let pass = this.state.password;
     let input = {
       username: '',
       email: ''
@@ -42,7 +48,18 @@ class Login extends Component {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/compare', { params: input })
     .then(function (response) {
-      console.log(response.data);
+      let hash = response.data.password;
+
+      bcrypt.compare(that.state.password, hash, function(err, result) {
+        if(result === true) {
+          axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
+          .then(function (response) {
+            that.props.onUserData(response.data);
+            that.props.navigation.navigate('Profile');
+          });
+        }
+      });
+
     })
     .catch(function (error) {
       throw error;
@@ -101,4 +118,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
