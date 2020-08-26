@@ -19,6 +19,8 @@ import Certificates from './sub_components/Certificates';
 import Goals from './sub_components/Goals';
 import Stats from './sub_components/Stats';
 
+import certData from './data.js';
+
 import {
   LineChart,
   BarChart,
@@ -74,6 +76,9 @@ class Profile extends Component {
   // lastDays -> change stats data length extracted from DB // TO BE IMPLEMENTED
 
   prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
+
+    let certDataFromDB = data.certificates;
+
     let lastWeekPoints = new Array(lastDays).fill(0);
 
     let points = data.points.split(";").slice(Math.abs(lastDays) * -1);

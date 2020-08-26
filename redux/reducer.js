@@ -81,7 +81,8 @@ export const Reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_STATS:
     return Object.assign({}, state, {
-      userStats: action.data
+      userStats: action.data.userStats,
+      certificates: action.data.certificates
     })
     default:
       return state;
