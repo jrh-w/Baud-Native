@@ -55,7 +55,6 @@ class Profile extends Component {
 
     this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
     this.getDateLabels = this.getDateLabels.bind(this);
-    this.getCertificates = this.getCertificates.bind(this);
   }
 
   getDateLabels() {
@@ -74,22 +73,13 @@ class Profile extends Component {
 
   }
 
-  getCertificates(certificates) {
-    certificates = certificates.split(';');
-
-    for(let certificate of certificates) {
-      if(certificate === '') continue;
-      certificate = certificate.split("-");
-      console.log(certificate);
-    }
-
-  }
-
   // lastDays -> change stats data length extracted from DB // TO BE IMPLEMENTED
 
   prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
 
     let certDataFromDB = data.certificates;
+
+
 
     let lastWeekPoints = new Array(lastDays).fill(0);
 
@@ -148,7 +138,6 @@ class Profile extends Component {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then((response) => {
-        this.getCertificates(response.data.certificates);
         this.props.onStatsData(this.prepareUserStatsData(response.data));
       }).catch((error) => {
         console.log(error);
