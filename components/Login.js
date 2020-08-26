@@ -11,29 +11,65 @@ import material from '../native-base-theme/variables/material';
 
 import AppHeader from './sub_components/AppHeader';
 
+import axios from 'axios';
+import bcrypt from 'react-native-bcrypt';
+import { connect } from 'react-redux';
+import { addUserData } from '../redux/reduxActions';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUserData: data => dispatch(addUserData(data))
+  };
+}
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //isReady: false
+      username: 'jaqub.f.wjlodaz@gmmm.coz',
+      password: 'gendarme21254+'
     };
+
+    this.logIn = this.logIn.bind(this);
   }
 
-  /*async componentDidMount() {
-    await Font.loadAsync({
-      Montserrat_Regular: require('../node_modules/native-base/Fonts/Foundation.ttf'),
-      Montserrat_Bold: require('../assets/fonts/Montserrat/Montserrat_Bold.ttf'),
-      SemiBold: require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
-      ...Ionicons.font,
+  logIn() {
+
+    let that = this; // Needed in BCrypt
+    let pass = this.state.password;
+    let input = {
+      username: '',
+      email: ''
+    };
+    let emailRegEx = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/);
+
+    if(emailRegEx.test(this.state.username)) input.email = this.state.username;
+    else input.username = this.state.username;
+
+    axios.get('https://evening-oasis-01489.herokuapp.com/compare', { params: input })
+    .then(function (response) {
+      let hash = response.data.password;
+
+      bcrypt.compare(that.state.password, hash, function(err, result) {
+        if(result === true) {
+          axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
+          .then(function (response) {
+            that.props.onUserData(response.data);
+            that.props.navigation.navigate('Profile');
+          });
+        }
+      });
+
+    })
+    .catch(function (error) {
+      throw error;
     });
-    this.setState({ isReady: true });
-  }*/
+
+    // this.props.navigation.navigate('Profile');
+
+  }
 
   render() {
-
-  /*  if (!this.state.isReady) {
-      return <AppLoading />;
-    }*/
 
     return (
     <StyleProvider style={getTheme(material)}>
@@ -50,16 +86,19 @@ class Login extends Component {
                       </H1>
                     </Row>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} placeholder='Username or email'/>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Username or email' value={this.state.username}
+                      onChangeText={username => this.setState({ username: username })}/>
                     </Item>
                     <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true} placeholder='Password'/>
+                      <Input style={{ paddingLeft: 15 }} secureTextEntry={true}
+                      placeholder='Password' value={this.state.password}
+                      onChangeText={password => this.setState({ password: password })}/>
                     </Item>
                     <Button transparent>
                       <Text>Forgot your password?</Text>
                     </Button>
                     <Row style={{ marginVertical: 20 }}>
-                      <Button onPress={() => this.props.navigation.navigate('Profile')}style={{ justifyContent: "center", width: 50 }} bordered large rounded>
+                      <Button onPress={ this.logIn }style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                     </Row>
@@ -79,4 +118,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

@@ -55,6 +55,7 @@ class Profile extends Component {
 
     this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
     this.getDateLabels = this.getDateLabels.bind(this);
+    this.getCertificates = this.getCertificates.bind(this);
   }
 
   getDateLabels() {
@@ -70,6 +71,17 @@ class Profile extends Component {
     }
 
     return labels;
+
+  }
+
+  getCertificates(certificates) {
+    certificates = certificates.split(';');
+
+    for(let certificate of certificates) {
+      if(certificate === '') continue;
+      certificate = certificate.split("-");
+      console.log(certificate);
+    }
 
   }
 
@@ -136,6 +148,7 @@ class Profile extends Component {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then((response) => {
+        this.getCertificates(response.data.certificates);
         this.props.onStatsData(this.prepareUserStatsData(response.data));
       }).catch((error) => {
         console.log(error);

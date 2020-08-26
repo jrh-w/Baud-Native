@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 
 import Sign_Up from './Sign_Up';
+import Login from './Login';
 
 test('Sign Up component functionality test', async () => {
 
@@ -10,16 +11,18 @@ test('Sign Up component functionality test', async () => {
   };
 
   const component = render(<Sign_Up navigation={navigation}/>).toJSON();
-  const { getAllByA11yLabel, getByPlaceholderText } = render(<Sign_Up navigation={navigation}/>);
+  const { getAllByA11yLabel, getByPlaceholderText, findByText } = render(<Sign_Up navigation={navigation}/>);
 
   fireEvent.changeText(getByPlaceholderText('Username'), 'asdfghjkl')
   fireEvent.changeText(getByPlaceholderText('Email'), 'jaqub.f.wjlodaz@gmmm.coz')
   fireEvent.changeText(getByPlaceholderText('Password'), 'gendarme21254+')
   fireEvent.changeText(getByPlaceholderText('Confirm password'), 'gendarme21254+')
 
-  const register = fireEvent.press(getAllByA11yLabel('register')[0]);
+  fireEvent.press(getAllByA11yLabel('register')[0]);
 
-  expect(register).toBeTruthy();
+  const loginHeader = await findByText('Sign up');
+
+  expect(loginHeader).toBeTruthy();
 
   expect(component).toMatchSnapshot();
 });
