@@ -82,15 +82,10 @@ const initialState = {
 export const Reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_STATS:
-<<<<<<< HEAD
     return Object.assign({}, state, {
-      userStats: action.data.userStats,
-      certificates: action.data.certificates
+      userStats: action.data,
+      certificates: action.certData
     })
-=======
-      return Object.assign({}, state, {
-        userStats: action.data
-      })
     case ADD_USERDATA:
       return Object.assign({}, state, {
         name: action.data.username,
@@ -99,7 +94,6 @@ export const Reducer = (state = initialState, action) => {
         sessionID: action.data.sessionID,
         verifyID: action.data.verifyID
       })
->>>>>>> 8cc7b54548110db69e582784a4b1583c92c79fd2
     default:
       return state;
   }

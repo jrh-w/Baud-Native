@@ -3,10 +3,11 @@
 export const ADD_STATS = 'ADD_STATS';
 export const ADD_USERDATA = 'ADD_USERDATA';
 
-export function addStatsData(data) {
+export function addStatsData(data, certData) {
   return {
     type: ADD_STATS,
-    data
+    data,
+    certData
   };
 }
 

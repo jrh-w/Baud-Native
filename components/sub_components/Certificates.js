@@ -19,7 +19,16 @@ class Certificates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificates: [],
+      certificates: [
+        {
+        icon: 'logo-nodejs',
+        name: 'Node.js',
+        color: '#000',
+        bgColor: '#A0C44D',
+        progress: 100,
+        route: '',
+      }
+    ]
     };
   }
 
@@ -41,13 +50,13 @@ class Certificates extends Component {
     this.certButtons = this.state.certificates.map((item, key) =>
       <CertificatesButton
         key={key}
-        icon={this.props.icon}
-        name={this.props.name}
+        icon={item.icon}
+        name={item.name}
         navigation={this.props.navigation}
-        color={this.props.color}
-        bgColor={this.props.bgColor}
-        progress={this.props.progress}
-        route={this.props.route}
+        color={item.color}
+        bgColor={item.bgColor}
+        progress={item.progress}
+        route={item.route}
       />
     );
 

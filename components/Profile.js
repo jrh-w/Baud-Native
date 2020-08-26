@@ -19,7 +19,7 @@ import Certificates from './sub_components/Certificates';
 import Goals from './sub_components/Goals';
 import Stats from './sub_components/Stats';
 
-import certData from './data.js';
+import { CERT_DATABASE } from './data';
 
 import {
   LineChart,
@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onStatsData: data => dispatch(addStatsData(data))
+    onStatsData: (data, certData) => dispatch(addStatsData(data, certData))
   };
 }
 
@@ -55,6 +55,7 @@ class Profile extends Component {
 
     this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
     this.getDateLabels = this.getDateLabels.bind(this);
+    this.getCertificates = this.getCertificates.bind(this);
   }
 
   getDateLabels() {
@@ -73,13 +74,26 @@ class Profile extends Component {
 
   }
 
+  getCertificates(certificates) {
+    certificates = certificates.split(';');
+    let certificatesGroup = [];
+
+    for(let certificate of certificates) {
+      if(certificate === '') continue;
+      certificate = certificate.split('-');
+
+      certificatesGroup.push(Object.assign(CERT_DATABASE[certificate[0]], {
+        name: certificate[0],
+        progress: certificate[1]
+      }));
+    }
+
+    return certificatesGroup;
+  }
+
   // lastDays -> change stats data length extracted from DB // TO BE IMPLEMENTED
 
   prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
-
-    let certDataFromDB = data.certificates;
-
-
 
     let lastWeekPoints = new Array(lastDays).fill(0);
 
@@ -138,7 +152,8 @@ class Profile extends Component {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then((response) => {
-        this.props.onStatsData(this.prepareUserStatsData(response.data));
+        this.props.onStatsData(this.prepareUserStatsData(response.data),
+        this.getCertificates(response.data.certificates));
       }).catch((error) => {
         console.log(error);
       })
