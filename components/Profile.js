@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onStatsData: (data, certData) => dispatch(addStatsData(data, certData))
+    onStatsData: (data) => dispatch(addStatsData(data))
   };
 }
 
@@ -120,6 +120,8 @@ class Profile extends Component {
 
     let labels = this.getDateLabels();
 
+    let certificates = this.getCertificates(data.certificates);
+
     let datasets = [
       {
         data: lastWeekPoints,
@@ -128,11 +130,14 @@ class Profile extends Component {
     ];
 
     return {
-      labels: labels,
-      datasets: datasets,
-      createdLessons: data.createdLessons,
-      userRank: data.userRank,
-      userWins: data.userWins
+      userStats: {
+        labels: labels,
+        datasets: datasets,
+        createdLessons: data.createdLessons,
+        userRank: data.userRank,
+        userWins: data.userWins
+      },
+      certificates: certificates
     }
 
   }
@@ -152,8 +157,7 @@ class Profile extends Component {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then((response) => {
-        this.props.onStatsData(this.prepareUserStatsData(response.data),
-        this.getCertificates(response.data.certificates));
+        this.props.onStatsData(this.prepareUserStatsData(response.data));
       }).catch((error) => {
         console.log(error);
       })

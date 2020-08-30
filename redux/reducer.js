@@ -50,32 +50,7 @@ const initialState = {
       route: 'Settings',
     },
   ],
-  certificates: [
-    // {
-    //   icon: 'logo-nodejs',
-    //   name: 'Node.js',
-    //   color: '#000',
-    //   bgColor: '#A0C44D',
-    //   progress: 100,
-    //   route: '',
-    // },
-    // {
-    //   icon: 'logo-javascript',
-    //   name: 'JS basics',
-    //   color: '#000',
-    //   bgColor: '#F0DE3C',
-    //   progress: 0,
-    //   route: '',
-    // },
-    // {
-    //   icon: 'logo-sass',
-    //   name: 'Sass basics',
-    //   color: '#AF6491',
-    //   bgColor: '#2C2F36',
-    //   progress: 20,
-    //   route: '',
-    // },
-  ],
+  certificates: [],
   myData: [20, 45, 28, 80, 99, 43]
 };
 
@@ -83,8 +58,8 @@ export const Reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_STATS:
     return Object.assign({}, state, {
-      userStats: action.data,
-      certificates: action.certData
+      userStats: action.data.userStats,
+      certificates: action.data.certificates
     })
     case ADD_USERDATA:
       return Object.assign({}, state, {
