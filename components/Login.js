@@ -16,6 +16,8 @@ import bcrypt from 'react-native-bcrypt';
 import { connect } from 'react-redux';
 import { addUserData } from '../redux/reduxActions';
 
+import SignUpAlert from './sub_components/SignUpAlert';
+
 const mapDispatchToProps = dispatch => {
   return {
     onUserData: data => dispatch(addUserData(data))
@@ -26,8 +28,10 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'jaqub.f.wjlodaz@gmmm.coz',
-      password: 'gendarme21254+'
+      username: 'jaqub.f.wjloaz@gmmm.coz',
+      password: 'gendarme21254+',
+      invalidData: false,
+      errorText: 'Incorrect username/e-mail or/and passsword'
     };
 
     this.logIn = this.logIn.bind(this);
@@ -52,11 +56,15 @@ class Login extends Component {
 
       bcrypt.compare(that.state.password, hash, function(err, result) {
         if(result === true) {
+          that.setState({intvalidData: false});
           axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
           .then(function (response) {
             that.props.onUserData(response.data);
             that.props.navigation.navigate('Profile');
           });
+        } else {
+          console.log(that.state.errorText);
+          that.setState({invalidData : true});
         }
       });
 
@@ -94,6 +102,7 @@ class Login extends Component {
                       placeholder='Password' value={this.state.password}
                       onChangeText={password => this.setState({ password: password })}/>
                     </Item>
+                    <SignUpAlert errorText={this.state.errorText} invalidData={this.state.invalidData} />
                     <Button transparent>
                       <Text>Forgot your password?</Text>
                     </Button>
