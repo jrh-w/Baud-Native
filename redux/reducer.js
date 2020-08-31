@@ -50,8 +50,7 @@ const initialState = {
       route: 'Settings',
     },
   ],
-  certificates: [],
-  myData: [20, 45, 28, 80, 99, 43]
+  certificates: []
 };
 
 export const Reducer = (state = initialState, action) => {

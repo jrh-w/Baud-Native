@@ -19,8 +19,6 @@ import Certificates from './sub_components/Certificates';
 import Goals from './sub_components/Goals';
 import Stats from './sub_components/Stats';
 
-import { CERT_DATABASE } from './data';
-
 import {
   LineChart,
   BarChart,
@@ -53,9 +51,10 @@ class Profile extends Component {
       userStats: {}
     };
 
-    this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
     this.getDateLabels = this.getDateLabels.bind(this);
     this.getCertificates = this.getCertificates.bind(this);
+    this.getChartData = this.getChartData.bind(this);
+    this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
   }
 
   getDateLabels() {
@@ -75,26 +74,45 @@ class Profile extends Component {
   }
 
   getCertificates(certificates) {
-    certificates = certificates.split(';');
-    let certificatesGroup = [];
 
-    for(let certificate of certificates) {
-      if(certificate === '') continue;
-      certificate = certificate.split('-');
+    return new Promise((resolve, reject) => {
+      axios.get('https://evening-oasis-01489.herokuapp.com/certificates')
+        .then((response) => {
+          let CERT_DATABASE = {};
+          for(let certificate of response.data){
+            CERT_DATABASE[certificate.name] = {
+              icon: certificate.icon,
+              color: certificate.color,
+              bgColor: certificate.bgColor,
+              route: certificate.route
+            }
+          }
 
-      certificatesGroup.push(Object.assign(CERT_DATABASE[certificate[0]], {
-        name: certificate[0],
-        progress: certificate[1]
-      }));
-    }
+          certificates = certificates.split(';');
+          let certificatesGroup = [];
 
-    return certificatesGroup;
+          for(let certificate of certificates) {
+            if(certificate === '') continue;
+            certificate = certificate.split('-');
+
+            certificatesGroup.push(Object.assign(CERT_DATABASE[certificate[0]], {
+              name: certificate[0],
+              progress: certificate[1]
+            }));
+          }
+
+          resolve(certificatesGroup);
+
+        }).catch((error) => {
+          console.log(error);
+        })
+    });
+
   }
 
   // lastDays -> change stats data length extracted from DB // TO BE IMPLEMENTED
 
-  prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
-
+  getChartData(data, lastDays = 7) {
     let lastWeekPoints = new Array(lastDays).fill(0);
 
     let points = data.points.split(";").slice(Math.abs(lastDays) * -1);
@@ -118,27 +136,32 @@ class Profile extends Component {
       }
     }
 
-    let labels = this.getDateLabels();
-
-    let certificates = this.getCertificates(data.certificates);
-
-    let datasets = [
+    return [
       {
         data: lastWeekPoints,
         strokeWidth: 2,
       }
     ];
+  }
 
-    return {
-      userStats: {
-        labels: labels,
-        datasets: datasets,
-        createdLessons: data.createdLessons,
-        userRank: data.userRank,
-        userWins: data.userWins
-      },
-      certificates: certificates
-    }
+  async prepareUserStatsData(data, lastDays = 7) { // Preparing data from the last week // NEEDS TESTING
+    let certificates = await this.getCertificates(data.certificates);
+
+    return new Promise((resolve, reject) => {
+      let datasets = this.getChartData(data, lastDays);
+      let labels = this.getDateLabels();
+
+      resolve({
+        userStats: {
+          labels: labels,
+          datasets: datasets,
+          createdLessons: data.createdLessons,
+          userRank: data.userRank,
+          userWins: data.userWins
+        },
+        certificates: certificates
+      });
+    });
 
   }
 
@@ -156,8 +179,9 @@ class Profile extends Component {
   componentDidMount() {
 
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
-      .then((response) => {
-        this.props.onStatsData(this.prepareUserStatsData(response.data));
+      .then(async (response) => {
+        let preparedStatsData = await this.prepareUserStatsData(response.data);
+        this.props.onStatsData(preparedStatsData);
       }).catch((error) => {
         console.log(error);
       })

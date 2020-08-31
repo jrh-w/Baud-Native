@@ -19,16 +19,7 @@ class Certificates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificates: [
-        {
-        icon: 'logo-nodejs',
-        name: 'Node.js',
-        color: '#000',
-        bgColor: '#A0C44D',
-        progress: 100,
-        route: '',
-      }
-    ]
+      certificates: []
     };
   }
 
