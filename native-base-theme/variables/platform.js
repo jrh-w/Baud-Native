@@ -181,7 +181,7 @@ export default {
     return this.fontSizeBase * 1.6;
   },
   get fontSizeH3() {
-    return this.fontSizeBase * 1.4;
+    return this.fontSizeBase * 1;
   },
 
   // Footer

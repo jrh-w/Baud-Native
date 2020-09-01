@@ -10,14 +10,48 @@ import material from '../native-base-theme/variables/material';
 
 import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
+import Questions from './sub_components/Questions';
 
 import { Dimensions } from 'react-native';
+
+// <Card>
+//   <CardItem>
+//     <Grid>
+//       <Col>
+//         <Row>
+//           <H1 style={{ fontSize: 15 }}>I have this problem...</H1>
+//         </Row>
+//         <Row>
+//           <Text style={{ fontSize: 12 }}>
+//             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer mpor incididunt ut labore et dolor
+//           </Text>
+//         </Row>
+//       </Col>
+//       <Col style={{ width: 35 }}>
+//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
+//           <Button transparent>
+//             <Icon type='Entypo' name='chevron-up' style={{ textAlign: 'center' }} />
+//           </Button>
+//         </Row>
+//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
+//           <Text note style={{ textAlign: 'center', textAlignVertical: 'bottom' }}>437</Text>
+//         </Row>
+//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
+//           <Button transparent>
+//             <Icon type='Entypo' name='chevron-down' style={{ textAlign: 'center' }} />
+//           </Button>
+//         </Row>
+//       </Col>
+//     </Grid>
+//   </CardItem>
+// </Card>
 
 class Community extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      screenWidth: Dimensions.get('window').width
     };
   }
 
@@ -28,13 +62,13 @@ class Community extends Component {
           <CommunityHeader/>
           <Content>
               <Body>
-                <Col style={{ width: Dimensions.get('window').width * .8 }}>
+                <Col style={{ width: this.state.screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>
                     <H1>All questions</H1>
                   </Row>
                 </Col>
                 <Grid>
-                  <Col style={{ marginHorizontal: Dimensions.get('window').width * .05 }}>
+                  <Col style={{ marginHorizontal: this.state.screenWidth * .05 }}>
                     <Item rounded>
                       <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
                       onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
@@ -42,42 +76,12 @@ class Community extends Component {
                   </Col>
                   <Col style={{ width: 50 }}>
                     <Button style={{ width: 35 }} transparent rouded large>
-                      <Icon type='Entypo' name='chevron-right' />
+                      <Icon type='Entypo' name='magnifying-glass' />
                     </Button>
                   </Col>
                 </Grid>
-                <Col style={{ width: Dimensions.get('window').width * .8 }}>
-                  <Card>
-                    <CardItem>
-                      <Grid>
-                        <Col>
-                          <Row>
-                            <H1 style={{ fontSize: 15 }}>I have this problem...</H1>
-                          </Row>
-                          <Row>
-                            <Text style={{ fontSize: 12 }}>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer
-                            </Text>
-                          </Row>
-                        </Col>
-                        <Col style={{ width: 35 }}>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-                            <Button transparent>
-                              <Icon type='Entypo' name='chevron-up' style={{ textAlign: 'center' }} />
-                            </Button>
-                          </Row>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-                            <Text note style={{ textAlign: 'center', textAlignVertical: 'bottom' }}>437</Text>
-                          </Row>
-                          <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-                            <Button transparent>
-                              <Icon type='Entypo' name='chevron-down' style={{ textAlign: 'center' }} />
-                            </Button>
-                          </Row>
-                        </Col>
-                      </Grid>
-                    </CardItem>
-                  </Card>
+                <Col style={{ width: this.state.screenWidth * .8 }}>
+                  <Questions navigation={this.props.navigation}/>
                 </Col>
               </Body>
           </Content>

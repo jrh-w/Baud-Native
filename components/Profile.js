@@ -48,7 +48,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       userID: 0,
-      userStats: {}
+      userStats: {},
+      screenWidth: Dimensions.get('window').width
     };
 
     this.getDateLabels = this.getDateLabels.bind(this);
@@ -207,7 +208,7 @@ class Profile extends Component {
           <Content showsVerticalScrollIndicator={false}>
             <Grid>
               <Body>
-                <Col style={{ width: Dimensions.get('window').width * .9 }}>
+                <Col style={{ width: this.state.screenWidth * .9 }}>
                   <Row style={{ marginVertical: 10 }}>
                     <H1>
                     Your certificates
@@ -215,7 +216,7 @@ class Profile extends Component {
                   </Row>
                 </Col>
                 <Certificates navigation={this.props.navigation}/>
-                <Col style={{ width: Dimensions.get('window').width * .9 }}>
+                <Col style={{ width: this.state.screenWidth * .9 }}>
                   <Goals />
                   <Stats />
                 </Col>

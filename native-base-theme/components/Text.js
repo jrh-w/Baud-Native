@@ -10,6 +10,9 @@ export default (variables /* : * */ = variable) => {
     '.note': {
       color: '#a7a7a7',
       fontSize: variables.noteFontSize
+    },
+    '.sm' : {
+      fontSize: 12
     }
   };
 
