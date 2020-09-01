@@ -7,6 +7,8 @@ import material from '../native-base-theme/variables/material';
 
 import Menu from './sub_components/Menu';
 
+import LearnHeader from './sub_components/LearnHeader';
+
 class Learn extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class Learn extends Component {
     return(
       <StyleProvider style={getTheme(material)}>
         <Container>
+          <LearnHeader/>
           <Content>
           </Content>
           <Menu navigation={this.props.navigation}/>

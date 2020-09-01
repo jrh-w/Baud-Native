@@ -28,16 +28,23 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'jaqub.f.wjloaz@gmmm.coz',
+      username: 'jaqub.f.wjlodaz@gmmm.coz',
       password: 'gendarme21254+',
       invalidData: false,
-      errorText: 'Incorrect username/e-mail or/and passsword'
+      errorText: 'Incorrect username/e-mail or/and passsword',
+      loggingIn: false
     };
 
     this.logIn = this.logIn.bind(this);
   }
 
   logIn() {
+
+    if(this.state.loggingIn){
+      return
+    } else {
+      this.setState({loggingIn: true});
+    }
 
     let that = this; // Needed in BCrypt
     let pass = this.state.password;
@@ -64,12 +71,16 @@ class Login extends Component {
           });
         } else {
           console.log(that.state.errorText);
-          that.setState({invalidData : true});
+          that.setState({
+            invalidData : true,
+            loggingIn: false
+          });
         }
       });
 
     })
     .catch(function (error) {
+      that.setState({loggingIn: false});
       throw error;
     });
 
