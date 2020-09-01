@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import { Dimensions } from 'react-native';
 
-class CommunityHeader extends Component {
+class QuestionHeader extends Component {
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -24,7 +24,7 @@ class CommunityHeader extends Component {
             <Row style={{ height: 35, marginHorizontal: 15}}>
               <Left>
                 <H1 style={{ fontFamily: "Montserrat_Bold" }}>
-                  Your questions
+                  Question
                 </H1>
               </Left>
             </Row>
@@ -47,4 +47,4 @@ class CommunityHeader extends Component {
   }
 }
 
-export default CommunityHeader;
+export default QuestionHeader;

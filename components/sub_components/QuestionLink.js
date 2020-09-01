@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 
-import { Card, CardItem, Body, H1, H3, Icon, Button, Text } from 'native-base';
+import { Card, CardItem, Body, H1, H3, Icon, Button, Text, Badge } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 class QuestionLink extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tagBlobs: []
+    }
+  }
+
+  componentDidMount(){
+    let tags = this.props.tags.split(';');
+
+    tags = tags.map((item, key) =>
+      (tags.length > 1) ?
+      <Badge key={key} style={{ margin: 1 }}>
+        <Text sm>{item}</Text>
+      </Badge>
+      :
+      null
+    );
+
+    this.setState({tagBlobs: tags});
   }
 
   render() {
-
-    // const onPress = () => {
-    //   this.props.navigation.navigate(this.props.route);  //FOR DEBUGGING
-    //   console.log('clicked');
-    // };
 
     return(
         <Card>
           <CardItem>
             <Grid>
-              <TouchableWithoutFeedback onPress={this.props.navigation.navigate(this.props.route)}>
+              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate(this.props.route)}>
                 <Col>
                   <Row>
                     <H3>{ this.props.topic }</H3>
@@ -29,6 +42,9 @@ class QuestionLink extends Component {
                       <Text sm>
                         { this.props.summary }
                       </Text>
+                  </Row>
+                  <Row style={{ marginTop: 10, flexWrap: 'wrap' }}>
+                    { this.state.tagBlobs }
                   </Row>
                 </Col>
               </TouchableWithoutFeedback>

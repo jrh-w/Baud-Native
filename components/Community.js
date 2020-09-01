@@ -51,36 +51,33 @@ class Community extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      screenWidth: Dimensions.get('window').width
     };
   }
 
   render() {
+
+    let screenWidth = Dimensions.get('window').width;
+
     return(
       <StyleProvider style={getTheme(material)}>
         <Container>
           <CommunityHeader/>
           <Content>
               <Body>
-                <Col style={{ width: this.state.screenWidth * .8 }}>
+                <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>
-                    <H1>All questions</H1>
+                    <H1>Top questions</H1>
                   </Row>
                 </Col>
                 <Grid>
-                  <Col style={{ marginHorizontal: this.state.screenWidth * .05 }}>
+                  <Col style={{ marginHorizontal: screenWidth * .05 }}>
                     <Item rounded>
                       <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
                       onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
                     </Item>
                   </Col>
-                  <Col style={{ width: 50 }}>
-                    <Button style={{ width: 35 }} transparent rouded large>
-                      <Icon type='Entypo' name='magnifying-glass' />
-                    </Button>
-                  </Col>
                 </Grid>
-                <Col style={{ width: this.state.screenWidth * .8 }}>
+                <Col style={{ width: screenWidth * .8 }}>
                   <Questions navigation={this.props.navigation}/>
                 </Col>
               </Body>
