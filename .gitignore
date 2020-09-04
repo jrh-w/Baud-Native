@@ -12,3 +12,4 @@ web-report/
 __snapshots__/*
 # macOS
 .DS_Store
+.idea/

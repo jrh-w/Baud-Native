@@ -12,7 +12,7 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView } from 'react-native';
 
 // <Card>
 //   <CardItem>
@@ -62,7 +62,12 @@ class Community extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
           <CommunityHeader/>
-          <Content>
+          <Content
+          onMomentumScrollEnd={({ nativeEvent }) => {
+            let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
+            let scrollBorder = parseInt(nativeEvent.contentSize.height);
+            if(currentPosition >= scrollBorder) console.log('end of scroll');
+          } }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>

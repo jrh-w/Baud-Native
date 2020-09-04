@@ -4,6 +4,7 @@ import { Card, CardItem, Body, H1, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { View, ScrollView, Text } from 'react-native';
 
+import axios from 'axios';
 // import { connect } from 'react-redux';
 
 import QuestionLink from './QuestionLink';
@@ -33,6 +34,13 @@ class Questions extends Component {
           summary: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
           route: '',
           tags: ''
+        },
+        {
+          topic: 'I have another problem...',
+          rating: 2,
+          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
+          route: '',
+          tags: ''
         }
       ]
     };
@@ -50,6 +58,18 @@ class Questions extends Component {
   // componentDidMount() {
   //   if (CERT_STYLE) const CERT_STYLE = certData(this.state.name);
   // }
+
+  componentDidMount() {
+    let input = {
+      startPosition: 0,
+      quantity: 2
+    };
+
+    axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
+    .then((response) => {
+      console.log(response.data);
+    })
+  }
 
   render() {
 
