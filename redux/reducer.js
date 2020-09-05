@@ -68,6 +68,14 @@ export const Reducer = (state = initialState, action) => {
         sessionID: action.data.sessionID,
         verifyID: action.data.verifyID
       })
+    case ADD_QUESTION:
+      return Object.assign({}, state, {
+        userID: action.data.id,
+        title: action.data.title,
+        content: action.data.content,
+        rating: action.data.rating,
+        tags: action.data.tags,
+      })
     default:
       return state;
   }
