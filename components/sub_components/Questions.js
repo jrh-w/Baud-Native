@@ -5,7 +5,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import { View, ScrollView, Text } from 'react-native';
 
 import axios from 'axios';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import QuestionLink from './QuestionLink';
 
@@ -54,22 +54,6 @@ class Questions extends Component {
   //   }
   //   return null;
   // }
-
-  // componentDidMount() {
-  //   if (CERT_STYLE) const CERT_STYLE = certData(this.state.name);
-  // }
-
-  componentDidMount() {
-    let input = {
-      startPosition: 0,
-      quantity: 2
-    };
-
-    axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
-    .then((response) => {
-      console.log(response.data);
-    })
-  }
 
   render() {
 

@@ -14,6 +14,9 @@ import Questions from './sub_components/Questions';
 
 import { Dimensions, ScrollView } from 'react-native';
 
+import axios from 'axios';
+import { connect } from 'react-redux';
+
 // <Card>
 //   <CardItem>
 //     <Grid>
@@ -46,12 +49,69 @@ import { Dimensions, ScrollView } from 'react-native';
 //   </CardItem>
 // </Card>
 
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions,
+    lastUpdateOfQuestions: state.lastUpdateOfQuestions,
+    lastQuestionDate: state.lastQuestionDate
+  }
+}
+
 class Community extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchValue: '',
+      questions: [],
+      lastQuestionDate: '',
+      lastUpdateOfQuestions: ''
     };
+
+    this.loadQuestions = this.loadQuestions.bind(this);
+    this.scrolledToBottom = this.scrolledToBottom.bind(this);
+  }
+
+  loadQuestions(numberOfQuestions, lastDate = this.state.lastUpdateOfQuestions) {
+    let input = {
+      lastDate: lastDate,
+      quantity: numberOfQuestions
+    };
+
+    axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
+    .then((response) => {
+      console.log(response.data);
+    });
+  }
+
+  scrolledToBottom(nativeEvent) {
+    let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
+    let scrollBorder = parseInt(nativeEvent.contentSize.height);
+
+    if(currentPosition >= scrollBorder) {
+      console.log('end of scroll');
+      // LOAD MORE QUESTIONS
+    }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props.questions !== state.questions) {
+      return {
+         questions: props.questions,
+         lastUpdateOfQuestions: props.lastUpdateOfQuestions,
+         lastQuestionDate: props.lastQuestionDate
+      };
+    }
+    return null;
+  }
+
+  componentDidMount() {
+    // ARE THERE ANY QUESTIONS ?
+    if(this.state.questions.length === 0) {
+      this.loadQuestions(2);
+    } else {
+      let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
+      // FUNCTION TO CHECK FOR NEW QUESTIONS
+    }
   }
 
   render() {
@@ -63,11 +123,7 @@ class Community extends Component {
         <Container>
           <CommunityHeader/>
           <Content
-          onMomentumScrollEnd={({ nativeEvent }) => {
-            let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
-            let scrollBorder = parseInt(nativeEvent.contentSize.height);
-            if(currentPosition >= scrollBorder) console.log('end of scroll');
-          } }>
+          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>
@@ -94,4 +150,4 @@ class Community extends Component {
   }
 }
 
-export default Community;
+export default connect(mapStateToProps)(Community);
