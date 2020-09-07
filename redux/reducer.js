@@ -1,6 +1,6 @@
 // Reducer rozpoznaje i rozdziela zadania oraz dane dla Store'a (sklepu)
 
-import { ADD_STATS, ADD_USERDATA } from './reduxActions';
+import { ADD_STATS, ADD_USERDATA, ADD_QUESTION } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',

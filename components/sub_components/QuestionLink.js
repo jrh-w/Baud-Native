@@ -14,6 +14,7 @@ class QuestionLink extends Component {
 
   componentDidMount(){
     let tags = this.props.tags.split(';');
+    let summary = this.props.content.slice(0,350);
 
     tags = tags.map((item, key) =>
       (tags.length > 1) ?
@@ -40,7 +41,7 @@ class QuestionLink extends Component {
                   </Row>
                   <Row>
                       <Text sm>
-                        { this.props.summary }
+                        { summary }
                       </Text>
                   </Row>
                   <Row style={{ marginTop: 10, flexWrap: 'wrap' }}>
