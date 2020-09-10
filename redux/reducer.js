@@ -73,11 +73,12 @@ export const Reducer = (state = initialState, action) => {
       })
     case ADD_QUESTION:
       return Object.assign({}, state, {
-        userID: action.data.id,
-        title: action.data.title,
-        content: action.data.content,
-        rating: action.data.rating,
-        tags: action.data.tags,
+        questions: [...state.questions, action.data]
+        // userID: action.data.id,
+        // title: action.data.title,
+        // content: action.data.content,
+        // rating: action.data.rating,
+        // tags: action.data.tags,
       })
     default:
       return state;
