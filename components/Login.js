@@ -5,7 +5,7 @@ import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
-import { StatusBar, Image } from 'react-native';
+import { StatusBar, Image, ActivityIndicator } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
@@ -99,6 +99,7 @@ class Login extends Component {
               <Body>
                 <Col style={{ width: 300 }}>
                   <Body>
+                    <SignUpAlert errorText={this.state.errorText} invalidData={this.state.invalidData} />
                     <Row style={{ marginVertical: 20 }}>
                       <H1>
                       Log in
@@ -113,14 +114,17 @@ class Login extends Component {
                       placeholder='Password' value={this.state.password}
                       onChangeText={password => this.setState({ password: password })}/>
                     </Item>
-                    <SignUpAlert errorText={this.state.errorText} invalidData={this.state.invalidData} />
                     <Button transparent>
                       <Text>Forgot your password?</Text>
                     </Button>
-                    <Row style={{ marginVertical: 20 }}>
+                    <Row style={{ marginVertical: 20, height: 50 }}>
+                      {(this.state.loggingIn) ?
+                      <ActivityIndicator color='#38A7F1' size='large'/>
+                        :
                       <Button onPress={ this.logIn }style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
+                      }
                     </Row>
                     <Row style={{ marginTop: 20 }}>
                       <Button onPress={() => this.props.navigation.navigate('Sign_Up')} style={{ justifyContent: "center", width: 200 }} bordered large rounded>
