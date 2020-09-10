@@ -57,6 +57,12 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onQuestionsData: (data) => dispatch(addQuestionsData(data))
+  };
+}
+
 class Community extends Component {
   constructor(props) {
     super(props);
@@ -71,15 +77,23 @@ class Community extends Component {
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
   }
 
-  loadQuestions(numberOfQuestions, lastDate = this.state.lastUpdateOfQuestions) {
+  loadQuestions(numberOfQuestions, questionsEmpty = false) {
     let input = {
-      lastDate: lastDate,
       quantity: numberOfQuestions
     };
 
+    if(!questionsEmpty) {
+      let questionsLength = this.state.questions.length - 1;
+
+      Object.assign(input, {
+        lastDate: this.state.questions[questionsLength].timestamp,
+        id: this.state.questions[questionsLength].id
+      });
+    }
+
     axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data, "+");
     });
   }
 
@@ -107,7 +121,7 @@ class Community extends Component {
   componentDidMount() {
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
-      this.loadQuestions(2);
+      this.loadQuestions(2, true);
     } else {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
