@@ -18,7 +18,7 @@ export function addUserData(data) {
   };
 }
 
-export function addQuestion(data) {
+export function addQuestionsData(data) {
   return {
     type: ADD_QUESTION,
     data

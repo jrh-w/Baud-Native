@@ -30,12 +30,12 @@ const initialState = {
   },
   icons: [
     {
-      icon: 'md-create',
-      route: 'Create',
-    },
-    {
       icon: 'ios-school',
       route: 'Learn',
+    },
+    {
+      icon: 'md-create',
+      route: 'Create',
     },
     {
       icon: 'ios-people',
@@ -73,7 +73,7 @@ export const Reducer = (state = initialState, action) => {
       })
     case ADD_QUESTION:
       return Object.assign({}, state, {
-        questions: [...state.questions, action.data]
+        questions: state.questions.concat(action.data)
         // userID: action.data.id,
         // title: action.data.title,
         // content: action.data.content,

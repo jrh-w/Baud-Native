@@ -12,10 +12,11 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions, ScrollView } from 'react-native';
+import { Dimensions, ScrollView, BackHandler } from 'react-native';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { addQuestionsData } from '../redux/reduxActions';
 
 const mapStateToProps = (state) => {
   return {
@@ -43,6 +44,7 @@ class Community extends Component {
 
     this.loadQuestions = this.loadQuestions.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
@@ -62,7 +64,9 @@ class Community extends Component {
     axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
     .then((response) => {
       console.log(response.data, "+");
+      this.props.onQuestionsData(response.data);
     });
+
   }
 
   scrolledToBottom(nativeEvent) {
@@ -78,15 +82,17 @@ class Community extends Component {
   static getDerivedStateFromProps(props, state) {
     if(props.questions !== state.questions) {
       return {
-         questions: props.questions,
-         lastUpdateOfQuestions: props.lastUpdateOfQuestions,
-         lastQuestionDate: props.lastQuestionDate
+        questions: props.questions,
+        lastUpdateOfQuestions: props.lastUpdateOfQuestions,
+        lastQuestionDate: props.lastQuestionDate
       };
     }
     return null;
   }
 
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
       this.loadQuestions(2, true);
@@ -94,6 +100,15 @@ class Community extends Component {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  handleBackButtonClick() {
+    this.props.navigation.navigate('Learn');
+    return true;
   }
 
   render() {
@@ -132,4 +147,4 @@ class Community extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Community);
+export default connect(mapStateToProps, mapDispatchToProps)(Community);

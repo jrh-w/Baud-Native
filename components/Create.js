@@ -12,11 +12,25 @@ import Menu from './sub_components/Menu';
 import QuestionHeader from './sub_components/QuestionHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions } from 'react-native';
+import { Dimensions, BackHandler } from 'react-native';
 
 class Create extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  handleBackButtonClick() {
+    this.props.navigation.navigate('Learn');
+    return true;
   }
 
   render() {
