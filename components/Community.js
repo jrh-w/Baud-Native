@@ -12,7 +12,7 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions, ScrollView, BackHandler } from 'react-native';
+import { Dimensions, ScrollView, BackHandler, RefreshControl } from 'react-native';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -39,17 +39,25 @@ class Community extends Component {
       searchValue: '',
       questions: [],
       lastQuestionDate: '',
-      lastUpdateOfQuestions: ''
+      lastUpdateOfQuestions: '',
+      isLoadingQuestions: false,
+      refreshing: false
     };
 
     this.loadQuestions = this.loadQuestions.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
+
+    if(this.state.isLoadingQuestions) return;
+    else this.state.isLoadingQuestions = true;
+
     let input = {
-      quantity: numberOfQuestions
+      quantity: numberOfQuestions,
+      questionsAmount: this.state.questions.length
     };
 
     if(!questionsEmpty) {
@@ -65,8 +73,13 @@ class Community extends Component {
     .then((response) => {
       console.log(response.data, "+");
       this.props.onQuestionsData(response.data);
+      this.state.isLoadingQuestions = false;
     });
 
+  }
+
+  onRefresh() {
+    console.log("refresh");
   }
 
   scrolledToBottom(nativeEvent) {
@@ -76,6 +89,7 @@ class Community extends Component {
     if(currentPosition >= scrollBorder) {
       console.log('end of scroll');
       // LOAD MORE QUESTIONS
+      this.loadQuestions(10);
     }
   }
 
@@ -95,7 +109,7 @@ class Community extends Component {
 
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
-      this.loadQuestions(2, true);
+      this.loadQuestions(10, true);
     } else {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
@@ -120,7 +134,8 @@ class Community extends Component {
         <Container>
           <CommunityHeader/>
           <Content
-          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }>
+          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
+          refreshControl={ <RefreshControl refreshing={ this.state.refreshing } onRefresh={ this.onRefresh } /> }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>
