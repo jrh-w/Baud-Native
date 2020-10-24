@@ -16,10 +16,7 @@ import { Dimensions, ScrollView, BackHandler, RefreshControl } from 'react-nativ
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { addQuestionsData, removeQuestionsData } from '../redux/reduxActions';
-=======
->>>>>>> cfe2cf6f6e4f2cafb77a7ce78a25d95dca2649f9
 
 const mapStateToProps = (state) => {
   return {
@@ -52,6 +49,7 @@ class Community extends Component {
     this.loadQuestions = this.loadQuestions.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
@@ -87,12 +85,13 @@ class Community extends Component {
       // Check values when new questions are added to DB !!!
       console.log(this.state.questions.length, response.data[1]);
     });
+
   }
 
   onRefresh() {
     if(this.state.refreshing) return;
     else this.state.refreshing = true;
-    
+
     console.log("refresh");
 
     this.props.onRemoveQuestionsData();
@@ -116,15 +115,17 @@ class Community extends Component {
   static getDerivedStateFromProps(props, state) {
     if(props.questions !== state.questions) {
       return {
-         questions: props.questions,
-         lastUpdateOfQuestions: props.lastUpdateOfQuestions,
-         lastQuestionDate: props.lastQuestionDate
+        questions: props.questions,
+        lastUpdateOfQuestions: props.lastUpdateOfQuestions,
+        lastQuestionDate: props.lastQuestionDate
       };
     }
     return null;
   }
 
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
       this.loadQuestions(this.state.questionQuantity, true);
@@ -132,6 +133,15 @@ class Community extends Component {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  handleBackButtonClick() {
+    this.props.navigation.navigate('Learn');
+    return true;
   }
 
   render() {
@@ -155,7 +165,7 @@ class Community extends Component {
                   <Col style={{ marginHorizontal: screenWidth * .05 }}>
                     <Item rounded>
                       <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
-                      onChangeText={ searchValue => this.setState({ searchValue: searchValue })}/>
+                      onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
                     </Item>
                   </Col>
                 </Grid>
@@ -171,4 +181,4 @@ class Community extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Community);
+export default connect(mapStateToProps, mapDispatchToProps)(Community);
