@@ -2,7 +2,9 @@
 
 export const ADD_STATS = 'ADD_STATS';
 export const ADD_USERDATA = 'ADD_USERDATA';
-export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_QUESTIONS = 'ADD_QUESTIONS';
+
+export const DELETE_QUESTIONS = 'DELETE_QUESTIONS';
 
 export function addStatsData(data, certData) {
   return {
@@ -20,7 +22,14 @@ export function addUserData(data) {
 
 export function addQuestionsData(data) {
   return {
-    type: ADD_QUESTION,
+    type: ADD_QUESTIONS,
     data
+  };
+}
+
+
+export function removeQuestionsData() {
+  return {
+    type: DELETE_QUESTIONS
   };
 }

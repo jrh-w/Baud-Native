@@ -1,6 +1,6 @@
 // Reducer rozpoznaje i rozdziela zadania oraz dane dla Store'a (sklepu)
 
-import { ADD_STATS, ADD_USERDATA, ADD_QUESTION } from './reduxActions';
+import { ADD_STATS, ADD_USERDATA, ADD_QUESTIONS, DELETE_QUESTIONS } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',
@@ -71,7 +71,7 @@ export const Reducer = (state = initialState, action) => {
         sessionID: action.data.sessionID,
         verifyID: action.data.verifyID
       })
-    case ADD_QUESTION:
+    case ADD_QUESTIONS:
       return Object.assign({}, state, {
         questions: state.questions.concat(action.data)
         // userID: action.data.id,
@@ -79,6 +79,10 @@ export const Reducer = (state = initialState, action) => {
         // content: action.data.content,
         // rating: action.data.rating,
         // tags: action.data.tags,
+      })
+    case DELETE_QUESTIONS:
+      return Object.assign({}, state, {
+        questions: []
       })
     default:
       return state;

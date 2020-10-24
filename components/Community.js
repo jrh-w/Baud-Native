@@ -16,7 +16,7 @@ import { Dimensions, ScrollView, BackHandler, RefreshControl } from 'react-nativ
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addQuestionsData } from '../redux/reduxActions';
+import { addQuestionsData, removeQuestionsData } from '../redux/reduxActions';
 
 const mapStateToProps = (state) => {
   return {
@@ -28,7 +28,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onQuestionsData: (data) => dispatch(addQuestionsData(data))
+    onQuestionsData: (data) => dispatch(addQuestionsData(data)),
+    onRemoveQuestionsData: () => dispatch(removeQuestionsData())
   };
 }
 
@@ -40,8 +41,9 @@ class Community extends Component {
       questions: [],
       lastQuestionDate: '',
       lastUpdateOfQuestions: '',
-      isLoadingQuestions: false,
-      refreshing: false
+      preventLoadingQuestions: false,
+      refreshing: false,
+      questionQuantity: 10
     };
 
     this.loadQuestions = this.loadQuestions.bind(this);
@@ -52,12 +54,12 @@ class Community extends Component {
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
 
-    if(this.state.isLoadingQuestions) return;
-    else this.state.isLoadingQuestions = true;
+    if(this.state.preventLoadingQuestions) return;
+    else this.state.preventLoadingQuestions = true;
 
     let input = {
       quantity: numberOfQuestions,
-      questionsAmount: this.state.questions.length
+      questionsAmount: 0
     };
 
     if(!questionsEmpty) {
@@ -65,21 +67,39 @@ class Community extends Component {
 
       Object.assign(input, {
         lastDate: this.state.questions[questionsLength].timestamp,
-        id: this.state.questions[questionsLength].id
+        id: this.state.questions[questionsLength].id,
+        questionsAmount: this.state.questions.length
       });
     }
 
     axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
     .then((response) => {
-      console.log(response.data, "+");
-      this.props.onQuestionsData(response.data);
-      this.state.isLoadingQuestions = false;
+      console.log(response.data[0], "+");
+      if(response.data[0].length == 0) {
+        this.state.preventLoadingQuestions = true;
+        // W tym warunku dodaj info dla użytkownika <----------
+      } else {
+        this.props.onQuestionsData(response.data[0]);
+        this.state.preventLoadingQuestions = false;
+      }
+      // Check values when new questions are added to DB !!!
+      console.log(this.state.questions.length, response.data[1]);
     });
 
   }
 
   onRefresh() {
+    if(this.state.refreshing) return;
+    else this.state.refreshing = true;
+    
     console.log("refresh");
+
+    this.props.onRemoveQuestionsData();
+
+    this.state.preventLoadingQuestions = false;
+    this.loadQuestions(this.state.questionQuantity, true);
+
+    this.state.refreshing = false;
   }
 
   scrolledToBottom(nativeEvent) {
@@ -88,8 +108,7 @@ class Community extends Component {
 
     if(currentPosition >= scrollBorder) {
       console.log('end of scroll');
-      // LOAD MORE QUESTIONS
-      this.loadQuestions(10);
+      this.loadQuestions(this.state.questionQuantity); // LOAD MORE QUESTIONS
     }
   }
 
@@ -109,7 +128,7 @@ class Community extends Component {
 
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
-      this.loadQuestions(10, true);
+      this.loadQuestions(this.state.questionQuantity, true);
     } else {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
@@ -135,7 +154,7 @@ class Community extends Component {
           <CommunityHeader/>
           <Content
           onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
-          refreshControl={ <RefreshControl refreshing={ this.state.refreshing } onRefresh={ this.onRefresh } /> }>
+          refreshControl={ <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} /> }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>
@@ -151,7 +170,7 @@ class Community extends Component {
                   </Col>
                 </Grid>
                 <Col style={{ width: screenWidth * .8 }}>
-                  <Questions navigation={this.props.navigation}/>
+                  <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
                 </Col>
               </Body>
           </Content>

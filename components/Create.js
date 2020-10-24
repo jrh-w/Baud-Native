@@ -62,9 +62,6 @@ class Create extends Component {
                     </Button>
                   </Col>
                 </Grid>
-                <Col style={{ width: screenWidth * .8 }}>
-                  <Questions navigation={this.props.navigation}/>
-                </Col>
               </Body>
           </Content>
           <Menu navigation={this.props.navigation}/>

@@ -34,7 +34,15 @@ class Questions extends Component {
 
   render() {
 
-    this.questionLinks = this.state.questions.map((item, key) =>
+    let data = this.state.questions;
+
+    if(this.props.searchValue != '') {
+      data = this.state.questions.filter((item, key) => {
+        return item.title.toLowerCase().match(this.props.searchValue.toLowerCase());
+      });
+    }
+
+    this.questionLinks = data.map((item, key) =>
       <QuestionLink
         key={key}
         topic={item.title}
