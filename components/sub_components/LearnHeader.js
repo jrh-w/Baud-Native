@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-import { Card, CardItem, Body, H1, Text, Left, Icon } from 'native-base';
+import { Right, H2, H3, Left, Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { Image, ScrollView, Dimensions } from 'react-native';
+import { Image, ScrollView, Dimensions, View } from 'react-native';
 import { connect } from 'react-redux';
+
+import getTheme from '../../native-base-theme/components';
+import material from '../../native-base-theme/variables/material';
+
 
 const mapStateToProps = state => {
   return {
@@ -17,7 +21,7 @@ class LearnHeader extends Component {
     super(props);
     this.state = {
       name: '',
-      points: 0
+      points: 0,
     };
   }
 
@@ -43,47 +47,64 @@ class LearnHeader extends Component {
                   </H1>
                 </Left>
               </Row>
-              <Row style={{ height: 180 }}>
-                  <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row' }}>
-                  <Card style={{ marginHorizontal: 10, width: Dimensions.get('window').width * .8 }}>
-                    <CardItem style={{ backgroundColor: '#619648', borderColor: '#619648' }}>
-                      <Grid>
-                        <Col style={{flex: 1, alignSelf: 'center'}}>
-                          <Icon type='Entypo' name='database' style={{ color: '#fff', fontSize: 60, width:66}}/>
-                        </Col>
-                        <Col style={{flex:3}}>
-                          <H1 style={{ color: '#fff', marginVertical: 10 }}>
-                          MongoDB
-                          </H1>
-                          <Text style={{ color: '#fff', fontSize: 10, marginBottom: 10 }}>
-                            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                          </Text>
-                        </Col>
-                      </Grid>
-                    </CardItem>
-                  </Card>
-                  <Card style={{ marginHorizontal: 10, width: Dimensions.get('window').width * .8 }}>
-                    <CardItem style={{ backgroundColor: '#619648', borderColor: '#619648' }}>
-                      <Grid>
-                        <Col style={{flex: 1, alignSelf: 'center'}}>
-                          <Icon type='Entypo' name='database' style={{ color: '#fff', fontSize: 60, width:66}}/>
-                        </Col>
-                        <Col style={{flex:3}}>
-                          <H1 style={{ color: '#fff', marginVertical: 10 }}>
-                          MongoDB
-                          </H1>
-                          <Text style={{ color: '#fff', fontSize: 10, marginBottom: 10 }}>
-                            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                          </Text>
-                        </Col>
-                      </Grid>
-                    </CardItem>
-                  </Card>
+                <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row', width: '100%' }}>
+                  <Row>
+                      <Card style={{ marginHorizontal: 10}}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
+                          <Grid>
+                            <Col style={{ width: 75, justifyContent: 'center'}}>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
+                            </Col>
+                            <Col>
+                              <Row style={{ height: 50 }}>
+                                <H1>MongoDB</H1>
+                              </Row>
+                              <Row style={{ height: 100 }}>
+                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              </Row>
+                            </Col>
+                          </Grid>
+                        </CardItem>
+                      </Card>
+                      <Card style={{ marginHorizontal: 10}}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
+                          <Grid>
+                            <Col style={{ width: 75, justifyContent: 'center'}}>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
+                            </Col>
+                            <Col>
+                              <Row style={{ height: 50 }}>
+                                <H1>MongoDB</H1>
+                              </Row>
+                              <Row style={{ height: 100 }}>
+                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              </Row>
+                            </Col>
+                          </Grid>
+                        </CardItem>
+                      </Card>
+                      <Card style={{ marginHorizontal: 10 }}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
+                          <Grid>
+                            <Col style={{ width: 75, justifyContent: 'center'}}>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
+                            </Col>
+                            <Col>
+                              <Row style={{ height: 50 }}>
+                                <H1>MongoDB</H1>
+                              </Row>
+                              <Row style={{ height: 100 }}>
+                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              </Row>
+                            </Col>
+                          </Grid>
+                        </CardItem>
+                      </Card>
+                  </Row>
                 </ScrollView>
-              </Row>
-            </Body>
-          </CardItem>
-        </Card>
+              </Body>
+            </CardItem>
+          </Card>
     );
   }
 }

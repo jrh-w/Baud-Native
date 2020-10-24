@@ -2,6 +2,7 @@
 
 export const ADD_STATS = 'ADD_STATS';
 export const ADD_USERDATA = 'ADD_USERDATA';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 export function addStatsData(data, certData) {
   return {
@@ -13,6 +14,13 @@ export function addStatsData(data, certData) {
 export function addUserData(data) {
   return {
     type: ADD_USERDATA,
+    data
+  };
+}
+
+export function addQuestion(data) {
+  return {
+    type: ADD_QUESTION,
     data
   };
 }

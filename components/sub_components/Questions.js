@@ -17,28 +17,28 @@ class Questions extends Component {
         {
           topic: 'I have this problem...',
           rating: 132,
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer mpor incididunt ut labore et dolor',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer mpor incididunt ut labore et dolor',
           route: '',
           tags: 'coding;c#;something;example'
         },
         {
           topic: 'I have other problem...',
           rating: 1442,
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  or incididunt ut labore et dolore magna aliqua. Bibe nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  ndum est ultricies integer mpor incididunt ut labore et dolor',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  or incididunt ut labore et dolore magna aliqua. Bibe nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  ndum est ultricies integer mpor incididunt ut labore et dolor',
           route: '',
           tags: ''
         },
         {
           topic: 'I have another problem...',
           rating: 2,
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
           route: '',
           tags: ''
         },
         {
           topic: 'I have another problem...',
           rating: 2,
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
           route: '',
           tags: ''
         }
@@ -62,7 +62,7 @@ class Questions extends Component {
         key={key}
         topic={item.topic}
         rating={item.rating}
-        summary={item.summary}
+        content={item.content}
         tags={item.tags}
         route={item.route}
         navigation={this.props.navigation}

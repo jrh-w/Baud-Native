@@ -17,38 +17,6 @@ import { Dimensions, ScrollView } from 'react-native';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-// <Card>
-//   <CardItem>
-//     <Grid>
-//       <Col>
-//         <Row>
-//           <H1 style={{ fontSize: 15 }}>I have this problem...</H1>
-//         </Row>
-//         <Row>
-//           <Text style={{ fontSize: 12 }}>
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer mpor incididunt ut labore et dolor
-//           </Text>
-//         </Row>
-//       </Col>
-//       <Col style={{ width: 35 }}>
-//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-//           <Button transparent>
-//             <Icon type='Entypo' name='chevron-up' style={{ textAlign: 'center' }} />
-//           </Button>
-//         </Row>
-//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-//           <Text note style={{ textAlign: 'center', textAlignVertical: 'bottom' }}>437</Text>
-//         </Row>
-//         <Row style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-//           <Button transparent>
-//             <Icon type='Entypo' name='chevron-down' style={{ textAlign: 'center' }} />
-//           </Button>
-//         </Row>
-//       </Col>
-//     </Grid>
-//   </CardItem>
-// </Card>
-
 const mapStateToProps = (state) => {
   return {
     questions: state.questions,

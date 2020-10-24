@@ -53,11 +53,16 @@ class Certificates extends Component {
 
     if(this.state.certificates.length) {
       return(
+        this.state.certificates.length > 2 ?
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row' }}>
           <Row>
             {this.certButtons}
           </Row>
         </ScrollView>
+        :
+        <Row>
+          {this.certButtons}
+        </Row>
       );
     } else {
       return(
