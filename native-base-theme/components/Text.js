@@ -13,6 +13,13 @@ export default (variables /* : * */ = variable) => {
     },
     '.sm' : {
       fontSize: 12
+    },
+    '.cent' : {
+      alignSelf: 'center'
+    },
+    '.b' : {
+      fontSize: 13,
+      fontWeight: 'bold'
     }
   };
 
