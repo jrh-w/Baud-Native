@@ -9,61 +9,39 @@ import { connect } from 'react-redux';
 
 import QuestionLink from './QuestionLink';
 
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions
+  }
+}
+
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: [
-        {
-          topic: 'I have this problem...',
-          rating: 132,
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer mpor incididunt ut labore et dolor',
-          route: '',
-          tags: 'coding;c#;something;example'
-        },
-        {
-          topic: 'I have other problem...',
-          rating: 1442,
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  or incididunt ut labore et dolore magna aliqua. Bibe nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  ndum est ultricies integer mpor incididunt ut labore et dolor',
-          route: '',
-          tags: ''
-        },
-        {
-          topic: 'I have another problem...',
-          rating: 2,
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
-          route: '',
-          tags: ''
-        },
-        {
-          topic: 'I have another problem...',
-          rating: 2,
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscetur adipiscing eli ididultricies integer mpor incididunt ut labore et dolor',
-          route: '',
-          tags: ''
-        }
-      ]
+      questions: []
     };
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   if(props.certificates !== state.certificates) {
-  //     return {
-  //        certificates: props.certificates
-  //     };
-  //   }
-  //   return null;
-  // }
+  static getDerivedStateFromProps(props, state) {
+    if(props.questions !== state.questions) {
+      return {
+         questions: props.questions
+      };
+    }
+    return null;
+  }
 
   render() {
 
     this.questionLinks = this.state.questions.map((item, key) =>
       <QuestionLink
         key={key}
-        topic={item.topic}
+        topic={item.title}
         rating={item.rating}
         content={item.content}
         tags={item.tags}
+        timestamp={item.timestamp}
         route={item.route}
         navigation={this.props.navigation}
       />
@@ -81,4 +59,4 @@ class Questions extends Component {
   }
 }
 
-export default Questions;
+export default connect(mapStateToProps)(Questions);

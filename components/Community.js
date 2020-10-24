@@ -116,7 +116,7 @@ class Community extends Component {
                   <Col style={{ marginHorizontal: screenWidth * .05 }}>
                     <Item rounded>
                       <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
-                      onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
+                      onChangeText={ searchValue => this.setState({ searchValue: searchValue })}/>
                     </Item>
                   </Col>
                 </Grid>

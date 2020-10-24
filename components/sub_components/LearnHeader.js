@@ -49,18 +49,18 @@ class LearnHeader extends Component {
               </Row>
                 <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row', width: '100%' }}>
                   <Row>
-                      <Card style={{ marginHorizontal: 10}}>
-                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
+                      <Card style={{ marginHorizontal: 10, backgroundColor: '#619648' }}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10, backgroundColor: '#619648' }}>
                           <Grid>
                             <Col style={{ width: 75, justifyContent: 'center'}}>
-                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 60, width: 75, color: '#fff' }}/>
                             </Col>
                             <Col>
-                              <Row style={{ height: 50 }}>
-                                <H1>MongoDB</H1>
+                              <Row style={{ height: 50}}>
+                                <H1 style={{color: '#fff'}}>MongoDB</H1>
                               </Row>
-                              <Row style={{ height: 100 }}>
-                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              <Row style={{ height: 100}}>
+                                <Text sm style={{color: '#fff'}}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
                               </Row>
                             </Col>
                           </Grid>

@@ -28,7 +28,7 @@ import {
   StackedBarChart
 } from 'react-native-chart-kit';
 
-import { Dimensions } from 'react-native';
+import { Dimensions, BackHandler } from 'react-native';
 
 const mapStateToProps = state => {
   return {
@@ -55,6 +55,7 @@ class Profile extends Component {
     this.getCertificates = this.getCertificates.bind(this);
     this.getChartData = this.getChartData.bind(this);
     this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   getDateLabels() {
@@ -178,6 +179,8 @@ class Profile extends Component {
 
   componentDidMount() {
 
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then(async (response) => {
         let preparedStatsData = await this.prepareUserStatsData(response.data);
@@ -186,6 +189,15 @@ class Profile extends Component {
         console.log(error);
       })
 
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  handleBackButtonClick() {
+    this.props.navigation.navigate('Learn');
+    return true;
   }
 
 /*  async componentDidMount() {
