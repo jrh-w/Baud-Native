@@ -1,5 +1,6 @@
 //import { AppLoading } from 'expo';
-import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem, Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
+import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem,
+  Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
@@ -10,6 +11,7 @@ import material from './native-base-theme/variables/material';
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+// import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
@@ -56,6 +58,16 @@ const RootStack = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(RootStack);
+
+// const TabNavigator = createBottomTabNavigator({
+//   Community: Community,
+//   Create: Create,
+//   Learn: Learn,
+//   Profile: Profile,
+//   Settings: Settings,
+// });
+//
+// const TabContainer = createAppContainer(TabNavigator);
 
 export default class App extends Component {
   constructor(props) {

@@ -27,9 +27,21 @@ export function addQuestionsData(data) {
   };
 }
 
-
 export function removeQuestionsData() {
   return {
     type: DELETE_QUESTIONS
   };
 }
+
+// Use for simple Axios calls [REDUX-THUNK MIDDLEWARE]
+// export function fetchQuestionsData() { // Template
+//   return (dispatch) => {
+//     return axios.get(`${apiUrl}/delete/${id}`)
+//       .then(response => {
+//         dispatch(deletePostSuccess(response.data))
+//       })
+//       .catch(error => {
+//         throw(error);
+//       });
+//   };
+// }

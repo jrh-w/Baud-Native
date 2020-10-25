@@ -22,7 +22,8 @@ const mapStateToProps = (state) => {
   return {
     questions: state.questions,
     lastUpdateOfQuestions: state.lastUpdateOfQuestions,
-    lastQuestionDate: state.lastQuestionDate
+    lastQuestionDate: state.lastQuestionDate,
+    preventLoadingQuestions: state.preventLoadingQuestions
   }
 }
 

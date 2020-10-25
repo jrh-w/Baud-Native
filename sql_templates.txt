@@ -1,0 +1,3 @@
+SELECT * FROM `questions` ORDER BY `timestamp` DESC LIMIT 0, 15 
+
+SELECT * FROM `questions` WHERE `timestamp` <= '2020-10-24 10:00:00' ORDER BY `timestamp` DESC
