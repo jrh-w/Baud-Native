@@ -4,7 +4,7 @@ import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { StatusBar, Image, View, YellowBox } from 'react-native';
+import { StatusBar, Image, View, LogBox } from 'react-native';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
@@ -25,7 +25,7 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
 
-YellowBox.ignoreWarnings(['Remote debugger', 'Using Math.random']); // remove debugger and random warning
+LogBox.ignoreLogs(['Remote debugger', 'Using Math.random']); // remove debugger and random warning
 
 const store = ConfigureStore();
 

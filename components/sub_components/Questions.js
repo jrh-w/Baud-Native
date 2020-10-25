@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Card, CardItem, Body, H1, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -62,7 +62,9 @@ class Questions extends Component {
         </View>
       );
       } else {
-        return(null);
+        return(
+          <ActivityIndicator color='#38A7F1' size='large'/>
+        );
     }
   }
 }
