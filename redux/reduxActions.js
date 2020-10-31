@@ -4,6 +4,7 @@ export const ADD_STATS = 'ADD_STATS';
 export const ADD_USERDATA = 'ADD_USERDATA';
 export const ADD_QUESTIONS = 'ADD_QUESTIONS';
 
+export const AUTHORIZE = 'AUTHORIZE';
 export const DELETE_QUESTIONS = 'DELETE_QUESTIONS';
 
 export function addStatsData(data, certData) {
@@ -30,6 +31,12 @@ export function addQuestionsData(data) {
 export function removeQuestionsData() {
   return {
     type: DELETE_QUESTIONS
+  };
+}
+
+export function authorize() {
+  return {
+    type: AUTHORIZE
   };
 }
 

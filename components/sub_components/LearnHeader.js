@@ -37,7 +37,7 @@ class LearnHeader extends Component {
 
   render() {
     return(
-        <Card style={{ marginTop: -80, paddingTop: 80, marginBottom: 0, paddingBottom: 15 }}>
+        <Card style={{ marginTop: -60, paddingTop: 80, marginBottom: 0, paddingBottom: 15 }}>
           <CardItem style={{ paddingLeft: 0, paddingRight: 0}}>
             <Body>
               <Row style={{ height: 35, marginHorizontal: 10, marginLeft: 30}}>

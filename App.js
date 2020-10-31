@@ -9,65 +9,16 @@ import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
 import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-// import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import Community from './components/Community';
-import Create from './components/Create';
-import Learn from './components/Learn';
-import Login from './components/Login';
-import Menu from './components/sub_components/Menu';
-import Profile from './components/Profile';
-import Settings from './components/Settings';
-import Sign_Up from './components/Sign_Up';
+import Navigation from './Navigation';
 
 LogBox.ignoreLogs(['Remote debugger', 'Using Math.random']); // remove debugger and random warning
 
 const store = ConfigureStore();
-
-const RootStack = createStackNavigator(
-  {
-    Community: Community,
-    Create: Create,
-    Learn: Learn,
-    Login: Login,
-    Menu: Menu,
-    Profile: Profile,
-    Settings: Settings,
-    Sign_Up: Sign_Up,
-  },
-  {
-    initialRouteName: 'Login',
-    defaultNavigationOptions: {
-      headerLeft: null,
-      headerStyle: {
-        height: 0,
-        borderBottomColor: 'transparent'
-      }
-    },
-    transitionConfig : () => ({
-  	transitionSpec: {
-  		duration: 0,
-  	}
-  })
-  }
-);
-
-const AppContainer = createAppContainer(RootStack);
-
-// const TabNavigator = createBottomTabNavigator({
-//   Community: Community,
-//   Create: Create,
-//   Learn: Learn,
-//   Profile: Profile,
-//   Settings: Settings,
-// });
-//
-// const TabContainer = createAppContainer(TabNavigator);
 
 export default class App extends Component {
   constructor(props) {
@@ -76,8 +27,6 @@ export default class App extends Component {
       isReady: false
     };
   }
-
-// Propozycja: wprowadzenie tego propsa do store'a [Może zadziałać]
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -94,9 +43,11 @@ export default class App extends Component {
   render() {
 
     if(this.state.isReady) {
-      return (
-        <Provider store={store}>
-          <AppContainer/>
+      return(
+        <Provider store={store.store}>
+          <PersistGate loading={null} persistor={store.persistor}>
+            <Navigation/>
+          </PersistGate>
         </Provider>
       );
     } else {

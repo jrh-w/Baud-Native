@@ -55,7 +55,6 @@ class Profile extends Component {
     this.getCertificates = this.getCertificates.bind(this);
     this.getChartData = this.getChartData.bind(this);
     this.prepareUserStatsData = this.prepareUserStatsData.bind(this);
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   getDateLabels() {
@@ -179,8 +178,6 @@ class Profile extends Component {
 
   componentDidMount() {
 
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-
     axios.get('https://evening-oasis-01489.herokuapp.com/stats', { params: { userID: this.state.userID } })
       .then(async (response) => {
         let preparedStatsData = await this.prepareUserStatsData(response.data);
@@ -190,25 +187,6 @@ class Profile extends Component {
       })
 
   }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    this.props.navigation.navigate('Learn');
-    return true;
-  }
-
-/*  async componentDidMount() {
-    await Font.loadAsync({
-      Montserrat_Regular: require('../assets/fonts/Montserrat/Montserrat_Regular.ttf'),
-      Montserrat_Bold: require('../assets/fonts/Montserrat/Montserrat_Bold.ttf'),
-      SemiBold: require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }*/
 
   render() {
 
@@ -236,7 +214,6 @@ class Profile extends Component {
               </Body>
             </Grid>
           </Content>
-          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );

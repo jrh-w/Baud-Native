@@ -10,20 +10,6 @@ import Menu from './sub_components/Menu';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
-
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    this.props.navigation.navigate('Learn');
-    return true;
   }
 
   render() {
@@ -32,7 +18,6 @@ class Settings extends Component {
         <Container>
           <Content>
           </Content>
-          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );

@@ -50,7 +50,6 @@ class Community extends Component {
     this.loadQuestions = this.loadQuestions.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
@@ -125,8 +124,6 @@ class Community extends Component {
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
       this.loadQuestions(this.state.questionQuantity, true);
@@ -134,15 +131,6 @@ class Community extends Component {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    this.props.navigation.navigate('Learn');
-    return true;
   }
 
   render() {
@@ -175,7 +163,6 @@ class Community extends Component {
                 </Col>
               </Body>
           </Content>
-          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );

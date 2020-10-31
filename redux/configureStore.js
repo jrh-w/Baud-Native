@@ -1,16 +1,27 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Reducer, initialState } from './reducer'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistStore, persistReducer } from 'redux-persist';
 
 export const ConfigureStore = () => {
-    const store = createStore(
-        Reducer, // reducer
-        initialState, // our initialState
-        applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+  const persistConfig = {
+    key: 'root',
+    storage: AsyncStorage
+  };
 
-    return store;
+  const persistedReducer = persistReducer(persistConfig, Reducer);
+
+  const store = createStore(
+    persistedReducer, // reducer
+    initialState, // our initialState
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+
+  const persistor = persistStore(store);
+
+  return { store, persistor };
 }
 
 // OLD VERSION

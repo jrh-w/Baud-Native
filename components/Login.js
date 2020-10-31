@@ -16,6 +16,8 @@ import bcrypt from 'react-native-bcrypt';
 import { connect } from 'react-redux';
 import { addUserData } from '../redux/reduxActions';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import SignUpAlert from './sub_components/SignUpAlert';
 
 const mapDispatchToProps = dispatch => {
@@ -67,7 +69,7 @@ class Login extends Component {
           axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
           .then(function (response) {
             that.props.onUserData(response.data);
-            that.props.navigation.navigate('Learn');
+            //that.props.navigation.navigate('Learn');
           });
         } else {
           console.log(that.state.errorText);

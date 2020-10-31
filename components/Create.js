@@ -17,20 +17,6 @@ import { Dimensions, BackHandler } from 'react-native';
 class Create extends Component {
   constructor(props) {
     super(props);
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
-
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    this.props.navigation.navigate('Learn');
-    return true;
   }
 
   render() {
@@ -64,7 +50,6 @@ class Create extends Component {
                 </Grid>
               </Body>
           </Content>
-          <Menu navigation={this.props.navigation}/>
         </Container>
       </StyleProvider>
     );
