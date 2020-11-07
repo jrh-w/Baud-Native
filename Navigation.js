@@ -19,15 +19,15 @@ import Sign_Up from './components/Sign_Up';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const getData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@storage_Key')
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch(e) {
-    // error reading value
-    console.log(e);
-  }
-}
+// const getData = async () => {
+//   try {
+//     const jsonValue = await AsyncStorage.getItem('@storage_Key')
+//     return jsonValue != null ? JSON.parse(jsonValue) : null;
+//   } catch(e) {
+//     // error reading value
+//     console.log(e);
+//   }
+// }
 
 const mapStateToProps = state => {
   return {
@@ -50,7 +50,7 @@ class Navigation extends Component {
   }
 
   async componentDidMount() {
-    const data = await getData();
+    //const data = await getData();
     //if(data != null) this.props.onAuthorization();
   }
 

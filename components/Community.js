@@ -12,7 +12,7 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions, ScrollView, BackHandler, RefreshControl } from 'react-native';
+import { Dimensions, ScrollView, BackHandler, RefreshControl, View } from 'react-native';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -44,6 +44,7 @@ class Community extends Component {
       lastUpdateOfQuestions: '',
       preventLoadingQuestions: false,
       refreshing: false,
+      loading: true,
       questionQuantity: 10
     };
 
@@ -52,10 +53,10 @@ class Community extends Component {
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
   }
 
-  loadQuestions(numberOfQuestions, questionsEmpty = false) {
+  async loadQuestions(numberOfQuestions, questionsEmpty = false) {
 
     if(this.state.preventLoadingQuestions) return;
-    else this.state.preventLoadingQuestions = true;
+    else this.setState({ preventLoadingQuestions: true });
 
     let input = {
       quantity: numberOfQuestions,
@@ -72,15 +73,14 @@ class Community extends Component {
       });
     }
 
-    axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
+    await axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
     .then((response) => {
       console.log(response.data[0], "+");
       if(response.data[0].length == 0) {
-        this.state.preventLoadingQuestions = true;
-        // W tym warunku dodaj info dla użytkownika <----------
+        this.setState({ preventLoadingQuestions: true });
       } else {
         this.props.onQuestionsData(response.data[0]);
-        this.state.preventLoadingQuestions = false;
+        this.setState({ preventLoadingQuestions: false });
       }
       // Check values when new questions are added to DB !!!
       console.log(this.state.questions.length, response.data[1]);
@@ -90,26 +90,33 @@ class Community extends Component {
 
   onRefresh() {
     if(this.state.refreshing) return;
-    else this.state.refreshing = true;
+    else this.setState({ refreshing: true });
 
     console.log("refresh");
 
     this.props.onRemoveQuestionsData();
 
-    this.state.preventLoadingQuestions = false;
+    this.setState({ preventLoadingQuestions: false });
     this.loadQuestions(this.state.questionQuantity, true);
 
-    this.state.refreshing = false;
+    this.setState({ refreshing: false });
   }
 
-  scrolledToBottom(nativeEvent) {
+  async scrolledToBottom(nativeEvent) {
+    //console.log(nativeEvent);
+
+    if(this.state.loading) return;
+    else this.setState({ loading: true });
+
     let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
     let scrollBorder = parseInt(nativeEvent.contentSize.height);
 
     if(currentPosition >= scrollBorder) {
       console.log('end of scroll');
-      this.loadQuestions(this.state.questionQuantity); // LOAD MORE QUESTIONS
+      await this.loadQuestions(this.state.questionQuantity); // LOAD MORE QUESTIONS
     }
+
+    this.setState({ loading: false });
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -123,14 +130,15 @@ class Community extends Component {
     return null;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // ARE THERE ANY QUESTIONS ?
     if(this.state.questions.length === 0) {
-      this.loadQuestions(this.state.questionQuantity, true);
+      await this.loadQuestions(this.state.questionQuantity, true);
     } else {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
+    this.setState({ loading: false });
   }
 
   render() {
@@ -161,6 +169,9 @@ class Community extends Component {
                 <Col style={{ width: screenWidth * .8 }}>
                   <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
                 </Col>
+                {(this.state.preventLoadingQuestions && !this.state.loading) ?
+                  <Text>There are no more questions to load</Text>
+                  : null}
               </Body>
           </Content>
         </Container>
