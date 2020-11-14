@@ -8,8 +8,6 @@ import { Text, StyleProvider, Container, Content, Header } from 'native-base';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
-import Menu from './sub_components/Menu';
-
 const mapDispatchToProps = dispatch => {
   return{
     onLogOut: () => dispatch(onLogOut())

@@ -69,7 +69,6 @@ class Login extends Component {
           axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
           .then(function (response) {
             that.props.onUserData(response.data);
-            //that.props.navigation.navigate('Learn');
           });
         } else {
           console.log(that.state.errorText);
@@ -85,9 +84,6 @@ class Login extends Component {
       that.setState({loggingIn: false});
       throw error;
     });
-
-    // this.props.navigation.navigate('Profile');
-
   }
 
   render() {
