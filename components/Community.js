@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
   return {
     questions: state.questions,
     loadingQuestions: state.loadingQuestions,
+    refreshingQuestions: state.refreshingQuestions,
     noMoreQuestions: state.noMoreQuestions
   }
 }
@@ -27,7 +28,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     onQuestionsData: (data) => dispatch(addQuestionsData(data)),
-    onRemoveQuestionsData: () => dispatch(removeQuestionsData()),
+    removeQuestionsData: (refresh) => dispatch(removeQuestionsData(refresh)),
     getQuestions: bindActionCreators(getQuestions, dispatch)
   };
 }
@@ -40,7 +41,7 @@ class Community extends Component {
       questions: [],
       noMoreQuestions: false,
       loadingQuestions: false,
-      refreshing: false,
+      refreshingQuestions: false,
       questionQuantity: 10
     };
 
@@ -75,12 +76,9 @@ class Community extends Component {
     if(this.state.loadingQuestions) return;
 
     console.log("refresh");
-    this.setState({ refreshing: true });
 
-    this.props.onRemoveQuestionsData();
+    this.props.removeQuestionsData(true);
     this.loadQuestions(this.state.questionQuantity, true);
-
-    this.setState({ refreshing: false });
   }
 
   scrolledToBottom(nativeEvent) {
@@ -102,6 +100,7 @@ class Community extends Component {
       return {
         questions: props.questions,
         loadingQuestions: props.loadingQuestions,
+        refreshingQuestions: props.refreshingQuestions,
         noMoreQuestions: props.noMoreQuestions
       };
     }
@@ -129,7 +128,7 @@ class Community extends Component {
           <CommunityHeader/>
           <Content
           onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
-          refreshControl={ <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} /> }>
+          refreshControl={ <RefreshControl refreshing={this.state.refreshingQuestions} onRefresh={this.onRefresh} /> }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
                   <Row style={{ marginBottom: 10, marginTop: 20 }}>

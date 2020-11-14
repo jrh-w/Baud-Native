@@ -56,6 +56,7 @@ const initialState = {
   certificateForms: [],
   questions: [],
   loadingQuestions: false,
+  refreshingQuestions: false,
   noMoreQuestions: false,
   errorList: {
     Sign_Up: {
@@ -90,6 +91,7 @@ export const Reducer = (state = initialState, action) => {
     case ADD_QUESTIONS:
       return Object.assign({}, state, {
         questions: state.questions.concat(action.data),
+        refreshingQuestions: false, // In case refreshing was activated
         noMoreQuestions: false
         // userID: action.data.id,
         // title: action.data.title,
@@ -115,7 +117,8 @@ export const Reducer = (state = initialState, action) => {
       })
     case DELETE_QUESTIONS:
       return Object.assign({}, state, {
-        questions: []
+        questions: [],
+        refreshingQuestions: action.refresh // Questions removed => refresh activated
       })
     case LOG_OUT:
       return Object.assign({}, state, initialState)

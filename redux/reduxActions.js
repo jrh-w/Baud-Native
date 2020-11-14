@@ -54,9 +54,10 @@ export function onLogOut() {
   };
 }
 
-export function removeQuestionsData() {
+export function removeQuestionsData(refresh = false) {
   return {
-    type: DELETE_QUESTIONS
+    type: DELETE_QUESTIONS,
+    refresh
   };
 }
 
