@@ -84,7 +84,7 @@ class Community extends Component {
   scrolledToBottom(nativeEvent) {
     //console.log(nativeEvent);
 
-    if(this.state.loadingQuestions) return;
+    if(this.state.loadingQuestions || this.state.noMoreQuestions) return;
 
     let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
     let scrollBorder = parseInt(nativeEvent.contentSize.height);

@@ -1,7 +1,8 @@
 // Reducer rozpoznaje i rozdziela zadania oraz dane dla Store'a (sklepu)
 
 import { ADD_STATS, ADD_USERDATA, ADD_QUESTIONS, LOG_OUT, DELETE_QUESTIONS,
-AUTHORIZE, PREVENT_LOADING_QUESTIONS, NO_MORE_QUESTIONS, SET_ERROR_SIGNUP } from './reduxActions';
+AUTHORIZE, PREVENT_LOADING_QUESTIONS, NO_MORE_QUESTIONS, SET_ERROR_SIGNUP,
+REGISTERING, USER_REGISTERED } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',
@@ -69,7 +70,9 @@ const initialState = {
       'connection': 'Connection error'
     }
   },
-  errorTextSignUp: ''
+  errorTextSignUp: '',
+  registering: false,
+  registerSuccessful: false
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -103,9 +106,20 @@ export const Reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         loadingQuestions: action.prevent
       })
-    case SET_ERROR_SIGNUP:
+    case REGISTERING:
       return Object.assign({}, state, {
-        errorTextSignUp: action.text
+        registering: action.isRegistering
+      })
+    case USER_REGISTERED:
+      return Object.assign({}, state, {
+        registerSuccessful: action.hasRegistered
+      })
+    case SET_ERROR_SIGNUP:
+      let text = '';
+      if(action.text != '') text = state.errorList.Sign_Up[action.text];
+      console.log(text);
+      return Object.assign({}, state, {
+        errorTextSignUp: text
       })
     case NO_MORE_QUESTIONS:
       return Object.assign({}, state, {
@@ -118,7 +132,8 @@ export const Reducer = (state = initialState, action) => {
     case DELETE_QUESTIONS:
       return Object.assign({}, state, {
         questions: [],
-        refreshingQuestions: action.refresh // Questions removed => refresh activated
+        refreshingQuestions: action.refresh, // Questions removed => refresh activated
+        noMoreQuestions: false
       })
     case LOG_OUT:
       return Object.assign({}, state, initialState)
