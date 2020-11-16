@@ -12,7 +12,7 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions, ScrollView, BackHandler, RefreshControl } from 'react-native';
+import { Dimensions, ScrollView, BackHandler, RefreshControl, SafeAreaView } from 'react-native';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -139,31 +139,31 @@ class Community extends Component {
 
     return(
       <StyleProvider style={getTheme(material)}>
-        <Container>
-          <CommunityHeader/>
-          <Content
-          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
-          refreshControl={ <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} /> }>
-              <Body>
-                <Col style={{ width: screenWidth * .8 }}>
-                  <Row style={{ marginBottom: 10, marginTop: 20 }}>
-                    <H1>Top questions</H1>
-                  </Row>
-                </Col>
-                <Grid>
-                  <Col style={{ marginHorizontal: screenWidth * .05 }}>
-                    <Item rounded>
-                      <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
-                      onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
-                    </Item>
+          <Container>
+            <CommunityHeader/>
+            <Content
+            onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
+            refreshControl={ <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} /> }>
+                <Body>
+                  <Col style={{ width: screenWidth * .8 }}>
+                    <Row style={{ marginBottom: 10, marginTop: 20 }}>
+                      <H1>Top questions</H1>
+                    </Row>
                   </Col>
-                </Grid>
-                <Col style={{ width: screenWidth * .8 }}>
-                  <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
-                </Col>
-              </Body>
-          </Content>
-        </Container>
+                  <Grid>
+                    <Col style={{ marginHorizontal: screenWidth * .05 }}>
+                      <Item rounded>
+                        <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
+                        onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
+                      </Item>
+                    </Col>
+                  </Grid>
+                  <Col style={{ width: screenWidth * .8 }}>
+                    <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
+                  </Col>
+                </Body>
+            </Content>
+          </Container>
       </StyleProvider>
     );
   }
