@@ -3,7 +3,7 @@ import { Dimensions, ScrollView, BackHandler, RefreshControl, View } from 'react
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 import { Text, StyleProvider, Container, Content, Header, H1, Body, Item, Input,
-  Button, Icon, Card, CardItem, Left } from 'native-base';
+  Button, Icon, Card, CardItem, Left, Toast, Fab } from 'native-base';
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
@@ -42,12 +42,14 @@ class Community extends Component {
       noMoreQuestions: false,
       loadingQuestions: false,
       refreshingQuestions: false,
-      questionQuantity: 10
+      questionQuantity: 10,
+      showReturnButton: false
     };
 
     this.loadQuestions = this.loadQuestions.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
+    this.returnToTop = this.returnToTop.bind(this);
   }
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
@@ -82,11 +84,7 @@ class Community extends Component {
   }
 
   scrolledToBottom(nativeEvent) {
-    //console.log(nativeEvent);
-
     if(this.state.loadingQuestions || this.state.noMoreQuestions) return;
-
-    console.log(nativeEvent);
 
     let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
     let scrollBorder = parseInt(nativeEvent.contentSize.height);
@@ -95,6 +93,14 @@ class Community extends Component {
       console.log('end of scroll');
       this.loadQuestions(this.state.questionQuantity); // LOAD MORE QUESTIONS
     }
+
+    if(currentPosition >= 1000) this.setState({ showReturnButton: true });
+    else this.setState({ showReturnButton: false });
+  }
+
+  returnToTop(nativeEvent) {
+    this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+    this.setState({ showReturnButton: false });
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -117,19 +123,25 @@ class Community extends Component {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
-    console.log("COMPONENT MOUNTED");
   }
 
   render() {
 
     let screenWidth = Dimensions.get('window').width;
 
+    let toastInfo = Toast.show({
+      text: "HI",
+      buttonText: "OK",
+      duration: 30000
+    });
+
     return(
       <StyleProvider style={getTheme(material)}>
         <Container>
           <CommunityHeader/>
-          <Content
-          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
+          { toastInfo }
+          <ScrollView ref='_scrollView'
+          onMomentumScrollEnd={ ({nativeEvent}) => { this.scrolledToBottom(nativeEvent); } }
           refreshControl={ <RefreshControl refreshing={this.state.refreshingQuestions} onRefresh={this.onRefresh} /> }>
               <Body>
                 <Col style={{ width: screenWidth * .8 }}>
@@ -152,7 +164,16 @@ class Community extends Component {
                   <Text>There are no more questions to load</Text>
                   : null}
               </Body>
-          </Content>
+          </ScrollView>
+          {this.state.showReturnButton ?
+            <Fab
+              containerStyle={{ marginRight: '30%' }}
+              style={{ backgroundColor: '#5067FF' }}
+              position="bottomRight"
+              onPress={ this.returnToTop }>
+                <Icon name="arrow-up" />
+            </Fab> : null
+          }
         </Container>
       </StyleProvider>
     );
@@ -160,3 +181,5 @@ class Community extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Community);
+//this.component._root.scrollToEnd();
+//ref={c => (this.component = c)}
