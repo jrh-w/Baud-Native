@@ -8,13 +8,15 @@ export const ADD_USERDATA = 'ADD_USERDATA';
 export const ADD_QUESTIONS = 'ADD_QUESTIONS';
 export const PREVENT_LOADING_QUESTIONS = 'PREVENT_LOADING_QUESTIONS';
 export const SET_ERROR_SIGNUP = 'SET_ERROR_SIGNUP';
+export const SET_ERROR_LOGIN = 'SET_ERROR_LOGIN';
 export const REGISTERING = 'REGISTERING';
+export const USER_REGISTERED = 'USER_REGISTERED';
+export const LOGGING_IN = 'LOGGING_IN';
 
 export const LOG_OUT = 'LOG_OUT';
 export const AUTHORIZE = 'AUTHORIZE';
 export const DELETE_QUESTIONS = 'DELETE_QUESTIONS';
 export const NO_MORE_QUESTIONS = 'NO_MORE_QUESTIONS';
-export const USER_REGISTERED = 'USER_REGISTERED';
 
 export function addStatsData(data) {
   return {
@@ -65,7 +67,6 @@ export function registering(isRegistering) {
   };
 }
 
-
 export function userRegistered(hasRegistered) {
   return {
     type: USER_REGISTERED,
@@ -73,6 +74,21 @@ export function userRegistered(hasRegistered) {
   };
 }
 
+export function loggingIn(isLoggingIn) {
+  return {
+    type: LOGGING_IN,
+    isLoggingIn
+  };
+}
+
+export function setErrorLogin(text = '') {
+  return {
+    type: SET_ERROR_LOGIN,
+    text
+  };
+}
+
+/// -----------------------------------
 
 export function onLogOut() {
   return {
@@ -92,6 +108,7 @@ export function noMoreQuestions() {
   };
 }
 
+/// -----------------------------------
 
 export function getQuestions(input) {
   return async dispatch => {
@@ -111,32 +128,32 @@ export function getQuestions(input) {
   }
 }
 
-function addUser(userData) {
-  return async dispatch => {
-    const hash = await new Promise((resolve, reject) => {
-      bcrypt.hash(userData.password, 10, function(err, hash) {
-        if(err) reject(err);
-        resolve(hash);
-      });
-    });
+const addUser = (userData) => async (dispatch, getState) => {
+  if(getState().errorTextSignUp !== '') return;
 
-    await axios.post('https://evening-oasis-01489.herokuapp.com/register', {
-      email: userData.email,
-      username: userData.username,
-      password: hash
-    })
-    .then(function (response) {
-      console.log(response.data);
-      dispatch(userRegistered(true));
-    })
-    .catch(function (error) {
-      let errorCode = error.response.status;
-
-      if(errorCode == 452) dispatch(setErrorSignUp('emailServer')); // Email taken
-      else if (errorCode == 453) dispatch(setErrorSignUp('usernameServer')); // Username taken
-      else dispatch(setErrorSignUp('connection')); // Connection error
+  const hash = await new Promise((resolve, reject) => {
+    bcrypt.hash(userData.password, 10, function(err, hash) {
+      if(err) reject(err);
+      resolve(hash);
     });
-  }
+  });
+
+  await axios.post('https://evening-oasis-01489.herokuapp.com/register', {
+    email: userData.email,
+    username: userData.username,
+    password: hash
+  })
+  .then(function (response) {
+    console.log(response.data);
+    dispatch(userRegistered(true));
+  })
+  .catch(function (error) {
+    let errorCode = error.response.status;
+
+    if(errorCode == 452) dispatch(setErrorSignUp('emailServer')); // Email taken
+    else if (errorCode == 453) dispatch(setErrorSignUp('usernameServer')); // Username taken
+    else dispatch(setErrorSignUp('connection')); // Connection error
+  });
 }
 
 function checkData(userData) {
@@ -166,10 +183,50 @@ function checkData(userData) {
 }
 
 export function register(userData) {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     dispatch(registering(true));
     await dispatch(checkData(userData));
-    if(getState().errorTextSignUp === '') await dispatch(addUser(userData));
+    await dispatch(addUser(userData));
     dispatch(registering(false));
+  }
+}
+
+const compare = (userData) => async dispatch => {
+    let hash = '';
+
+    await axios.get('https://evening-oasis-01489.herokuapp.com/compare',
+    { params: { email: userData.email, username: userData.username } })
+    .then(async function (response) {
+      hash = response.data.password;
+    })
+    .catch(function (error) {
+      return dispatch(setErrorLogin('connection'));
+    });
+
+    await new Promise((resolve, reject) => {
+      bcrypt.compare(userData.password, hash, function(err, result) {
+        if(err) reject(err);
+
+        if(result === true) resolve(dispatch(setErrorLogin('')));
+        else resolve(dispatch(setErrorLogin('userData')));
+      });
+    });
+}
+
+const authorizeLogin = (userData) => async (dispatch, getState) => {
+    if(getState().errorTextLogin !== '') return;
+
+    await axios.post('https://evening-oasis-01489.herokuapp.com/login', userData)
+    .then(function (response) {
+      return dispatch(addUserData(response.data));
+    });
+}
+
+export function logIn(userData) {
+  return async (dispatch, getState) => {
+    dispatch(loggingIn(true));
+    await dispatch(compare(userData));
+    await dispatch(authorizeLogin(userData));
+    dispatch(loggingIn(false));
   }
 }

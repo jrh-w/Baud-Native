@@ -86,6 +86,8 @@ class Community extends Component {
 
     if(this.state.loadingQuestions || this.state.noMoreQuestions) return;
 
+    console.log(nativeEvent);
+
     let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
     let scrollBorder = parseInt(nativeEvent.contentSize.height);
 
