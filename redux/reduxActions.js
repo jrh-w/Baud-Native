@@ -12,6 +12,7 @@ export const SET_ERROR_LOGIN = 'SET_ERROR_LOGIN';
 export const REGISTERING = 'REGISTERING';
 export const USER_REGISTERED = 'USER_REGISTERED';
 export const LOGGING_IN = 'LOGGING_IN';
+export const SET_APP_THEME = 'SET_APP_THEME';
 
 export const LOG_OUT = 'LOG_OUT';
 export const AUTHORIZE = 'AUTHORIZE';
@@ -86,6 +87,13 @@ export function setErrorLogin(text = '') {
     type: SET_ERROR_LOGIN,
     text
   };
+}
+
+export function setAppTheme(theme) {
+  return {
+    type: SET_APP_THEME,
+    theme
+  }
 }
 
 /// -----------------------------------

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Appearance } from 'react-native';
 import { connect } from 'react-redux';
-import { authorize } from './redux/reduxActions';
+// import { Appearance, AppearanceProvider } from 'react-native-appearance';
+
+import { setAppTheme } from './redux/reduxActions';
 import { Root } from "native-base";
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -36,13 +39,14 @@ const config = {
 
 const mapStateToProps = state => {
   return {
-    isAuth: state.isAuth
+    isAuth: state.isAuth,
+    appTheme: state.appTheme
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthorization: () => dispatch(authorize())
+    setAppTheme: (theme) => dispatch(setAppTheme(theme))
   };
 }
 
@@ -54,25 +58,34 @@ class Navigation extends Component {
     };
   }
 
-  async componentDidMount() {
-    //const data = await getData();
-    //if(data != null) this.props.onAuthorization();
-  }
-
   static getDerivedStateFromProps(props, state) {
-    if(props.isAuth !== state.isAuth) {
+    if(props !== state) {
       return {
-        isAuth: props.isAuth
+        isAuth: props.isAuth,
+        appTheme: props.appTheme
       };
     }
 
     return null;
   }
 
+  componentDidMount() {
+    let colorScheme = Appearance.getColorScheme();
+    this.props.setAppTheme(colorScheme);
+
+    Appearance.addChangeListener(({ colorScheme }) => {
+      this.props.setAppTheme(colorScheme);
+    });
+  }
+
+  componentWillUnmount() {
+    Appearance.removeChangeListener();
+  }
+
   render() {
-    return(
+    return (
       <Root>
-        <NavigationContainer>
+        <NavigationContainer theme={this.state.appTheme === 'dark' ? DarkTheme : DefaultTheme}>
           { this.state.isAuth ?
             <Drawer.Navigator backBehavior={'initialRoute'}>
               <Drawer.Screen name="Learn" component={Learn} />

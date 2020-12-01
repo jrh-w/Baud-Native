@@ -2,7 +2,7 @@
 
 import { ADD_STATS, ADD_USERDATA, ADD_QUESTIONS, LOG_OUT, DELETE_QUESTIONS,
 AUTHORIZE, PREVENT_LOADING_QUESTIONS, NO_MORE_QUESTIONS, SET_ERROR_SIGNUP,
-REGISTERING, USER_REGISTERED, LOGGING_IN, SET_ERROR_LOGIN } from './reduxActions';
+REGISTERING, USER_REGISTERED, LOGGING_IN, SET_ERROR_LOGIN, SET_APP_THEME } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',
@@ -78,7 +78,8 @@ const initialState = {
   registering: false,
   registerSuccessful: false,
   errorTextLogin: '',
-  loggingIn: false
+  loggingIn: false,
+  appTheme: 'no-preference'
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -154,6 +155,10 @@ export const Reducer = (state = initialState, action) => {
       })
     case LOG_OUT:
       return Object.assign({}, state, initialState)
+    case SET_APP_THEME:
+      return Object.assign({}, state, {
+        appTheme: action.theme
+      })
     default:
       return state;
   }

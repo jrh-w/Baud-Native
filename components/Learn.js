@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { Appearance } from 'react-native-appearance';
 
 import { Text, StyleProvider, Container, Content, Header, Input, Item, Card, CardItem, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
@@ -17,7 +18,7 @@ class Learn extends Component {
   constructor(props) {
     super(props);
   }
-
+  
   render() {
     let screenWidth = Dimensions.get('window').width;
 
