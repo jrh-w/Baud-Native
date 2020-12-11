@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Switch } from 'react-native';
 import { connect } from 'react-redux';
 import { onLogOut } from '../redux/reduxActions';
 
@@ -9,8 +10,14 @@ import { Dimensions, Alert } from 'react-native';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
+const mapStateToProps = state => {
+  return {
+    appTheme: state.appTheme
+  };
+};
+
 const mapDispatchToProps = dispatch => {
-  return{
+  return {
     onLogOut: () => dispatch(onLogOut())
   };
 };
@@ -18,8 +25,19 @@ const mapDispatchToProps = dispatch => {
 class Settings extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
 
     this.logOut = this.logOut.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props !== state) {
+      return {
+        appTheme: props.appTheme
+      };
+    }
+
+    return null;
   }
 
   logOut() {
@@ -45,23 +63,18 @@ class Settings extends Component {
   render() {
     return(
       <StyleProvider style={getTheme(material)}>
-        <Container>
-          <Header rounded>
-            <Left>
-              <Button>
-                <Icon type='Entypo' name='chevron-right' />
-              </Button>
-            </Left>
-            <Body>
-              <Text>fddd</Text>
-            </Body>
-          </Header>
-          <Content>
-            <Button onPress={this.logOut} style={{ justifyContent: "center", marginTop: 20}} bordered large rounded>
-              <Text style={{paddingHorizontal: 30}}>
-                Log out
-              </Text>
-            </Button>
+        <Container style={{ padding: 10, fontSize: 20}}>
+          <Content style={{ marginTop: 100 , flexDirection: 'row' }}>
+            <Button onPress={this.logOut} title="Log out" color="#841584"/>
+            <Switch
+              style={{ padding: 5, marginRight: "auto", marginTop: 10 }}
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={this.state.appTheme ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+
+              value={this.state.appTheme}
+            />
+            <Text>Dark Mode</Text>
           </Content>
         </Container>
       </StyleProvider>
@@ -69,4 +82,4 @@ class Settings extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

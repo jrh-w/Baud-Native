@@ -2,7 +2,7 @@
 
 import { ADD_STATS, ADD_USERDATA, ADD_QUESTIONS, LOG_OUT, DELETE_QUESTIONS,
 AUTHORIZE, PREVENT_LOADING_QUESTIONS, NO_MORE_QUESTIONS, SET_ERROR_SIGNUP,
-REGISTERING, USER_REGISTERED } from './reduxActions';
+REGISTERING, USER_REGISTERED, LOGGING_IN, SET_ERROR_LOGIN, SET_APP_THEME } from './reduxActions';
 
 const initialState = {
   name: 'John Doe',
@@ -68,11 +68,18 @@ const initialState = {
       'usernameServer': 'That username is already taken',
       'emailServer': 'Email already in use',
       'connection': 'Connection error'
+    },
+    Login: {
+      'userData': 'Incorrect username/e-mail or/and passsword',
+      'connection': 'Connection error'
     }
   },
   errorTextSignUp: '',
   registering: false,
-  registerSuccessful: false
+  registerSuccessful: false,
+  errorTextLogin: '',
+  loggingIn: false,
+  appTheme: 'no-preference'
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -114,12 +121,23 @@ export const Reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         registerSuccessful: action.hasRegistered
       })
-    case SET_ERROR_SIGNUP:
-      let text = '';
-      if(action.text != '') text = state.errorList.Sign_Up[action.text];
-      console.log(text);
+    case LOGGING_IN:
       return Object.assign({}, state, {
-        errorTextSignUp: text
+        loggingIn: action.isLoggingIn
+      })
+    case SET_ERROR_SIGNUP:
+      let textSignUp = '';
+      if(action.text != '') textSignUp = state.errorList.Sign_Up[action.text];
+
+      return Object.assign({}, state, {
+        errorTextSignUp: textSignUp
+      })
+    case SET_ERROR_LOGIN:
+      let textLogin = '';
+      if(action.text != '') textLogin = state.errorList.Login[action.text];
+
+      return Object.assign({}, state, {
+        errorTextLogin: textLogin
       })
     case NO_MORE_QUESTIONS:
       return Object.assign({}, state, {
@@ -137,6 +155,10 @@ export const Reducer = (state = initialState, action) => {
       })
     case LOG_OUT:
       return Object.assign({}, state, initialState)
+    case SET_APP_THEME:
+      return Object.assign({}, state, {
+        appTheme: action.theme
+      })
     default:
       return state;
   }

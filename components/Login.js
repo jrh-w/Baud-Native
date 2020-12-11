@@ -11,16 +11,22 @@ import material from '../native-base-theme/variables/material';
 
 import AppHeader from './sub_components/AppHeader';
 
-import axios from 'axios';
-import bcrypt from 'react-native-bcrypt';
 import { connect } from 'react-redux';
-import { addUserData } from '../redux/reduxActions';
+import { bindActionCreators } from 'redux';
+import { logIn } from '../redux/reduxActions';
 
 import SignUpAlert from './sub_components/SignUpAlert';
 
+const mapStateToProps = (state) => {
+  return {
+    errorText: state.errorTextLogin,
+    loggingIn: state.loggingIn
+  };
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    onUserData: data => dispatch(addUserData(data))
+    logIn: bindActionCreators(logIn, dispatch)
   };
 }
 
@@ -34,50 +40,31 @@ class Login extends Component {
       loggingIn: false
     };
 
-    this.logIn = this.logIn.bind(this);
+    this.onLogin = this.onLogin.bind(this);
   }
 
-  logIn() {
-
-    if(this.state.loggingIn) return;
-    else this.setState({loggingIn: true});
-
-    let that = this; // Needed in BCrypt
-    let pass = this.state.password;
-    let input = {
+  onLogin() {
+    let userData = {
+      password: this.state.password,
       username: '',
       email: ''
     };
     let emailRegEx = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/);
 
-    if(emailRegEx.test(this.state.username)) input.email = this.state.username;
-    else input.username = this.state.username;
+    if(emailRegEx.test(this.state.username)) userData.email = this.state.username;
+    else userData.username = this.state.username;
 
-    axios.get('https://evening-oasis-01489.herokuapp.com/compare', { params: input })
-    .then(function (response) {
-      let hash = response.data.password;
+    this.props.logIn(userData);
+  }
 
-      bcrypt.compare(that.state.password, hash, function(err, result) {
-        if(result === true) {
-          that.setState({errorText: ''});
-          axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
-          .then(function (response) {
-            that.props.onUserData(response.data);
-          });
-        } else {
-          console.log(that.state.errorText);
-          that.setState({
-            errorText: 'Incorrect username/e-mail or/and passsword',
-            loggingIn: false
-          });
-        }
-      });
-
-    })
-    .catch(function (error) {
-      that.setState({loggingIn: false});
-      throw error;
-    });
+  static getDerivedStateFromProps(props, state) {
+    if(props !== state) {
+      return {
+        errorText: props.errorText,
+        loggingIn: props.loggingIn
+      };
+    }
+    return null;
   }
 
   render() {
@@ -113,7 +100,7 @@ class Login extends Component {
                       {(this.state.loggingIn) ?
                       <ActivityIndicator color='#38A7F1' size='large'/>
                         :
-                      <Button onPress={ this.logIn }style={{ justifyContent: "center", width: 50 }} bordered large rounded>
+                      <Button onPress={ this.onLogin }style={{ justifyContent: "center", width: 50 }} bordered large rounded>
                         <Icon type='Entypo' name='chevron-right' />
                       </Button>
                       }
@@ -134,4 +121,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
