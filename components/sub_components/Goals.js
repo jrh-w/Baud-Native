@@ -6,14 +6,7 @@ import { Image, StyleSheet, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
 const mapStateToProps = state => {
   return {

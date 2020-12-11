@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Text, StyleProvider, Container, Content, Header, H1, Body, Item, Input, Button, Icon, Card, CardItem, Left
-} from 'native-base';
-
+import { Dimensions, ScrollView, BackHandler, RefreshControl, View } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+
+import { Text, StyleProvider, Container, Content, Header, H1, Body, Item, Input,
+  Button, Icon, Card, CardItem, Left } from 'native-base';
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
@@ -12,25 +12,24 @@ import Menu from './sub_components/Menu';
 import CommunityHeader from './sub_components/CommunityHeader';
 import Questions from './sub_components/Questions';
 
-import { Dimensions, ScrollView, BackHandler, RefreshControl, SafeAreaView } from 'react-native';
-
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { addQuestionsData, removeQuestionsData } from '../redux/reduxActions';
+import { bindActionCreators } from 'redux';
+import { addQuestionsData, removeQuestionsData, getQuestions } from '../redux/reduxActions';
 
 const mapStateToProps = (state) => {
   return {
     questions: state.questions,
-    lastUpdateOfQuestions: state.lastUpdateOfQuestions,
-    lastQuestionDate: state.lastQuestionDate,
-    preventLoadingQuestions: state.preventLoadingQuestions
+    loadingQuestions: state.loadingQuestions,
+    refreshingQuestions: state.refreshingQuestions,
+    noMoreQuestions: state.noMoreQuestions
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onQuestionsData: (data) => dispatch(addQuestionsData(data)),
-    onRemoveQuestionsData: () => dispatch(removeQuestionsData())
+    removeQuestionsData: (refresh) => dispatch(removeQuestionsData(refresh)),
+    getQuestions: bindActionCreators(getQuestions, dispatch)
   };
 }
 
@@ -40,10 +39,9 @@ class Community extends Component {
     this.state = {
       searchValue: '',
       questions: [],
-      lastQuestionDate: '',
-      lastUpdateOfQuestions: '',
-      preventLoadingQuestions: false,
-      refreshing: false,
+      noMoreQuestions: false,
+      loadingQuestions: false,
+      refreshingQuestions: false,
       questionQuantity: 10
     };
 
@@ -54,8 +52,7 @@ class Community extends Component {
 
   loadQuestions(numberOfQuestions, questionsEmpty = false) {
 
-    if(this.state.preventLoadingQuestions) return;
-    else this.state.preventLoadingQuestions = true;
+    if(this.state.loadingQuestions) return;
 
     let input = {
       quantity: numberOfQuestions,
@@ -72,37 +69,23 @@ class Community extends Component {
       });
     }
 
-    axios.post('https://evening-oasis-01489.herokuapp.com/questions', input)
-    .then((response) => {
-      console.log(response.data[0], "+");
-      if(response.data[0].length == 0) {
-        this.state.preventLoadingQuestions = true;
-        // W tym warunku dodaj info dla użytkownika <----------
-      } else {
-        this.props.onQuestionsData(response.data[0]);
-        this.state.preventLoadingQuestions = false;
-      }
-      // Check values when new questions are added to DB !!!
-      console.log(this.state.questions.length, response.data[1]);
-    });
-
+    this.props.getQuestions(input);
   }
 
   onRefresh() {
-    if(this.state.refreshing) return;
-    else this.state.refreshing = true;
+    if(this.state.loadingQuestions) return;
 
     console.log("refresh");
 
-    this.props.onRemoveQuestionsData();
-
-    this.state.preventLoadingQuestions = false;
+    this.props.removeQuestionsData(true);
     this.loadQuestions(this.state.questionQuantity, true);
-
-    this.state.refreshing = false;
   }
 
   scrolledToBottom(nativeEvent) {
+    //console.log(nativeEvent);
+
+    if(this.state.loadingQuestions || this.state.noMoreQuestions) return;
+
     let currentPosition = parseInt(nativeEvent.contentOffset.y + nativeEvent.layoutMeasurement.height);
     let scrollBorder = parseInt(nativeEvent.contentSize.height);
 
@@ -113,11 +96,12 @@ class Community extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if(props.questions !== state.questions) {
+    if(props !== state) {
       return {
         questions: props.questions,
-        lastUpdateOfQuestions: props.lastUpdateOfQuestions,
-        lastQuestionDate: props.lastQuestionDate
+        loadingQuestions: props.loadingQuestions,
+        refreshingQuestions: props.refreshingQuestions,
+        noMoreQuestions: props.noMoreQuestions
       };
     }
     return null;
@@ -131,6 +115,7 @@ class Community extends Component {
       let lastDate = this.state.questions[this.state.questions.length - 1].timestamp;
       // FUNCTION TO CHECK FOR NEW QUESTIONS
     }
+    console.log("COMPONENT MOUNTED");
   }
 
   render() {
@@ -139,31 +124,34 @@ class Community extends Component {
 
     return(
       <StyleProvider style={getTheme(material)}>
-          <Container>
-            <CommunityHeader/>
-            <Content
-            onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
-            refreshControl={ <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} /> }>
-                <Body>
-                  <Col style={{ width: screenWidth * .8 }}>
-                    <Row style={{ marginBottom: 10, marginTop: 20 }}>
-                      <H1>Top questions</H1>
-                    </Row>
+        <Container>
+          <CommunityHeader/>
+          <Content
+          onMomentumScrollEnd={({ nativeEvent }) => { this.scrolledToBottom(nativeEvent) } }
+          refreshControl={ <RefreshControl refreshing={this.state.refreshingQuestions} onRefresh={this.onRefresh} /> }>
+              <Body>
+                <Col style={{ width: screenWidth * .8 }}>
+                  <Row style={{ marginBottom: 10, marginTop: 20 }}>
+                    <H1>Top questions</H1>
+                  </Row>
+                </Col>
+                <Grid>
+                  <Col style={{ marginHorizontal: screenWidth * .05 }}>
+                    <Item rounded>
+                      <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
+                      onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
+                    </Item>
                   </Col>
-                  <Grid>
-                    <Col style={{ marginHorizontal: screenWidth * .05 }}>
-                      <Item rounded>
-                        <Input style={{ paddingLeft: 15 }} placeholder='Search' value={this.state.searchValue}
-                        onChangeText={searchValue => this.setState({ searchValue: searchValue })}/>
-                      </Item>
-                    </Col>
-                  </Grid>
-                  <Col style={{ width: screenWidth * .8 }}>
-                    <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
-                  </Col>
-                </Body>
-            </Content>
-          </Container>
+                </Grid>
+                <Col style={{ width: screenWidth * .8 }}>
+                  <Questions navigation={this.props.navigation} searchValue={this.state.searchValue}/>
+                </Col>
+                {this.state.noMoreQuestions ?
+                  <Text>There are no more questions to load</Text>
+                  : null}
+              </Body>
+          </Content>
+        </Container>
       </StyleProvider>
     );
   }

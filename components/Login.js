@@ -16,8 +16,6 @@ import bcrypt from 'react-native-bcrypt';
 import { connect } from 'react-redux';
 import { addUserData } from '../redux/reduxActions';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import SignUpAlert from './sub_components/SignUpAlert';
 
 const mapDispatchToProps = dispatch => {
@@ -32,8 +30,7 @@ class Login extends Component {
     this.state = {
       username: 'jaqub.f.wjlodaz@gmmm.coz',
       password: 'gendarme21254+',
-      invalidData: false,
-      errorText: 'Incorrect username/e-mail or/and passsword',
+      errorText: '',
       loggingIn: false
     };
 
@@ -42,11 +39,8 @@ class Login extends Component {
 
   logIn() {
 
-    if(this.state.loggingIn){
-      return
-    } else {
-      this.setState({loggingIn: true});
-    }
+    if(this.state.loggingIn) return;
+    else this.setState({loggingIn: true});
 
     let that = this; // Needed in BCrypt
     let pass = this.state.password;
@@ -65,16 +59,15 @@ class Login extends Component {
 
       bcrypt.compare(that.state.password, hash, function(err, result) {
         if(result === true) {
-          that.setState({intvalidData: false});
+          that.setState({errorText: ''});
           axios.post('https://evening-oasis-01489.herokuapp.com/login', input)
           .then(function (response) {
             that.props.onUserData(response.data);
-            //that.props.navigation.navigate('Learn');
           });
         } else {
           console.log(that.state.errorText);
           that.setState({
-            invalidData : true,
+            errorText: 'Incorrect username/e-mail or/and passsword',
             loggingIn: false
           });
         }
@@ -85,9 +78,6 @@ class Login extends Component {
       that.setState({loggingIn: false});
       throw error;
     });
-
-    // this.props.navigation.navigate('Profile');
-
   }
 
   render() {
@@ -101,7 +91,7 @@ class Login extends Component {
               <Body>
                 <Col style={{ width: 300 }}>
                   <Body>
-                    <SignUpAlert errorText={this.state.errorText} invalidData={this.state.invalidData} />
+                    <SignUpAlert errorText={this.state.errorText}/>
                     <Row style={{ marginVertical: 20 }}>
                       <H1>
                       Log in
