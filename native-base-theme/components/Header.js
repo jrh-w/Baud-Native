@@ -237,7 +237,7 @@ export default (variables /* : * */ = variable) => {
           },
           'NativeBase.Text': {
             color: variables.toolbarBtnTextColor,
-            fontSize: platform === PLATFORM.IOS ? 17 : 0,
+            fontSize: platform === PLATFORM.IOS ? 17 : 14,
             top: platform === PLATFORM.IOS ? 1 : -1.5,
             paddingLeft:
               platform === PLATFORM.IOS && platformStyle !== PLATFORM.MATERIAL
@@ -393,7 +393,7 @@ export default (variables /* : * */ = variable) => {
         : 10,
     paddingRight: 10,
     justifyContent: 'center',
-    paddingTop: platform === PLATFORM.IOS ? 18 : 0,
+    // paddingTop: platform === PLATFORM.IOS ? 18 : 0,
     borderBottomWidth:
       platform === PLATFORM.IOS
         ? 1 / PixelRatio.getPixelSizeForLayoutSize(1)
@@ -412,10 +412,7 @@ export default (variables /* : * */ = variable) => {
     shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     top: 0,
     left: 0,
-    right: 0,
-
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    right: 0
   };
 
   return headerTheme;

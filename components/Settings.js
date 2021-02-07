@@ -3,7 +3,9 @@ import { Button, Dimensions, Switch, Modal, StyleSheet, View } from 'react-nativ
 import { connect } from 'react-redux';
 import { onLogOut } from '../redux/reduxActions';
 
-import { Text, StyleProvider, Container, Content, Header } from 'native-base';
+import { Text, StyleProvider, Container, Content, Header, Card, CardItem, Body, H1, Left, Icon } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Alert } from 'react-native';
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
@@ -62,8 +64,12 @@ class Settings extends Component {
             <Modal animationType="fade" transparent={true} visible={this.state.modalVisible}>
               <View style={CSS.modal}>
                 <View style={CSS.innerModal}>
-                  <Text style={CSS.text}>Hewwo</Text>
-                  <Button onPress={this.reverseDecision} style={CSS.button} title="UwU"></Button>
+                  <Text style={CSS.text}>Logging out</Text>
+                  <Text style={CSS.text}>Are you sure you want to log out ?</Text>
+                  <View style={CSS.buttonView}>
+                    <Button onPress={this.props.onLogOut} style={CSS.button} title="LOG OUT, UmU"></Button>
+                    <Button onPress={this.reverseDecision} style={CSS.button} title="Stay with me, UwU"></Button>
+                  </View>
                 </View>
               </View>
             </Modal>
@@ -102,8 +108,13 @@ let CSS = StyleSheet.create({
     opacity: 1,
     margin: 5
   },
+  buttonView: {
+    margin: 20,
+    display: 'flex',
+    flexDirection: 'row'
+  },
   button: {
-
+    margin: 10
   }
 });
 
