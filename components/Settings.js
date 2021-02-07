@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Dimensions, Switch, Modal, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, Button, Dimensions, Switch, Modal, StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { onLogOut } from '../redux/reduxActions';
 
-import { Text, StyleProvider, Container, Content, Header, Card, CardItem, Body, H1, Left, Icon } from 'native-base';
+import { StyleProvider, Container, Content, Header, Card, CardItem, Body, H1, Left, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Alert } from 'react-native';
 
@@ -64,11 +64,19 @@ class Settings extends Component {
             <Modal animationType="fade" transparent={true} visible={this.state.modalVisible}>
               <View style={CSS.modal}>
                 <View style={CSS.innerModal}>
-                  <Text style={CSS.text}>Logging out</Text>
-                  <Text style={CSS.text}>Are you sure you want to log out ?</Text>
+                  <Text style={CSS.H1}>Logging out</Text>
+                  <Text style={CSS.H2}>Are you sure you want to log out ?</Text>
                   <View style={CSS.buttonView}>
-                    <Button onPress={this.props.onLogOut} style={CSS.button} title="LOG OUT, UmU"></Button>
-                    <Button onPress={this.reverseDecision} style={CSS.button} title="Stay with me, UwU"></Button>
+                    <TouchableOpacity onPress={this.props.onLogOut} style={{marginHorizontal: 10, marginTop: 10}}>
+                      <View style={CSS.buttonLogOut}>
+                        <Text style={CSS.textLogOut}>LOG OUT</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.reverseDecision} style={{marginHorizontal: 10, marginTop: 10}}>
+                      <View style={CSS.button}>
+                        <Text style={CSS.text}>STAY WITH US</Text>
+                      </View>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>
@@ -81,7 +89,6 @@ class Settings extends Component {
               trackColor={{ false: "#767577", true: "#81b0ff" }}
               thumbColor={this.state.appTheme ? "#f5dd4b" : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
-
               value={this.state.darkMode}
             />
             <Text>Dark Mode</Text>
@@ -102,19 +109,51 @@ let CSS = StyleSheet.create({
   innerModal: {
     backgroundColor: "#fff",
     margin: 50,
-    padding: 40
+    padding: 40,
+    borderRadius: 20,
+    borderColor: '#fff'
   },
-  text: {
+  H1: {
     opacity: 1,
-    margin: 5
+    margin: 5,
+    fontFamily: 'Montserrat_Bold',
+    fontSize: 20,
+    color: '#38A7F1'
+  },
+  H2: {
+    opacity: 1,
+    margin: 5,
+    fontFamily: 'Montserrat_Regular',
+    fontSize: 16,
+    marginTop: 15
   },
   buttonView: {
-    margin: 20,
+    margin: 10,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  buttonLogOut: {
+    padding: 10,
+    backgroundColor: '#38A7F1',
+    borderRadius: 10,
   },
   button: {
-    margin: 10
+    padding: 10,
+    borderColor: '#38A7F1',
+    borderWidth: 1,
+    borderRadius: 10,
+  },textLogOut: {
+    fontFamily: 'Montserrat_Bold',
+    fontSize: 14,
+    color: '#fff',
+    textAlign: 'center'
+  },
+  text: {
+    fontFamily: 'Montserrat_Bold',
+    fontSize: 14,
+    color: '#38A7F1',
+    textAlign: 'center'
   }
 });
 

@@ -44,9 +44,9 @@ class QuestionLink extends Component {
                         { this.props.content.slice(0,200) + "..." }
                       </Text>
                   </Row>
-                  <Row style={{ marginTop: 10, flexWrap: 'wrap' }}>
+                  {/*<Row style={{ marginTop: 10, flexWrap: 'wrap' }}>
                     { this.state.tagBlobs }
-                  </Row>
+                  </Row>*/}
                 </Col>
               </TouchableWithoutFeedback>
               <Col style={{ width: 35, marginLeft: 5 }}>

@@ -18,7 +18,7 @@ class QuestionHeader extends Component {
 
   render() {
     return(
-      <Card style={{ marginTop: -80, paddingTop: 80, marginBottom: 0 }}>
+      <Card style={{ marginTop: -30, paddingTop: 80, marginBottom: 0 }}>
         <CardItem>
           <Body>
             <Row style={{ height: 35, marginHorizontal: 15}}>

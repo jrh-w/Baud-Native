@@ -18,7 +18,7 @@ class Learn extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     let screenWidth = Dimensions.get('window').width;
 

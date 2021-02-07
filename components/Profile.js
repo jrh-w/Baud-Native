@@ -82,7 +82,7 @@ class Profile extends Component {
             <Grid>
               <Body>
                 <Col style={{ width: screenWidth * .9 }}>
-                  <Row style={{ marginVertical: 10 }}>
+                  <Row style={{ marginTop: 20, marginBottom: 10 }}>
                     <H1>
                     Your certificates
                     </H1>

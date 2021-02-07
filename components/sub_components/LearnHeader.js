@@ -37,7 +37,7 @@ class LearnHeader extends Component {
 
   render() {
     return(
-        <Card style={{ marginTop: -60, paddingTop: 80, marginBottom: 0, paddingBottom: 15 }}>
+        <Card style={{ marginTop: -30, paddingTop: 80, marginBottom: 0, paddingBottom: 15 }}>
           <CardItem style={{ paddingLeft: 0, paddingRight: 0}}>
             <Body>
               <Row style={{ height: 35, marginHorizontal: 10, marginLeft: 30}}>
@@ -49,8 +49,42 @@ class LearnHeader extends Component {
               </Row>
                 <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ flexDirection: 'row', width: '100%' }}>
                   <Row>
-                      <Card style={{ marginHorizontal: 10, backgroundColor: '#619648' }}>
-                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10, backgroundColor: '#619648' }}>
+                      <Card style={{ marginHorizontal: 10, backgroundColor: '#528dda' }}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10, backgroundColor: '#528dda' }}>
+                          <Grid>
+                            <Col style={{ width: 75, justifyContent: 'center'}}>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 60, width: 75, color: '#fff' }}/>
+                            </Col>
+                            <Col>
+                              <Row style={{ height: 50}}>
+                                <H1 style={{color: '#fff'}}>MySql</H1>
+                              </Row>
+                              <Row style={{ height: 100}}>
+                                <Text sm style={{color: '#fff'}}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              </Row>
+                            </Col>
+                          </Grid>
+                        </CardItem>
+                      </Card>
+                      <Card style={{ marginHorizontal: 10, backgroundColor: '#db5461' }}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10, backgroundColor: '#db5461' }}>
+                          <Grid>
+                            <Col style={{ width: 75, justifyContent: 'center'}}>
+                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 60, width: 75, color: '#fff' }}/>
+                            </Col>
+                            <Col>
+                              <Row style={{ height: 50}}>
+                                <H1 style={{color: '#fff'}}>HTML</H1>
+                              </Row>
+                              <Row style={{ height: 100}}>
+                                <Text sm style={{color: '#fff'}}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
+                              </Row>
+                            </Col>
+                          </Grid>
+                        </CardItem>
+                      </Card>
+                      <Card style={{ marginHorizontal: 10, backgroundColor: '#da8952' }}>
+                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10, backgroundColor: '#da8952' }}>
                           <Grid>
                             <Col style={{ width: 75, justifyContent: 'center'}}>
                                 <Icon type='Ionicons' name='cloud' style={{ fontSize: 60, width: 75, color: '#fff' }}/>
@@ -61,40 +95,6 @@ class LearnHeader extends Component {
                               </Row>
                               <Row style={{ height: 100}}>
                                 <Text sm style={{color: '#fff'}}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
-                              </Row>
-                            </Col>
-                          </Grid>
-                        </CardItem>
-                      </Card>
-                      <Card style={{ marginHorizontal: 10}}>
-                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
-                          <Grid>
-                            <Col style={{ width: 75, justifyContent: 'center'}}>
-                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
-                            </Col>
-                            <Col>
-                              <Row style={{ height: 50 }}>
-                                <H1>MongoDB</H1>
-                              </Row>
-                              <Row style={{ height: 100 }}>
-                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
-                              </Row>
-                            </Col>
-                          </Grid>
-                        </CardItem>
-                      </Card>
-                      <Card style={{ marginHorizontal: 10 }}>
-                        <CardItem style={{ width: 300, height: 188, marginHorizontal: 10 }}>
-                          <Grid>
-                            <Col style={{ width: 75, justifyContent: 'center'}}>
-                                <Icon type='Ionicons' name='cloud' style={{ fontSize: 50, width: 75 }}/>
-                            </Col>
-                            <Col>
-                              <Row style={{ height: 50 }}>
-                                <H1>MongoDB</H1>
-                              </Row>
-                              <Row style={{ height: 100 }}>
-                                <Text sm>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.</Text>
                               </Row>
                             </Col>
                           </Grid>
