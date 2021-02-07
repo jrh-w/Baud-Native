@@ -40,7 +40,7 @@ class Sign_Up extends Component {
     super(props);
     this.state = {
       username: 'Asdfghjk',
-      email: 'abc583869@gmail.com',
+      email: 'jakub.r.wlodarz@gmail.com',
       password: 'Nasdaq2000!',
       confirmPassword: 'Nasdaq2000!',
       errorTextSignUp: '',

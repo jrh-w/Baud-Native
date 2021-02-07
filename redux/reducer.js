@@ -79,7 +79,8 @@ const initialState = {
   registerSuccessful: false,
   errorTextLogin: '',
   loggingIn: false,
-  appTheme: 'no-preference'
+  appTheme: 'no-preference',
+  darkMode: false
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -156,8 +157,11 @@ export const Reducer = (state = initialState, action) => {
     case LOG_OUT:
       return Object.assign({}, state, initialState)
     case SET_APP_THEME:
+      let darkMode = false;
+      if(action.theme === 'dark') darkMode = true;
       return Object.assign({}, state, {
-        appTheme: action.theme
+        appTheme: action.theme,
+        darkMode: darkMode
       })
     default:
       return state;

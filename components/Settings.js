@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Switch } from 'react-native';
+import { Button, Dimensions, Switch, Modal, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { onLogOut } from '../redux/reduxActions';
 
@@ -10,7 +10,8 @@ import material from '../native-base-theme/variables/material';
 
 const mapStateToProps = state => {
   return {
-    appTheme: state.appTheme
+    appTheme: state.appTheme,
+    darkMode: state.darkMode
   };
 };
 
@@ -23,15 +24,19 @@ const mapDispatchToProps = dispatch => {
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      modalVisible: false
+    };
 
     this.logOut = this.logOut.bind(this);
+    this.reverseDecision = this.reverseDecision.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
     if(props !== state) {
       return {
-        appTheme: props.appTheme
+        appTheme: props.appTheme,
+        darkMode: props.darkMode
       };
     }
 
@@ -41,13 +46,28 @@ class Settings extends Component {
   logOut() {
     // ARE YOU SURE ?
     console.log("LOG OUT");
-    this.props.onLogOut();
+    this.setState({ modalVisible: true });
+    //this.props.onLogOut();
+  }
+
+  reverseDecision() {
+    this.setState({ modalVisible: false });
   }
 
   render() {
     return(
       <StyleProvider style={getTheme(material)}>
         <Container style={{ padding: 10, fontSize: 20}}>
+          <View style={CSS.container}>
+            <Modal animationType="fade" transparent={true} visible={this.state.modalVisible}>
+              <View style={CSS.modal}>
+                <View style={CSS.innerModal}>
+                  <Text style={CSS.text}>Hewwo</Text>
+                  <Button onPress={this.reverseDecision} style={CSS.button} title="UwU"></Button>
+                </View>
+              </View>
+            </Modal>
+          </View>
           <Content style={{ marginTop: 100 , flexDirection: 'row' }}>
             <Button onPress={this.logOut} title="Log out" color="#841584"/>
             <Switch
@@ -56,7 +76,7 @@ class Settings extends Component {
               thumbColor={this.state.appTheme ? "#f5dd4b" : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
 
-              value={this.state.appTheme}
+              value={this.state.darkMode}
             />
             <Text>Dark Mode</Text>
           </Content>
@@ -65,5 +85,26 @@ class Settings extends Component {
     );
   }
 }
+
+let CSS = StyleSheet.create({
+  modal: {
+    backgroundColor: "#000000aa",
+    height: Dimensions.get('window').height,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  innerModal: {
+    backgroundColor: "#fff",
+    margin: 50,
+    padding: 40
+  },
+  text: {
+    opacity: 1,
+    margin: 5
+  },
+  button: {
+
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
