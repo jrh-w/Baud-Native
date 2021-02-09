@@ -87,13 +87,13 @@ class Navigation extends Component {
       <Root>
         <NavigationContainer theme={this.state.appTheme === 'dark' ? DarkTheme : DefaultTheme}>
           { this.state.isAuth ?
-            <Drawer.Navigator backBehavior={'initialRoute'}>
-              <Drawer.Screen name="Learn" component={Learn} />
-              <Drawer.Screen name="Create" component={Create} />
-              <Drawer.Screen name="Community" component={Community} />
-              <Drawer.Screen name="Profile" component={Profile} />
-              <Drawer.Screen name="Settings" component={Settings} />
-            </Drawer.Navigator>
+            <Tab.Navigator backBehavior={'initialRoute'}>
+              <Tab.Screen name="Learn" component={Learn} />
+              <Tab.Screen name="Create" component={Create} />
+              <Tab.Screen name="Community" component={Community} />
+              <Tab.Screen name="Profile" component={Profile} />
+              <Tab.Screen name="Settings" component={Settings} />
+            </Tab.Navigator>
           :
             <Stack.Navigator>
               <Stack.Screen name="Login" component={Login} />
