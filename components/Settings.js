@@ -64,17 +64,16 @@ class Settings extends Component {
             <Modal animationType="fade" transparent={true} visible={this.state.modalVisible}>
               <View style={CSS.modal}>
                 <View style={CSS.innerModal}>
-                  <Text style={CSS.H1}>Logging out</Text>
                   <Text style={CSS.H2}>Are you sure you want to log out ?</Text>
                   <View style={CSS.buttonView}>
                     <TouchableOpacity onPress={this.props.onLogOut} style={{marginHorizontal: 10, marginTop: 10}}>
                       <View style={CSS.buttonLogOut}>
-                        <Text style={CSS.textLogOut}>LOG OUT</Text>
+                        <Text style={CSS.textLogOut}>Log out</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.reverseDecision} style={{marginHorizontal: 10, marginTop: 10}}>
                       <View style={CSS.button}>
-                        <Text style={CSS.text}>STAY WITH US</Text>
+                        <Text style={CSS.text}>Stay with us</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -110,7 +109,7 @@ let CSS = StyleSheet.create({
     backgroundColor: "#fff",
     margin: 50,
     padding: 40,
-    borderRadius: 20,
+    borderRadius: 10,
     borderColor: '#fff'
   },
   H1: {
@@ -123,9 +122,8 @@ let CSS = StyleSheet.create({
   H2: {
     opacity: 1,
     margin: 5,
-    fontFamily: 'Montserrat_Regular',
+    fontFamily: 'SemiBold',
     fontSize: 16,
-    marginTop: 15
   },
   buttonView: {
     margin: 10,
@@ -136,21 +134,21 @@ let CSS = StyleSheet.create({
   buttonLogOut: {
     padding: 10,
     backgroundColor: '#38A7F1',
-    borderRadius: 10,
+    borderRadius: 50,
   },
   button: {
     padding: 10,
     borderColor: '#38A7F1',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 50,
   },textLogOut: {
-    fontFamily: 'Montserrat_Bold',
+    fontFamily: 'SemiBold',
     fontSize: 14,
     color: '#fff',
     textAlign: 'center'
   },
   text: {
-    fontFamily: 'Montserrat_Bold',
+    fontFamily: 'SemiBold',
     fontSize: 14,
     color: '#38A7F1',
     textAlign: 'center'
