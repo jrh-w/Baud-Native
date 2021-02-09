@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Appearance } from 'react-native';
 import { connect } from 'react-redux';
-// import { Appearance, AppearanceProvider } from 'react-native-appearance';
 
 import { setAppTheme } from './redux/reduxActions';
 import { Root } from "native-base";
 
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -24,9 +20,7 @@ import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
 
 const Stack = createStackNavigator();
-//const Tab = createBottomTabNavigator();
 const Tab = createMaterialBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
 const config = {
   animation: 'timing',
@@ -132,7 +126,7 @@ class Navigation extends Component {
           />
         </Tab.Navigator>
         :
-        <Stack.Navigator>
+        <Stack.Navigator headerMode="none">
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Sign_Up" component={Sign_Up} />
         </Stack.Navigator>
@@ -161,11 +155,3 @@ class Navigation extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
-
-// <Tab.Navigator backBehavior={'initialRoute'}>
-//   <Tab.Screen name="Learn" component={Learn} />
-//   <Tab.Screen name="Create" component={Create} />
-//   <Tab.Screen name="Community" component={Community} />
-//   <Tab.Screen name="Profile" component={Profile} />
-//   <Tab.Screen name="Settings" component={Settings} />
-// </Tab.Navigator>

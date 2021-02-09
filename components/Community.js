@@ -129,17 +129,10 @@ class Community extends Component {
 
     let screenWidth = Dimensions.get('window').width;
 
-    let toastInfo = Toast.show({
-      text: "HI",
-      buttonText: "OK",
-      duration: 30000
-    });
-
     return(
       <StyleProvider style={getTheme(material)}>
         <Container>
           <CommunityHeader/>
-          { toastInfo }
           <ScrollView ref='_scrollView'
           onMomentumScrollEnd={ ({nativeEvent}) => { this.scrolledToBottom(nativeEvent); } }
           refreshControl={ <RefreshControl refreshing={this.state.refreshingQuestions} onRefresh={this.onRefresh} /> }>

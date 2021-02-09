@@ -11,7 +11,7 @@ class AppHeader extends Component {
 
   render() {
     return(
-        <Card style={{ marginTop: -80, paddingTop: 80 }}>
+        <Card style={{ marginTop: 0, paddingTop: 60 }}>
           <CardItem>
             <Body style={{ alignItems: 'center' }}>
               <Row>
