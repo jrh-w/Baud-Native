@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BackHandler } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { Appearance } from 'react-native-appearance';
 
 import { Text, StyleProvider, Container, Content, Header, Input, Item, Card, CardItem, Icon } from 'native-base';
