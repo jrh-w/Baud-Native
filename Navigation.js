@@ -11,6 +11,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import Community from './components/Community';
 import Create from './components/Create';
 import Learn from './components/Learn';
@@ -21,7 +24,8 @@ import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+//const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 const config = {
@@ -85,7 +89,56 @@ class Navigation extends Component {
   render() {
     return (
       <Root>
-        <NavigationContainer theme={this.state.appTheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <NavigationContainer theme={DefaultTheme}>
+        { this.state.isAuth ?
+        <Tab.Navigator
+        backBehavior="initialRoute"
+        shifting={true}
+        >
+          <Tab.Screen
+            name="Learn"
+            component={Learn}
+            options={{
+              tabBarIcon: 'home-account',
+            }}
+          />
+          <Tab.Screen
+            name="Create"
+            component={Create}
+            options={{
+              tabBarIcon: 'bell-outline',
+            }}
+          />
+          <Tab.Screen
+            name="Community"
+            component={Community}
+            options={{
+              tabBarIcon: 'message-text-outline',
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              tabBarIcon: 'bell-outline',
+            }}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              tabBarIcon: 'message-text-outline',
+            }}
+          />
+        </Tab.Navigator>
+        :
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Sign_Up" component={Sign_Up} />
+        </Stack.Navigator>
+        }
+      </NavigationContainer>
+        {/*<NavigationContainer theme={DefaultTheme}>
           { this.state.isAuth ?
             <Tab.Navigator backBehavior={'initialRoute'}>
               <Tab.Screen name="Learn" component={Learn} />
@@ -100,7 +153,7 @@ class Navigation extends Component {
               <Stack.Screen name="Sign_Up" component={Sign_Up} />
             </Stack.Navigator>
           }
-        </NavigationContainer>
+        </NavigationContainer>*/}
       </Root>
     );
   }
