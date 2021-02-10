@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { Appearance, AppearanceProvider } from 'react-native-appearance';
 
 import { setAppTheme } from './redux/reduxActions';
-import { Root } from "native-base";
+import { Root, Icon } from "native-base";
 
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -12,7 +12,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Community from './components/Community';
 import Create from './components/Create';
@@ -22,6 +22,8 @@ import Menu from './components/sub_components/Menu';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Sign_Up from './components/Sign_Up';
+
+// import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 //const Tab = createBottomTabNavigator();
@@ -94,40 +96,58 @@ class Navigation extends Component {
         <Tab.Navigator
         backBehavior="initialRoute"
         shifting={true}
+        activeColor="#38A7F1"
+        inactiveColor="#C9C9C9"
+        barStyle={{ backgroundColor: '#fff', paddingTop: 10 }}
         >
           <Tab.Screen
             name="Learn"
             component={Learn}
             options={{
-              tabBarIcon: 'home-account',
+              tabBarLabel: null,
+              tabBarIcon: ({ color }) => (
+                <Icon type='Feather' name='pen-tool' style={{ fontSize: 24, color: color }}/>
+              ),
             }}
           />
           <Tab.Screen
-            name="Create"
+            name="Feed"
             component={Create}
             options={{
-              tabBarIcon: 'bell-outline',
+              tabBarLabel: null,
+              tabBarIcon: ({ color }) => (
+                <Icon type='Feather' name='book-open' style={{ fontSize: 24, color: color }}/>
+              ),
             }}
           />
           <Tab.Screen
             name="Community"
             component={Community}
             options={{
-              tabBarIcon: 'message-text-outline',
+              tabBarLabel: null,
+              tabBarIcon: ({ color }) => (
+                <Icon type='Feather' name='globe' style={{ fontSize: 24, color: color }} />
+              ),
             }}
           />
           <Tab.Screen
             name="Profile"
             component={Profile}
             options={{
-              tabBarIcon: 'bell-outline',
+              tabBarLabel: null,
+              tabBarIcon: ({color}) => (
+                <Icon type='Feather' name='user' style={{ fontSize: 24, color: color }}/>
+              ),
             }}
           />
           <Tab.Screen
             name="Settings"
             component={Settings}
             options={{
-              tabBarIcon: 'message-text-outline',
+              tabBarLabel: null,
+              tabBarIcon: ({ color }) => (
+                <Icon type='Feather' name='sliders' style={{ fontSize: 24, color: color }}/>
+              ),
             }}
           />
         </Tab.Navigator>
