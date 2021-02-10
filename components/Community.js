@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+//import React, { Component } from 'react';
+import * as React from 'react';
 import { Dimensions, ScrollView, BackHandler, RefreshControl, View } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
@@ -15,6 +16,8 @@ import Questions from './sub_components/Questions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addQuestionsData, removeQuestionsData, getQuestions } from '../redux/reduxActions';
+
+import { useScrollToTop } from '@react-navigation/native';
 
 const mapStateToProps = (state) => {
   return {
@@ -33,7 +36,7 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-class Community extends Component {
+class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,7 +102,8 @@ class Community extends Component {
   }
 
   returnToTop(nativeEvent) {
-    this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+    //this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+    this.props.scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
     this.setState({ showReturnButton: false });
   }
 
@@ -133,7 +137,7 @@ class Community extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
           <CommunityHeader/>
-          <ScrollView ref='_scrollView'
+          <ScrollView ref={this.props.scrollRef}
           onMomentumScrollEnd={ ({nativeEvent}) => { this.scrolledToBottom(nativeEvent); } }
           refreshControl={ <RefreshControl refreshing={this.state.refreshingQuestions} onRefresh={this.onRefresh} /> }>
               <Body>
@@ -173,6 +177,12 @@ class Community extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Community);
-//this.component._root.scrollToEnd();
-//ref={c => (this.component = c)}
+function NewCommunity(props) {
+  const ref = React.useRef(null);
+
+  useScrollToTop(ref);
+
+  return <Community {...props} scrollRef={ref} />;
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCommunity);
