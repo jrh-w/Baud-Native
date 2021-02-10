@@ -1,10 +1,6 @@
-//import { AppLoading } from 'expo';
-import { Footer, StyleProvider, Container, Text, Header, Content, Card, CardItem,
-  Body, Thumbnail, H1, Item, Input, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import { StatusBar, Image, View, LogBox } from 'react-native';
+import { View, LogBox } from 'react-native';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
