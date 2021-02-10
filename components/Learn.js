@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { BackHandler } from 'react-native';
+//import { Component } from 'react';
+import * as React from 'react';
+import { BackHandler, Dimensions, ScrollView } from 'react-native';
 import { Appearance } from 'react-native-appearance';
 
 import { Text, StyleProvider, Container, Content, Header, Input, Item, Card, CardItem, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { Dimensions, ScrollView } from 'react-native';
+
+import { useScrollToTop } from '@react-navigation/native';
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
@@ -13,7 +15,7 @@ import Menu from './sub_components/Menu';
 
 import LearnHeader from './sub_components/LearnHeader';
 
-class Learn extends Component {
+class Learn extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -25,7 +27,7 @@ class Learn extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
           <LearnHeader/>
-          <Content showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false} ref={this.props.scrollRef}>
             <Col style={{ marginHorizontal: screenWidth * .05, marginVertical: 10 }}>
                 <Item rounded>
                   <Input style={{ paddingLeft: 15 }} placeholder='Search'/>
@@ -136,11 +138,19 @@ class Learn extends Component {
                 </CardItem>
               </Card>
             </Row>
-          </Content>
+          </ScrollView>
         </Container>
       </StyleProvider>
     );
   }
 }
 
-export default Learn;
+export default function(props) {
+  const ref = React.useRef(null);
+
+  useScrollToTop(ref);
+
+  return <Learn {...props} scrollRef={ref} />;
+}
+
+//export default Learn;
