@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Appearance } from 'react-native';
+//import { Appearance } from 'react-native';
 import { connect } from 'react-redux';
 
 import { setAppTheme } from './redux/reduxActions';
@@ -69,7 +69,7 @@ class Navigation extends Component {
     return null;
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     let colorScheme = Appearance.getColorScheme();
     this.props.setAppTheme(colorScheme);
 
@@ -80,7 +80,7 @@ class Navigation extends Component {
 
   componentWillUnmount() {
     Appearance.removeChangeListener();
-  }
+  }*/
 
   render() {
     return (

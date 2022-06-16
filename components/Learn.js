@@ -1,7 +1,7 @@
 //import { Component } from 'react';
 import * as React from 'react';
 import { BackHandler, Dimensions, ScrollView } from 'react-native';
-import { Appearance } from 'react-native-appearance';
+//import { Appearance } from 'react-native-appearance';
 
 import { Text, StyleProvider, Container, Content, Header, Input, Item, Card, CardItem, Icon } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
